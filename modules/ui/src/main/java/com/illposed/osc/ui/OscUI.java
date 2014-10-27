@@ -14,24 +14,38 @@ import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPacket;
 import com.illposed.osc.OSCPort;
 import com.illposed.osc.OSCPortOut;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+
 
 /**
  * OscUI is a subClass of JPanel.
@@ -50,6 +64,9 @@ public class OscUI extends JPanel {
 	private JTextField textBox3;
 	private JTextField textBox4 = new JTextField(String.valueOf(1000), 8);
 	private JLabel delayLabel;
+	private Color OSK_PINK = new Color(249, 200, 202);
+	private Color OSK_YELLOW = new Color(254, 242, 242);
+
 
 	private JButton firstSynthButtonOn, secondSynthButtonOn, thirdSynthButtonOn, fourthSynthButtonOn;
 	private JButton firstSynthButtonOff, secondSynthButtonOff, thirdSynthButtonOff,fourthSynthButtonOff;
@@ -75,15 +92,84 @@ public class OscUI extends JPanel {
 	private final void makeDisplay() {
 
 		// setLayout to be a BoxLayout
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BorderLayout());
+		setBackground(OSK_PINK);
+		setOpaque(true);
 		// call these methods ???? to be defined later
+		
+		addTopPanel();
+		addBottomPanel();
+		
+		
+//		addOscServerAddressPanel();
+//		addGlobalControlPanel();
+//		addFirstSynthPanel();
+//		addSecondSynthPanel();
+//		addThirdSynthPanel();
+//		addFourthSynthPanel();
 
-		addOscServerAddressPanel();
-		addGlobalControlPanel();
-		addFirstSynthPanel();
-		addSecondSynthPanel();
-		addThirdSynthPanel();
-		addFourthSynthPanel();
+	}
+	
+	private void addTopPanel() {
+		JPanel topPanel = new JPanel();
+		add(topPanel, BorderLayout.NORTH);
+		topPanel.add(loadImage("oskImg.png"), BorderLayout.CENTER);
+		
+	}
+	
+	private void addBottomPanel() {
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new BorderLayout());
+		add(bottomPanel, BorderLayout.SOUTH);
+		addTabPane(bottomPanel);
+		addLeftPanel(bottomPanel);
+		addRightPanel(bottomPanel);
+		
+	}
+
+	
+
+	// /javaosc-ui/src/main/java/res/oskImg.png
+	private Component loadImage(String path){
+		try
+		{
+		  ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		  InputStream input = getClass().getResourceAsStream(path);
+		  Image logo = ImageIO.read(input);
+
+		  JLabel label = new JLabel( new ImageIcon( logo ) );
+		  return label;
+		}
+		catch ( Exception e ) { return new JLabel("image load failed"); }
+	}
+
+	private void addRightPanel(JPanel panel) {
+		JPanel rightPanel= new JPanel();
+		rightPanel.setBackground(OSK_YELLOW);
+		rightPanel.setOpaque(true);
+		JFileChooser fileChooser = new JFileChooser();
+		rightPanel.add(fileChooser);
+		panel.add(rightPanel, BorderLayout.EAST);
+	}
+
+	private void addLeftPanel(JPanel panel) {
+		JPanel leftPanel = new JPanel();
+		leftPanel.setBackground(OSK_YELLOW);
+		leftPanel.setOpaque(true);
+		leftPanel.setLayout(new GridLayout(8, 1));
+		for (int i = 0; i < 8; i++){
+			leftPanel.add(new JLabel("==============="+ String.valueOf(i) + "==============="));
+		}
+		panel.add(leftPanel, BorderLayout.WEST);
+	}
+
+	private void addTabPane(JPanel panel) {
+		JPanel audioTabPanel = new JPanel();
+		JPanel skelTabPanel = new JPanel();
+		JTabbedPane tabbedPanel = new JTabbedPane();
+		tabbedPanel.addTab("Audio", audioTabPanel);
+		tabbedPanel.addTab("Video", skelTabPanel);
+		panel.add(tabbedPanel, BorderLayout.CENTER);
 
 	}
 

@@ -8,15 +8,17 @@
 
 package com.illposed.osc.ui;
 
+import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 
 /**
  * @author Chandrasekhar Ramakrishnan
  */
 public class Main extends JFrame {
-
+// jason was here
 	private OscUI myUi;
 
 	public void addOscUI() {
@@ -35,6 +37,9 @@ public class Main extends JFrame {
 		});
 
 		addOscUI();
+		Rectangle bounds = getMaximizedBounds(); // set your maximized bounds
+		setMaximizedBounds(bounds);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 	}
 
