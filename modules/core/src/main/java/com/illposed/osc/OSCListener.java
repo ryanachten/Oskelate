@@ -17,12 +17,12 @@ import java.util.Date;
  * @author Chandrasekhar Ramakrishnan
  */
 public interface OSCListener {
-
 	/**
 	 * Process a matching, incoming OSC Message.
 	 * @param time     The time this message is to be executed.
 	 *   <code>null</code> means: process immediately
 	 * @param message  The message to process.
 	 */
+	
 	void acceptMessage(Date time, OSCMessage message);
 }

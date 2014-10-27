@@ -23,14 +23,7 @@ import java.nio.charset.Charset;
  * An example:<br>
  * (loosely based on {com.illposed.osc.OSCPortTest#testReceiving()})
  * <blockquote><pre>{@code
- * receiver = new OSCPortIn(OSCPort.DEFAULT_SC_OSC_PORT());
- * OSCListener listener = new OSCListener() {
- * 	public void acceptMessage(java.util.Date time, OSCMessage message) {
- * 		System.out.println("Message received!");
- * 	}
- * };
- * receiver.addListener("/message/receiving", listener);
- * receiver.startListening();
+  
  * }</pre></blockquote>
  *
  * Then, using a program such as SuperCollider or sendOSC, send a message
@@ -39,6 +32,7 @@ import java.nio.charset.Charset;
  *
  * @author Chandrasekhar Ramakrishnan
  */
+
 public class OSCPortIn extends OSCPort implements Runnable {
 
 	/** state for listening */
@@ -55,6 +49,21 @@ public class OSCPortIn extends OSCPort implements Runnable {
 
 		this.converter = new OSCByteArrayToJavaConverter();
 		this.dispatcher = new OSCPacketDispatcher();
+	}
+	public void receiveMessage(){
+		try {
+			OSCPort receiver = new OSCPortIn(OSCPort.defaultSCOSCPort());
+			OSCListener listener = new OSCListener() {
+			 	public void acceptMessage(java.util.Date time, OSCMessage message) {
+			 		System.out.println("Message received!");
+			 	}
+			 };
+			 ((OSCPortIn) receiver).addListener("/message/receiving", listener);
+			 ((OSCPortIn) receiver).startListening();
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 
 	/**
