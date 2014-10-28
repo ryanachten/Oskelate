@@ -11,8 +11,12 @@ package com.illposed.osc.ui;
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.DatagramSocket;
+import java.net.SocketException;
 
 import javax.swing.JFrame;
+
+import com.illposed.osc.OSCPortIn;
 
 /**
  * @author Chandrasekhar Ramakrishnan
@@ -20,11 +24,14 @@ import javax.swing.JFrame;
 public class Main extends JFrame {
 // jason was here
 	private OscUI myUi;
+	private OSCPortIn port;
 
 	public void addOscUI() {
 		myUi = new OscUI(this);
 		setBounds(10, 10, 500, 350);
 		setContentPane(myUi);
+		
+		
 	}
 
 	public Main() {

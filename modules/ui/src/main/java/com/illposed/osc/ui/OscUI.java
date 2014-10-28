@@ -10,9 +10,11 @@
 package com.illposed.osc.ui;
 
 import com.illposed.osc.OSCBundle;
+import com.illposed.osc.OSCListener;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPacket;
 import com.illposed.osc.OSCPort;
+import com.illposed.osc.OSCPortIn;
 import com.illposed.osc.OSCPortOut;
 
 import java.awt.BorderLayout;
@@ -26,6 +28,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -72,8 +76,9 @@ public class OscUI extends JPanel {
 	private JButton firstSynthButtonOff, secondSynthButtonOff, thirdSynthButtonOff,fourthSynthButtonOff;
 	private JSlider slider, slider2, slider3;
 
-	private OSCPortOut oscPort;
-
+	private OSCPortOut oscPortOut;
+	private OSCPortIn oscPortIn; 
+	
 	// create a constructor
 	// OscUI takes an argument of myParent which is a JFrame
 	public OscUI(JFrame myParent) {
@@ -81,7 +86,23 @@ public class OscUI extends JPanel {
 		parent = myParent;
 		makeDisplay();
 		try {
-			oscPort = new OSCPortOut();
+			oscPortOut = new OSCPortOut();
+			oscPortIn = new OSCPortIn(OSCPort.defaultSCOSCPort());
+			JOptionPane.showMessageDialog(null, "ISTEEEEENING.");
+
+			oscPortIn.addListener("/livelevel", new OSCListener() {
+				
+				@Override
+				public void acceptMessage(Date time, OSCMessage message) {
+					System.out.println("RECEIVED:"+message.toString());
+					JOptionPane.showMessageDialog(null, "RECEIVED:"+message.toString());
+
+					
+				}
+				
+			});
+			oscPortIn.startListening();
+			
 		} catch (Exception ex) {
 			// this is just a demo program, so this is acceptable behavior
 			ex.printStackTrace();
@@ -113,7 +134,13 @@ public class OscUI extends JPanel {
 	private void addTopPanel() {
 		JPanel topPanel = new JPanel();
 		add(topPanel, BorderLayout.NORTH);
-		topPanel.add(loadImage("oskImg.png"), BorderLayout.CENTER);
+		topPanel.add(loadImage("oskImg.png"), BorderLayout.EAST);
+		
+		JTextArea textArea = new JTextArea();
+		topPanel.add(textArea, BorderLayout.WEST);
+		
+		
+		
 		
 	}
 	
@@ -600,7 +627,7 @@ public class OscUI extends JPanel {
 		// the variable OSCPortOut tries to get an instance of OSCPortOut
 		// at the address indicated by the addressWidget
 		try {
-			oscPort =
+			oscPortOut =
 				new OSCPortOut(InetAddress.getByName(addressWidget.getText()));
 			// if the oscPort variable fails to be instantiated then sent
 			// the error message
@@ -613,7 +640,7 @@ public class OscUI extends JPanel {
 	public void doSendOn(float freq, int node) {
 		// if "Set Address" has not been performed then give the message to set
 		// it first
-		if (null == oscPort) {
+		if (null == oscPortOut) {
 			showError("Please set an address first");
 		}
 
@@ -635,7 +662,7 @@ public class OscUI extends JPanel {
 		// try to use the send method of oscPort using the msg in nodeWidget
 		// send an error message if this doesn't happen
 		try {
-			oscPort.send(msg);
+			oscPortOut.send(msg);
 		} catch (Exception ex) {
 			showError("Couldn't send");
 		}
@@ -645,7 +672,7 @@ public class OscUI extends JPanel {
 	public void doSendOff(int node) {
 		// if "Set Address" has not been performed then give the message to set
 		// it first
-		if (null == oscPort) {
+		if (null == oscPortOut) {
 			showError("Please set an address first");
 		}
 
@@ -657,7 +684,7 @@ public class OscUI extends JPanel {
 		// try to use the send method of oscPort using the msg in nodeWidget
 		// send an error message if this doesn't happen
 		try {
-			oscPort.send(msg);
+			oscPortOut.send(msg);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}
@@ -679,7 +706,7 @@ public class OscUI extends JPanel {
 	public void doSendSlider(float freq, int node) {
 		// if "Set Address" has not been performed then give the message to set
 		// it first
-		if (null == oscPort) {
+		if (null == oscPortOut) {
 			showError("Please set an address first");
 		}
 
@@ -693,14 +720,14 @@ public class OscUI extends JPanel {
 		// try to use the send method of oscPort using the msg in nodeWidget
 		// send an error message if this doesn't happen
 		try {
-			oscPort.send(msg);
+			oscPortOut.send(msg);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}
 	}
 
 	public void doSendGlobalOff(int node1, int node2, int node3) {
-		if (null == oscPort) {
+		if (null == oscPortOut) {
 			showError("Please set an address first");
 		}
 
@@ -730,7 +757,7 @@ public class OscUI extends JPanel {
 		OSCBundle bundle = new OSCBundle(packets, newDate);
 
 		try {
-			oscPort.send(bundle);
+			oscPortOut.send(bundle);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}
@@ -738,7 +765,7 @@ public class OscUI extends JPanel {
 	}
 
 	public void doSendGlobalOn(int node1, int node2, int node3) {
-		if (null == oscPort) {
+		if (null == oscPortOut) {
 			showError("Please set an address first");
 		}
 
@@ -764,19 +791,19 @@ public class OscUI extends JPanel {
 		OSCMessage msg3 = new OSCMessage("/s_new", args3);
 
 		try {
-			oscPort.send(msg1);
+			oscPortOut.send(msg1);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}
 
 		try {
-			oscPort.send(msg2);
+			oscPortOut.send(msg2);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}
 
 		try {
-			oscPort.send(msg3);
+			oscPortOut.send(msg3);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}

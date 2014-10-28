@@ -11,11 +11,16 @@ package com.illposed.osc;
 import com.illposed.osc.utility.OSCByteArrayToJavaConverter;
 import com.illposed.osc.utility.OSCPacketDispatcher;
 import com.illposed.osc.utility.OSCPatternAddressSelector;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.nio.charset.Charset;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  * OSCPortIn is the class that listens for OSC messages.
@@ -47,25 +52,13 @@ public class OSCPortIn extends OSCPort implements Runnable {
 	public OSCPortIn(DatagramSocket socket) {
 		super(socket, socket.getLocalPort());
 
+		JOptionPane.showMessageDialog(null, "Eggs are not supposed to be green.");
+
 		this.converter = new OSCByteArrayToJavaConverter();
 		this.dispatcher = new OSCPacketDispatcher();
-	}
-	public void receiveMessage(){
-		try {
-			OSCPort receiver = new OSCPortIn(OSCPort.defaultSCOSCPort());
-			OSCListener listener = new OSCListener() {
-			 	public void acceptMessage(java.util.Date time, OSCMessage message) {
-			 		System.out.println("Message received!");
-			 	}
-			 };
-			 ((OSCPortIn) receiver).addListener("/message/receiving", listener);
-			 ((OSCPortIn) receiver).startListening();
-		} catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
 
+	}
+	
 	/**
 	 * Create an OSCPort that listens on the specified port.
 	 * Strings will be decoded using the systems default character set.
@@ -74,7 +67,9 @@ public class OSCPortIn extends OSCPort implements Runnable {
 	 *   or there is already a socket listening on it
 	 */
 	public OSCPortIn(int port) throws SocketException {
+		
 		this(new DatagramSocket(port));
+
 	}
 
 	/**
@@ -107,10 +102,15 @@ public class OSCPortIn extends OSCPort implements Runnable {
 		byte[] buffer = new byte[BUFFER_SIZE];
 		DatagramPacket packet = new DatagramPacket(buffer, BUFFER_SIZE);
 		DatagramSocket socket = getSocket();
+		System.out.println("start thread");
 		while (listening) {
 			try {
 				try {
+					System.out.println("1");
+
 					socket.receive(packet);
+					System.out.println("2");
+
 				} catch (SocketException ex) {
 					if (listening) {
 						throw ex;
@@ -123,6 +123,7 @@ public class OSCPortIn extends OSCPort implements Runnable {
 				OSCPacket oscPacket = converter.convert(buffer,
 						packet.getLength());
 				dispatcher.dispatchPacket(oscPacket);
+				
 			} catch (IOException e) {
 				e.printStackTrace(); // XXX This may not be a good idea, as this could easily lead to a never ending series of exceptions thrown (due to the non-exited while loop), and because the user of the lib may want to handle this case himself
 			}

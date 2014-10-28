@@ -64,6 +64,7 @@ public class OSCPacketDispatcher {
 	}
 
 	private void dispatchMessage(OSCMessage message, Date time) {
+		System.out.println("RECIEVE "+message.toString());
 		for (Entry<AddressSelector, OSCListener> addrList : selectorToListener.entrySet()) {
 			if (addrList.getKey().matches(message.getAddress())) {
 				addrList.getValue().acceptMessage(time, message);
