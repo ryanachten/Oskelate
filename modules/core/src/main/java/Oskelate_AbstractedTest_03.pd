@@ -1,8 +1,6 @@
-#N canvas 37 149 1280 645 10;
-#X declare -lib mrpeach;
-#X declare -lib mrpeach;
-#X declare -lib mrpeach;
-#N canvas 0 22 1280 648 GemWindow 0;
+#N canvas 19 22 1280 648 10;
+#X obj 56 56 dumpOSC 57110;
+#N canvas 333 132 715 496 GemWindow 0;
 #X obj 100 100 cnv 15 220 350 empty empty G.E.M 15 20 0 24 -261752
 -66577 0;
 #X obj 113 149 bng 50 250 50 0 empty empty empty 17 7 0 10 -4032 -1
@@ -15,13 +13,13 @@
 1;
 #X msg 409 212 fullscreen \$1;
 #X msg 410 188 dimen 1200 300;
-#X obj 636 139 gemwin;
+#X obj 636 140 gemwin;
 #X obj 646 212 loadbang;
 #X obj 113 280 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 2
 2;
 #X msg 549 212 dimen 1920 480;
 #X obj 508 212 sel 2;
-#X obj 113 249 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 0
+#X obj 113 249 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 1
 1;
 #X text 234 64 GEMWIN;
 #X text 167 146 GEM Create;
@@ -30,12 +28,6 @@
 #X text 142 311 Small Screen (Test);
 #X text 142 280 Projection Screen (Main);
 #X obj 20 185 loadbang;
-#X obj 81 -48 import mrpeach;
-#X obj 359 -59 udpreceive 5000;
-#X obj 359 -37 unpackOSC;
-#X obj 359 -14 routeOSC /button01;
-#X floatatom 359 17 5 0 0 0 - - -;
-#X obj 358 51 autoscale 0 1;
 #X connect 1 0 3 0;
 #X connect 2 0 4 0;
 #X connect 3 0 8 0;
@@ -50,34 +42,29 @@
 #X connect 12 0 11 0;
 #X connect 13 0 8 0;
 #X connect 20 0 10 0;
-#X connect 22 0 23 0;
-#X connect 23 0 24 0;
-#X connect 24 0 25 0;
-#X connect 25 0 26 0;
-#X connect 26 0 1 0;
 #X coords 0 -1 1 1 220 350 2 100 100;
 #X restore 21 60 pd GemWindow;
-#N canvas 59 22 1280 692 audio 1;
+#N canvas 0 97 1280 649 audio 0;
 #X obj 100 100 cnv 30 280 350 empty empty AUDIO 105 20 0 22 -256741
 -66577 0;
 #X obj 454 349 adc~;
-#X obj 508 375 env~;
+#X obj 490 349 env~;
 #X floatatom 524 351 5 0 0 0 - - -;
 #X obj 567 321 adc~;
 #X obj 567 349 fiddle~ 1024 1 20 3;
 #X msg 853 272 \; pd dsp 1;
-#X obj 111 152 hsl 190 40 0 80 0 0 empty empty Sound_Threshold -2 -8
+#X obj 123 152 hsl 190 40 0 80 0 0 empty empty Sound_Threshold -2 -8
 0 10 -204800 -1 -1 9450 1;
 #X msg 817 268 40;
 #X obj 650 387 - 40;
 #X text 798 359 SOUND REACTOR;
 #X obj 502 29 average 20;
-#X obj 224 218 hsl 128 10 0 100 0 0 empty empty Sound_Average -2 -8
+#X obj 224 227 hsl 128 10 0 100 0 0 empty empty Sound_Average -2 -8
 0 10 -204800 -1 -1 0 1;
 #X obj 499 611 average;
 #X obj 171 217 vu 30 200 empty empty -1 -8 0 10 -66577 -1 0 0;
-#X obj 120 217 vu 30 200 empty empty -1 -8 1 10 -66577 -1 1 0;
-#X obj 336 152 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 0
+#X obj 120 217 vu 30 200 empty empty -1 -8 1 10 -66577 -1 0 0;
+#X obj 333 152 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 1
 1;
 #X text 165 196 AVERAGE;
 #X text 122 197 LIVE;
@@ -88,17 +75,17 @@
 #X obj 101 450 outlet;
 #X text 578 152 variable sound averaging for slider returns averaged
 sound;
-#X obj 173 451 outlet;
+#X obj 177 452 outlet;
 #X obj 363 578 autoscale -20 20;
 #X text -51 568 LI;
 #X text 30 567 AV;
 #X obj 408 40 loadbang;
 #X obj 408 16 loadbang;
-#X obj 221 333 vu 55 80 empty empty -1 -8 0 10 -66577 -1 0 0;
+#X obj 223 335 vu 55 80 empty empty -1 -8 0 10 -66577 -1 0 0;
 #X obj 224 261 hsl 128 10 0 100 0 0 empty empty Sound_Average -2 -8
 0 10 -204800 -1 -1 0 1;
-#X obj 232 295 hsl 128 10 0 100 0 0 \$1_\$2 empty Sound_Average -2
--8 0 10 -204800 -1 -1 0 1;
+#X obj 224 295 hsl 128 10 0 100 0 0 empty empty Sound_Average -2 -8
+0 10 -204800 -1 -1 0 1;
 #X obj 298 335 vu 55 80 empty empty -1 -8 0 10 -66577 -1 0 0;
 #X obj 630 612 average;
 #X obj 563 573 autoscale -20 20;
@@ -118,29 +105,11 @@ sound;
 0;
 #X obj 189 439 cnv 10 10 10 empty empty Average_1 -20 -10 0 10 -259485
 -66577 0;
-#X obj 203 30 udpsend;
-#X msg 217 -51 disconnect;
-#X obj 365 -46 packOSC;
-#X msg 209 68 send /audio/soundAverage01;
-#X obj 189 -155 import mrpeach;
-#X obj -9 260 unpack 0 0 0;
-#X obj 298 524 print;
-#X msg 273 487 Sound_Average_3 \$1;
-#X msg -35 348 Sound_Average_2 \$1;
-#X obj -29 388 print;
-#X msg 6 74 Sound_average_1 \$1;
-#X obj -1 124 print;
-#X msg 443 -46 send /sound_threshold \$1;
-#X obj 491 -15 print;
-#X msg 363 -79 send /livelevel \$1;
-#X obj 525 -82 print livelevel \$1;
-#X msg 190 -94 connect localhost 9000;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 4 0 5 0;
 #X connect 5 3 9 0;
 #X connect 7 0 9 1;
-#X connect 7 0 61 0;
 #X connect 8 0 7 0;
 #X connect 9 0 11 0;
 #X connect 11 0 15 0;
@@ -149,44 +118,26 @@ sound;
 #X connect 11 0 35 0;
 #X connect 11 0 38 0;
 #X connect 12 0 13 1;
-#X connect 12 0 59 0;
 #X connect 13 0 14 0;
 #X connect 13 0 26 0;
-#X connect 15 0 63 0;
 #X connect 16 0 20 0;
 #X connect 19 0 6 0;
 #X connect 19 0 8 0;
-#X connect 20 0 52 0;
 #X connect 21 0 23 0;
 #X connect 26 0 25 0;
 #X connect 29 0 16 0;
 #X connect 30 0 29 0;
 #X connect 32 0 35 1;
-#X connect 32 0 57 0;
 #X connect 33 0 38 1;
-#X connect 33 0 56 0;
 #X connect 35 0 36 0;
 #X connect 35 0 31 0;
 #X connect 36 0 37 0;
 #X connect 38 0 39 0;
 #X connect 38 0 34 0;
 #X connect 39 0 40 0;
-#X connect 50 0 49 0;
-#X connect 51 0 49 0;
-#X connect 54 2 12 0;
-#X connect 54 2 32 0;
-#X connect 54 2 33 0;
-#X connect 56 0 55 0;
-#X connect 57 0 58 0;
-#X connect 59 0 60 0;
-#X connect 61 0 51 0;
-#X connect 61 0 62 0;
-#X connect 63 0 51 0;
-#X connect 63 0 64 0;
-#X connect 65 0 49 0;
 #X coords 0 -1 1 1 280 350 2 100 100;
-#X restore 624 61 pd audio;
-#N canvas 58 22 1280 645 openvideo 0;
+#X restore 623 63 pd audio;
+#N canvas 58 22 1280 648 openvideo 0;
 #X obj 100 100 cnv 15 250 350 empty empty VIDEOMIX 65 20 0 24 -256741
 -66577 0;
 #X obj 392 99 gemhead;
@@ -199,7 +150,7 @@ sound;
 #X msg 404 158 open \$1;
 #X obj 395 210 pix_film;
 #X msg 478 136 auto \$1;
-#X obj 276 236 tgl 20 0 empty empty empty 17 7 0 10 -4032 -1 -1 0 1
+#X obj 276 236 tgl 20 0 empty empty empty 17 7 0 10 -4032 -1 -1 1 1
 ;
 #X obj 238 236 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 0
 1;
@@ -209,11 +160,11 @@ sound;
 #X text 110 238 OPEN VIDEO!;
 #X text 229 215 Render;
 #X obj 114 270 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 0 256;
+-1 -1 88375 256;
 #X obj 271 270 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 0 256;
+-1 -1 360 256;
 #X obj 192 270 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 0 256;
+-1 -1 640 256;
 #X text 288 290 Height;
 #X text 201 290 Width;
 #X text 120 291 Length;
@@ -301,7 +252,7 @@ sound;
 #X connect 48 0 47 0;
 #X connect 49 0 48 0;
 #X coords 0 -1 1 1 250 350 2 100 100;
-#X restore 297 61 pd openvideo;
+#X restore 297 63 pd openvideo;
 #N canvas 0 22 1280 752 kaleie 0;
 #X obj 100 100 cnv 15 220 210 empty empty FX:_K_A_L_E_I 30 35 0 18
 -139264 -66577 0;
@@ -1041,7 +992,7 @@ them;
 #X restore 1035 22 pd OskelateHelp;
 #X obj 1035 159 cnv 15 200 220 empty empty O_S_K_E_L 50 20 0 18 -227496
 -66577 0;
-#N canvas 0 22 1280 640 oskel 0;
+#N canvas 0 22 1280 752 oskel 0;
 #X obj 99 101 cnv 15 200 220 empty empty O_S_K_E_L 50 20 0 18 -227496
 -66577 0;
 #X obj 248 -83 gemhead 50;
@@ -1102,7 +1053,7 @@ them;
 -1 0 1;
 #X obj 170 222 hsl 100 10 0 10 0 0 empty empty Y 110 6 0 10 -204800
 -1 -1 0 1;
-#X obj 173 154 hsl 100 10 0 10 0 0 empty empty X 110 6 0 10 -4032 -1
+#X obj 170 158 hsl 100 10 0 10 0 0 empty empty X 110 6 0 10 -4032 -1
 -1 0 1;
 #X obj 170 172 hsl 100 10 0 10 0 0 empty empty Y 110 6 0 10 -204800
 -1 -1 0 1;
@@ -1132,7 +1083,7 @@ them;
 #X text 115 142 Skel;
 #X text 105 251 CALIBRATE;
 #X text 114 207 Regist;
-#X obj 286 113 loadbang;
+#X obj -31 169 loadbang;
 #X obj -45 626 circle 0.2;
 #X obj -145 624 circle 0.2;
 #X obj 62 649 circle 0.2;
@@ -1149,21 +1100,6 @@ them;
 #X obj 270 577 translateXYZ;
 #X obj 312 532 + 10;
 #X floatatom 353 475 5 0 0 0 - - -;
-#X msg 30 54 Head_X \$1;
-#X obj -19 82 print;
-#X msg 34 118 Head_Y \$1;
-#X obj -17 135 print;
-#X obj -17 194 print;
-#X obj -10 254 print;
-#X obj -5 302 print;
-#X msg 22 168 Left_X \$1;
-#X msg 28 221 Left_Y \$1;
-#X msg 33 270 Right_X \$1;
-#X msg -22 333 Right_Y \$1;
-#X obj -71 373 print;
-#X obj -92 -57 import mrpeach;
-#X obj -107 -12 udpreceive 5000;
-#X obj -114 17 unpackOSC;
 #X connect 1 0 6 0;
 #X connect 2 0 6 1;
 #X connect 3 0 7 0;
@@ -1220,12 +1156,6 @@ them;
 #X connect 48 0 29 0;
 #X connect 48 0 33 0;
 #X connect 48 0 37 0;
-#X connect 49 0 105 0;
-#X connect 50 0 106 0;
-#X connect 51 0 103 0;
-#X connect 52 0 104 0;
-#X connect 53 0 96 0;
-#X connect 54 0 98 0;
 #X connect 55 0 49 0;
 #X connect 55 0 66 0;
 #X connect 56 0 50 0;
@@ -1251,23 +1181,15 @@ them;
 #X connect 93 0 91 0;
 #X connect 94 0 93 2;
 #X connect 95 0 94 1;
-#X connect 96 0 97 0;
-#X connect 98 0 99 0;
-#X connect 103 0 100 0;
-#X connect 104 0 101 0;
-#X connect 105 0 102 0;
-#X connect 106 0 107 0;
-#X connect 109 0 110 0;
-#X connect 110 0 97 0;
-#X connect 110 0 99 0;
-#X connect 110 0 100 0;
-#X connect 110 0 101 0;
-#X connect 110 0 102 0;
-#X connect 110 0 107 0;
 #X coords 0 -1 1 1 200 220 2 100 100;
 #X restore 1034 158 pd oskel;
-#X connect 1 0 2 0;
+#X msg 960 76 connect localhost 13000;
+#X obj 970 135 netsend 1;
+#X msg 923 115 send /livelevel;
+#X connect 2 0 17 0;
 #X connect 4 0 5 0;
 #X connect 5 0 7 0;
 #X connect 6 0 4 0;
 #X connect 7 0 3 0;
+#X connect 15 0 16 0;
+#X connect 17 0 16 0;
