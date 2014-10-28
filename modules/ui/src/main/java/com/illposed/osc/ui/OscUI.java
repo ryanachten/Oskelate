@@ -21,8 +21,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -46,6 +49,9 @@ import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -70,6 +76,15 @@ public class OscUI extends JPanel {
 	private JLabel delayLabel;
 	private Color OSK_PINK = new Color(249, 200, 202);
 	private Color OSK_YELLOW = new Color(254, 242, 242);
+	public enum EFFECT {LUMA, BLUR, FRAME, REFRACT, KALEI, CUBISM, OSKWAVE, EMPTY  };
+	public static Font font16 = new Font("Verdana", Font.BOLD, 16);
+	public static Font font22 = new Font("Verdana", Font.BOLD, 22);
+	public static Font font24 = new Font("Verdana", Font.BOLD, 24);
+	public static Border lineBorder = new LineBorder(Color.BLACK, 2);
+	public static Border emptyBorder = new EmptyBorder(5, 5, 5, 5);
+
+
+	
 
 
 	private JButton firstSynthButtonOn, secondSynthButtonOn, thirdSynthButtonOn, fourthSynthButtonOn;
@@ -129,28 +144,43 @@ public class OscUI extends JPanel {
 	
 	private void addTopPanel() {
 		JPanel topPanel = new JPanel();
+		topPanel.setBackground(OSK_PINK);
+		topPanel.setOpaque(true);
 		add(topPanel, BorderLayout.NORTH);
-		topPanel.add(loadImage("oskImg.png"), BorderLayout.EAST);
+//		topPanel.add(loadImage("oskImg.png"), BorderLayout.EAST);
+		topPanel.add(makeLabel("O_S_K_E_L_A_T_E", font24), BorderLayout.CENTER);
 		
-		JTextArea textArea = new JTextArea();
-		topPanel.add(textArea, BorderLayout.WEST);
+//		JTextArea textArea = new JTextArea();
+//		topPanel.add(textArea, BorderLayout.WEST);
 		
 		
 		
 		
 	}
 	
+	
+
 	private void addBottomPanel() {
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new BorderLayout());
-		add(bottomPanel, BorderLayout.SOUTH);
-		addTabPane(bottomPanel);
+		add(bottomPanel, BorderLayout.CENTER);
+		addVideoPanel(bottomPanel);
 		addLeftPanel(bottomPanel);
 		addRightPanel(bottomPanel);
+		addCenterPanel(bottomPanel);
 		
 	}
 
 	
+
+	private void addCenterPanel(JPanel bottomPanel) {
+		JPanel centerPanel= new JPanel();
+		centerPanel.setBackground(OSK_YELLOW);
+		centerPanel.setOpaque(true);
+		centerPanel.add(makeLabel("SOUND LEVELS GO HERE YAAR", font22));
+		
+		bottomPanel.add(centerPanel, BorderLayout.CENTER);
+	}
 
 	// /javaosc-ui/src/main/java/res/oskImg.png
 	private Component loadImage(String path){
@@ -170,30 +200,63 @@ public class OscUI extends JPanel {
 		JPanel rightPanel= new JPanel();
 		rightPanel.setBackground(OSK_YELLOW);
 		rightPanel.setOpaque(true);
-		JFileChooser fileChooser = new JFileChooser();
-		rightPanel.add(fileChooser);
+		rightPanel.add(new JButton("Choose wideo file"));
+
+		
 		panel.add(rightPanel, BorderLayout.EAST);
 	}
 
 	private void addLeftPanel(JPanel panel) {
 		JPanel leftPanel = new JPanel();
-		leftPanel.setBackground(OSK_YELLOW);
-		leftPanel.setOpaque(true);
-		leftPanel.setLayout(new GridLayout(8, 1));
+		leftPanel.setLayout(new GridLayout(1, 2));
+		
+		JPanel audioPanel = new JPanel();
+		audioPanel.setBackground(OSK_YELLOW);
+		audioPanel.setOpaque(true);
+		audioPanel.setLayout(new GridLayout(10, 1, 5, 5));
+		audioPanel.setBorder(emptyBorder);
+		audioPanel.add(makeLabel("AUDIO", font22));
+		
+		JPanel skeletalPanel = new JPanel();
+		skeletalPanel.setBackground(OSK_YELLOW);
+		skeletalPanel.setOpaque(true);
+		skeletalPanel.setLayout(new GridLayout(10, 1, 5, 5));
+		skeletalPanel.setBorder(emptyBorder);
+		skeletalPanel.add(makeLabel("SKELETAL", font22));
+		
 		for (int i = 0; i < 8; i++){
-			leftPanel.add(new JLabel("==============="+ String.valueOf(i) + "==============="));
+			audioPanel.add(new EffectPanel(EFFECT.EMPTY));
+			skeletalPanel.add(new EffectPanel(EFFECT.EMPTY));
 		}
+		
+		audioPanel.setVisible(true);
+		audioPanel.setOpaque(true);
+		skeletalPanel.setVisible(true);
+		skeletalPanel.setOpaque(true);
+		
+		leftPanel.add(audioPanel);
+		leftPanel.add(skeletalPanel);
+		leftPanel.setVisible(true);
+		leftPanel.setOpaque(true);
 		panel.add(leftPanel, BorderLayout.WEST);
+		
+		
+		
 	}
 
-	private void addTabPane(JPanel panel) {
-		JPanel audioTabPanel = new JPanel();
-		JPanel skelTabPanel = new JPanel();
-		JTabbedPane tabbedPanel = new JTabbedPane();
-		tabbedPanel.addTab("Audio", audioTabPanel);
-		tabbedPanel.addTab("Video", skelTabPanel);
-		panel.add(tabbedPanel, BorderLayout.CENTER);
+	private void addVideoPanel(JPanel panel) {
+		JFileChooser fileChooser = new JFileChooser();
+		panel.add(fileChooser);
 
+	}
+	
+	/* returns JLabel with text*/
+	public static Component makeLabel(String name, Font font) {
+		JLabel temp = new JLabel();
+		temp.setFont(font);
+		temp.setText(name);
+		temp.setBorder(emptyBorder);
+		return temp;
 	}
 
 	protected void addFourthSynthPanel() {
