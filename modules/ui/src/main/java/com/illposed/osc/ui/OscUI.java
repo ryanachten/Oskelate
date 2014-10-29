@@ -131,6 +131,7 @@ public class OscUI extends JPanel {
 		setLayout(new BorderLayout());
 		setBackground(OSK_PINK);
 		setOpaque(true);
+		
 		// call these methods ???? to be defined later
 		
 		addTopPanel();
@@ -145,6 +146,9 @@ public class OscUI extends JPanel {
 //		addFourthSynthPanel();
 
 	}
+	
+	/****** ADD PANEL METHODS  ******/
+
 	
 	private void addTopPanel() {
 		JPanel topPanel = new JPanel();
@@ -181,10 +185,14 @@ public class OscUI extends JPanel {
 		JPanel centerPanel= new JPanel();
 		centerPanel.setBackground(OSK_YELLOW);
 		centerPanel.setOpaque(true);
-		centerPanel.add(makeLabel("SOUND LEVELS GO HERE YAAR", font22));
+		centerPanel.setLayout(new BorderLayout());
+		centerPanel.add(makeLabel("SOUND LEVEL", font22), BorderLayout.NORTH);
+		centerPanel.add(makeLevels(), BorderLayout.CENTER);
 		
 		bottomPanel.add(centerPanel, BorderLayout.CENTER);
 	}
+
+	
 
 	// /javaosc-ui/src/main/java/res/oskImg.png
 	private Component loadImage(String path){
@@ -204,7 +212,17 @@ public class OscUI extends JPanel {
 		JPanel rightPanel= new JPanel();
 		rightPanel.setBackground(OSK_YELLOW);
 		rightPanel.setOpaque(true);
-		rightPanel.add(new JButton("Choose wideo file"));
+		JButton videoButton = new JButton("Choose wideo file");
+		videoButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				doSendSlider((float)1000.00, 1000);;
+				
+			}
+		});
+		rightPanel.add(videoButton);
+		
 
 		
 		panel.add(rightPanel, BorderLayout.EAST);
@@ -254,6 +272,8 @@ public class OscUI extends JPanel {
 
 	}
 	
+	/****** MAKE COMPONENT METHODS ******/
+	
 	/* returns JLabel with text*/
 	public static Component makeLabel(String name, Font font) {
 		JLabel temp = new JLabel();
@@ -261,6 +281,39 @@ public class OscUI extends JPanel {
 		temp.setText(name);
 		temp.setBorder(emptyBorder);
 		return temp;
+	}
+	
+	private Component makeLevels() {
+		JPanel levelsPanel = new JPanel();
+		levelsPanel.setLayout(new GridLayout(1, 2, 20, 1));
+		JPanel livePanel= new JPanel();
+		livePanel.setLayout(new GridLayout(15, 1, 0, 2));
+		fillLevels(livePanel, 5);
+		levelsPanel.add(livePanel);
+		
+		JPanel averagePanel = new JPanel();
+		averagePanel.setLayout(new GridLayout(15, 1, 0, 2));
+		fillLevels(averagePanel, 8);
+		levelsPanel.add(averagePanel);
+
+
+		
+		
+		return levelsPanel;
+	}
+
+	private void fillLevels(JPanel panel, int num) {
+		for (int i = 0; i < (15 - num); i++)
+		{
+			panel.add(new JLabel("   "));
+		}
+		for (int i = 0;  i < num; i++)
+		{
+			JLabel square = new JLabel("   ");
+			square.setOpaque(true);
+			square.setBackground(Color.GREEN);
+			panel.add(square);
+		}
 	}
 
 	protected void addFourthSynthPanel() {
