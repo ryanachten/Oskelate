@@ -103,12 +103,14 @@ public class OscUI extends JPanel {
 		try {
 			oscPortOut = new OSCPortOut();
 			oscPortIn = new OSCPortIn(OSCPort.defaultSCOSCPort());
-			JOptionPane.showMessageDialog(null, "ISTEEEEENING.");
-
 			oscPortIn.addListener("/livelevel", new OSCListener() {
 				@Override
 				public void acceptMessage(Date time, OSCMessage message) {
-					System.out.println("RECEIVED:"+message.toString());
+					List<Object> args = message.getArguments();
+					for(Object a : args){
+						Float ar = (Float) a;
+						System.out.println("RECEIVED: "+ ar);
+					}
 					JOptionPane.showMessageDialog(null, "RECEIVED:"+message.toString());
 				}	
 			});
