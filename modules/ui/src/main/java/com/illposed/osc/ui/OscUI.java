@@ -23,6 +23,8 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
@@ -74,18 +76,35 @@ public class OscUI extends JPanel {
 	private JTextField textBox3;
 	private JTextField textBox4 = new JTextField(String.valueOf(1000), 8);
 	private JLabel delayLabel;
-	private Color OSK_PINK = new Color(249, 200, 202);
-	private Color OSK_YELLOW = new Color(254, 242, 242);
+	public static final Color OSK_PINK = new Color(249, 197, 201);
+	public static final Color OSK_MEDPINK = new Color(253, 235, 236);
+	public static final Color OSK_PALEPINK = new Color(253, 235, 236);
+	public static final Color OSK_PALEGREY = new Color(232, 233, 232);
+	public static final Color OSK_MEDGREY = new Color(197, 201, 202);
+	public static final Color OSK_DARKGREY = new Color(109, 110, 115);
+	public static final Color OSK_RED = new Color(235, 89, 114);
+	public static final Color OSK_BLUE = new Color(46, 151, 216);
+
+
 	public enum EFFECT {LUMA, BLUR, FRAME, REFRACT, KALEI, CUBISM, OSKWAVE, EMPTY  };
-	public static Font font16 = new Font("Verdana", Font.BOLD, 16);
-	public static Font font22 = new Font("Verdana", Font.BOLD, 22);
-	public static Font font24 = new Font("Verdana", Font.BOLD, 24);
-	public static Border lineBorder = new LineBorder(Color.BLACK, 2);
-	public static Border emptyBorder = new EmptyBorder(5, 5, 5, 5);
+	
+	// fonts
+	public static final  Font font11 = new Font("Helvetica Neue", Font.PLAIN, 11);
+	public static final  Font font11b = new Font("Helvetica Neue", Font.BOLD, 11);
+	public static final  Font font16 = new Font("Helvetica Neue", Font.PLAIN, 16);
+	public static final  Font font16b = new Font("Helvetica Neue", Font.BOLD, 16);
+	public static final Font font22 = new Font("Helvetica Neue", Font.PLAIN, 22);
+	public static final Font font22b = new Font("Helvetica Neue", Font.BOLD, 22);
+	public static final Font font30 = new Font("Helvetica Neue", Font.PLAIN, 30);
+	public static final Font font30b = new Font("Helvetica Neue", Font.BOLD, 30);
+	
+	//borders
+	public static final Border lineBorder = new LineBorder(Color.BLACK, 2);
+	public static final Border emptyBorder = new EmptyBorder(5, 5, 5, 5);
 
 
 	
-
+	
 
 	private JButton firstSynthButtonOn, secondSynthButtonOn, thirdSynthButtonOn, fourthSynthButtonOn;
 	private JButton firstSynthButtonOff, secondSynthButtonOff, thirdSynthButtonOff,fourthSynthButtonOff;
@@ -131,7 +150,7 @@ public class OscUI extends JPanel {
 		// call these methods ???? to be defined later
 		
 		addTopPanel();
-		addBottomPanel();
+		addMainPanel();
 		
 		
 //		addOscServerAddressPanel();
@@ -144,15 +163,29 @@ public class OscUI extends JPanel {
 	}
 	
 	/****** ADD PANEL METHODS  ******/
+	/****** LOOK THE DIAGRAM BELOW **/
 
+	/**|_____1______|  
+	/**| 2 | 3  | 4 |
+	/**|___|____|___|
+	/**| 5 | 6  | 7 |
+	/**|___|____|___|
 	
+	/** 1 **/
 	private void addTopPanel() {
 		JPanel topPanel = new JPanel();
 		topPanel.setBackground(OSK_PINK);
 		topPanel.setOpaque(true);
 		add(topPanel, BorderLayout.NORTH);
 //		topPanel.add(loadImage("oskImg.png"), BorderLayout.EAST);
-		topPanel.add(makeLabel("O_S_K_E_L_A_T_E", font24), BorderLayout.CENTER);
+		JPanel titlePanel = new JPanel();
+		titlePanel.add(makeLabel("[", font30));
+		titlePanel.add(makeLabel("OSKELATE ", font30b));
+		titlePanel.add(makeLabel("VISUALISER", font30));
+		titlePanel.add(makeLabel("]", font30));
+		titlePanel.setBackground(OSK_PINK);
+		titlePanel.setOpaque(true);
+		topPanel.add(titlePanel, BorderLayout.CENTER);
 		
 //		JTextArea textArea = new JTextArea();
 //		topPanel.add(textArea, BorderLayout.WEST);
@@ -163,32 +196,192 @@ public class OscUI extends JPanel {
 	}
 	
 	
+	/** 2, 3, 4, 5, 6, 7 **/
+	private void addMainPanel() {
+		JPanel mainPanel = new JPanel();
+		GridBagLayout gridBag = new GridBagLayout();
+		mainPanel.setLayout(gridBag);
+		GridBagConstraints cons = new GridBagConstraints();
+		cons.weightx = 0.5;
+		
 
-	private void addBottomPanel() {
-		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new BorderLayout());
-		add(bottomPanel, BorderLayout.CENTER);
-		addVideoPanel(bottomPanel);
-		addLeftPanel(bottomPanel);
-		addRightPanel(bottomPanel);
-		addCenterPanel(bottomPanel);
+		
+		add(mainPanel, BorderLayout.CENTER);
+		
+		cons.fill = GridBagConstraints.BOTH;
+		cons.gridx = 0;
+		cons.gridy = 0;
+		cons.gridheight = 1;
+		cons.gridwidth = 1;
+		addLogoPanel(mainPanel, cons);
+		cons.fill = GridBagConstraints.BOTH;
+		cons.gridx = 1;
+		cons.gridy = 0;
+		cons.gridheight = 1;
+		cons.gridwidth = 2;
+		addSkeletalPanel(mainPanel, cons);
+		cons.fill = GridBagConstraints.BOTH;
+		cons.gridx = 3;
+		cons.gridy = 0;
+		cons.gridheight = 1;
+		cons.gridwidth = GridBagConstraints.REMAINDER;
+		addLevelsPanel(mainPanel, cons);
+		cons.fill = GridBagConstraints.BOTH;
+		cons.gridx = 0;
+		cons.gridy = 1;
+		cons.gridheight = 1;
+		cons.gridwidth = 1;
+		addGemPanel(mainPanel, cons);
+		cons.fill = GridBagConstraints.BOTH;
+		cons.gridx = 1;
+		cons.gridy = 1;
+		cons.gridheight = 1;
+		cons.gridwidth = 2;
+		addAudioPanel(mainPanel, cons);
+		cons.fill = GridBagConstraints.BOTH;
+		cons.gridx = 3;
+		cons.gridy = 1;
+		cons.gridheight = 1;
+		cons.gridwidth = GridBagConstraints.REMAINDER;
+		addVideoPanel(mainPanel, cons);
+		
+
+		
+	}
+	
+	
+	
+	/** 4 
+	 * @param cons **/
+	private void addLevelsPanel(JPanel upperPanel, GridBagConstraints cons) {
+		JPanel levelsPanel = new JPanel();
+		levelsPanel.setBackground(OSK_PALEPINK);
+		levelsPanel.setOpaque(true);
+		levelsPanel.setLayout(new BorderLayout());
+		levelsPanel.add(makeLabel("SOUND LEVEL", font22), BorderLayout.NORTH);
+		levelsPanel.add(makeLevels(), BorderLayout.CENTER);
+		
+		upperPanel.add(levelsPanel, cons);
+		
+	
+		
+		
+	}
+
+	/** 3 
+	 * @param cons **/
+	private void addSkeletalPanel(JPanel mainPanel, GridBagConstraints cons) {
+		JPanel skeletalPanel = new JPanel();
+		skeletalPanel.setBackground(OSK_PALEPINK);
+		skeletalPanel.setOpaque(true);
+		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
+		skeletalPanel.setBorder(emptyBorder);
+		skeletalPanel.add(makeLabel("SKELETAL", font22));
+		
+		// FX and TX
+		JPanel skelFXPanel = new JPanel();
+		for (int i = 0; i < 5; i++){
+			skelFXPanel.add(new EmptyPanel());
+		}
+		skeletalPanel.add(skelFXPanel);
+		
+		JPanel skelTXPanel = new JPanel();
+		for (int i = 0; i < 3; i++){
+			skelTXPanel.add(new EmptyPanel());
+		}
+		skeletalPanel.add(skelTXPanel);
+		
+		skeletalPanel.setVisible(true);
+		skeletalPanel.setOpaque(true);
+		
+		mainPanel.add(skeletalPanel, cons);
+
+		
+	}
+
+	/** 2 
+	 * @param cons **/
+	private void addLogoPanel(JPanel mainPanel, GridBagConstraints cons) {
+		mainPanel.add(makeLabel("===IMAGE===", font30b), cons);
 		
 	}
 
 	
 
-	private void addCenterPanel(JPanel bottomPanel) {
-		JPanel centerPanel= new JPanel();
-		centerPanel.setBackground(OSK_YELLOW);
-		centerPanel.setOpaque(true);
-		centerPanel.setLayout(new BorderLayout());
-		centerPanel.add(makeLabel("SOUND LEVEL", font22), BorderLayout.NORTH);
-		centerPanel.add(makeLevels(), BorderLayout.CENTER);
+
+	/** 6 
+	 * @param cons **/
+	private void addAudioPanel(JPanel mainPanel, GridBagConstraints cons) {
+		JPanel audioPanel = new JPanel();
+		audioPanel.setBackground(OSK_PALEPINK);
+		audioPanel.setOpaque(true);
+		audioPanel.setLayout(new GridLayout(3, 1, 5, 5));
+		audioPanel.setBorder(emptyBorder);
+		audioPanel.add(makeLabel("AUDIO", font22));
 		
-		bottomPanel.add(centerPanel, BorderLayout.CENTER);
+		// FX and TX
+		JPanel auFXPanel = new JPanel();
+		for (int i = 0; i < 5; i++){
+			auFXPanel.add(new EmptyPanel());
+		}
+		audioPanel.add(auFXPanel);
+		
+		JPanel auTXPanel = new JPanel();
+		for (int i = 0; i < 3; i++){
+			auTXPanel.add(new EmptyPanel());
+		}
+		audioPanel.add(auTXPanel);
+		
+		
+		
+	
+		
+		for (int i = 0; i < 8; i++){
+//			audioPanel.add(new EmptyPanel());
+		}
+		
+		audioPanel.setVisible(true);
+		audioPanel.setOpaque(true);
+		
+		
+		mainPanel.add(audioPanel, cons);
+		
 	}
 
+	/** 5 
+	 * @param cons **/
+	private void addGemPanel(JPanel mainPanel, GridBagConstraints cons) {
+		mainPanel.add(makeLabel("====GEM====", font30b), cons);
+
+		
+	}
 	
+	/** 7 
+	 * @param cons **/
+	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
+		
+		JPanel videoPanel= new JPanel();
+		videoPanel.setBackground(OSK_PALEPINK);
+		videoPanel.setOpaque(true);
+		JButton videoButton = new JButton("Choose wideo file");
+		videoButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				doSendSlider((float)1000.00, 1000);;
+				
+			}
+		});
+		videoPanel.add(videoButton);
+		
+		mainPanel.add(videoPanel, cons);
+
+	}
+	
+	/** THAT'S ALL THE MAIN PANELS **/
+
+	
+
 
 	// /javaosc-ui/src/main/java/res/oskImg.png
 	private Component loadImage(String path){
@@ -204,69 +397,16 @@ public class OscUI extends JPanel {
 		catch ( Exception e ) { return new JLabel("image load failed"); }
 	}
 
-	private void addRightPanel(JPanel panel) {
-		JPanel rightPanel= new JPanel();
-		rightPanel.setBackground(OSK_YELLOW);
-		rightPanel.setOpaque(true);
-		JButton videoButton = new JButton("Choose wideo file");
-		videoButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				doSendSlider((float)1000.00, 1000);;
-				
-			}
-		});
-		rightPanel.add(videoButton);
-		
 
-		
-		panel.add(rightPanel, BorderLayout.EAST);
-	}
 
 	private void addLeftPanel(JPanel panel) {
-		JPanel leftPanel = new JPanel();
-		leftPanel.setLayout(new GridLayout(1, 2));
 		
-		JPanel audioPanel = new JPanel();
-		audioPanel.setBackground(OSK_YELLOW);
-		audioPanel.setOpaque(true);
-		audioPanel.setLayout(new GridLayout(10, 1, 5, 5));
-		audioPanel.setBorder(emptyBorder);
-		audioPanel.add(makeLabel("AUDIO", font22));
-		
-		JPanel skeletalPanel = new JPanel();
-		skeletalPanel.setBackground(OSK_YELLOW);
-		skeletalPanel.setOpaque(true);
-		skeletalPanel.setLayout(new GridLayout(10, 1, 5, 5));
-		skeletalPanel.setBorder(emptyBorder);
-		skeletalPanel.add(makeLabel("SKELETAL", font22));
-		
-		for (int i = 0; i < 8; i++){
-			audioPanel.add(new EffectPanel(EFFECT.EMPTY));
-			skeletalPanel.add(new EffectPanel(EFFECT.EMPTY));
-		}
-		
-		audioPanel.setVisible(true);
-		audioPanel.setOpaque(true);
-		skeletalPanel.setVisible(true);
-		skeletalPanel.setOpaque(true);
-		
-		leftPanel.add(audioPanel);
-		leftPanel.add(skeletalPanel);
-		leftPanel.setVisible(true);
-		leftPanel.setOpaque(true);
-		panel.add(leftPanel, BorderLayout.WEST);
 		
 		
 		
 	}
 
-	private void addVideoPanel(JPanel panel) {
-		JFileChooser fileChooser = new JFileChooser();
-		panel.add(fileChooser);
-
-	}
+	
 	
 	/****** MAKE COMPONENT METHODS ******/
 	
@@ -283,12 +423,12 @@ public class OscUI extends JPanel {
 		JPanel levelsPanel = new JPanel();
 		levelsPanel.setLayout(new GridLayout(1, 2, 20, 1));
 		JPanel livePanel= new JPanel();
-		livePanel.setLayout(new GridLayout(15, 1, 0, 2));
+		livePanel.setLayout(new GridLayout(15, 1, 0, 1));
 		fillLevels(livePanel, 5);
 		levelsPanel.add(livePanel);
 		
 		JPanel averagePanel = new JPanel();
-		averagePanel.setLayout(new GridLayout(15, 1, 0, 2));
+		averagePanel.setLayout(new GridLayout(15, 1, 0, 1));
 		fillLevels(averagePanel, 8);
 		levelsPanel.add(averagePanel);
 
