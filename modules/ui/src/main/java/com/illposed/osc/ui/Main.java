@@ -46,7 +46,11 @@ public class Main extends JFrame {
 		addOscUI();
 		Rectangle bounds = getMaximizedBounds(); // set your maximized bounds
 		setMaximizedBounds(bounds);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    setUndecorated(true);
+
+
 		setVisible(true);
 	}
 
