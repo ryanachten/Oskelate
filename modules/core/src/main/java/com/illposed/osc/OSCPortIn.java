@@ -52,7 +52,6 @@ public class OSCPortIn extends OSCPort implements Runnable {
 	public OSCPortIn(DatagramSocket socket) {
 		super(socket, socket.getLocalPort());
 
-		JOptionPane.showMessageDialog(null, "Eggs are not supposed to be green.");
 
 		this.converter = new OSCByteArrayToJavaConverter();
 		this.dispatcher = new OSCPacketDispatcher();
@@ -102,6 +101,7 @@ public class OSCPortIn extends OSCPort implements Runnable {
 		byte[] buffer = new byte[BUFFER_SIZE];
 		DatagramPacket packet = new DatagramPacket(buffer, BUFFER_SIZE);
 		DatagramSocket socket = getSocket();
+		
 		System.out.println("start thread");
 		while (listening) {
 			try {
