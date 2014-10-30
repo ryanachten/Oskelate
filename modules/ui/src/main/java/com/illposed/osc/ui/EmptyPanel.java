@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -19,55 +20,66 @@ import javax.swing.SwingConstants;
 public class EmptyPanel extends EffectPanel {
 
 	
-	public EmptyPanel (){
+	
+	public EmptyPanel (String n, int w, int h, int f1, int f2, int p){
 		super("");
-		this.setPreferredSize( new Dimension( 150, 90 ) );
+		this.setPreferredSize( new Dimension( w, h ) );//130 90
 		//add 3 white boxes
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		Font font1 = new Font("Verdana", Font.BOLD, 13);
-		Font font = new Font("Verdana", Font.BOLD, 10);
+		Font font1 = new Font("Verdana", Font.BOLD, f1);
+		Font font = new Font("Verdana", Font.PLAIN, f2);
 		
-		final JLabel l1 = new JLabel("M O D U L E: N",JLabel.CENTER);
+		final JLabel l1 = new JLabel(n,JLabel.CENTER);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
-		c.ipady = 15;      //make this component tall
+		c.ipady = p;      //make this component tall
 		c.weightx = 0;
-		c.gridwidth = 3;
+		c.gridwidth = 5;
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(l1, c);
 		
-		final JTextField t1 = new JTextField(2);
-		c.weightx = 1;
-		c.gridx = 0;
+		final JTextField t1 = new JTextField(1);
+		t1.setFont(font);
+		t1.setPreferredSize( new Dimension( 30, 20 ) );
+		t1.setEditable(false);
+		c.weightx = 0.1;
+		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		t1.setFont(font);
 		this.add(t1, c);
 		
-		final JTextField t2 = new JTextField(2);
-		c.weightx = 1;
-		c.gridx = 1;
+		final JTextField t2 = new JTextField(1);
+		t2.setFont(font);
+		t2.setPreferredSize( new Dimension( 30, 20 ) );
+		t2.setEditable(false);
+		c.weightx = 0.1;
+		c.gridx = 2;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(t2, c);
 		
-		final JTextField t3 = new JTextField(2);
-		c.weightx = 1;
-		c.gridx = 2;
+		final JTextField t3 = new JTextField(1);
+		t3.setFont(font);
+		t3.setPreferredSize( new Dimension( 50, 20 ) );
+		t3.setEditable(false);
+		c.weightx = 0.1;
+		c.gridx = 3;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(t3, c);
 		
-		final JTextField t4 = new JTextField(2);
+		
+		JButton b1 = new JButton();
+		b1.setBackground(Color.RED);
+		b1.setPreferredSize(new Dimension(25, 15));
 		c.weightx = 1;
-		c.gridx = 3;
+		c.gridx = 4;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		this.add(t4, c);
-		
+		this.add(b1, c);
 		
 
 		

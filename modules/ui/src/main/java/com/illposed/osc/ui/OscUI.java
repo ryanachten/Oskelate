@@ -124,6 +124,7 @@ public class OscUI extends JPanel {
 		makeDisplay();
 		try {
 			oscPortOut = new OSCPortOut();
+			
 			oscPortIn = new OSCPortIn(OSCPort.defaultSCOSCPort());
 			oscPortIn.addListener("/livelevel", new OSCListener() {
 				private List<Integer> samples = new ArrayList<Integer>();
@@ -351,15 +352,19 @@ public class OscUI extends JPanel {
 		
 		// FX and TX
 		JPanel skelFXPanel = new JPanel();
-		for (int i = 0; i < 5; i++){
-			skelFXPanel.add(new EmptyPanel());
-		}
+		skelFXPanel.add(new EmptyPanel("FX:LUMA",130,90, 13, 18, 15));
+		skelFXPanel.add(new SliderPanel("FX:FRAME",130,90, 13, 18, 15));
+		skelFXPanel.add(new EmptyPanel("FX:MBLUR",130,90, 13, 18, 15));
+		skelFXPanel.add(new EmptyPanel("FX:REFRACT",130,90, 13, 18, 15));
+		skelFXPanel.add(new EmptyPanel("FX:KALEI",130,90, 13, 18, 15));
+
 		skeletalPanel.add(skelFXPanel);
 		
 		JPanel skelTXPanel = new JPanel();
-		for (int i = 0; i < 3; i++){
-			skelTXPanel.add(new EmptyPanel());
-		}
+		skelTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
+		skelTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
+		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
+
 		skeletalPanel.add(skelTXPanel);
 		
 		skeletalPanel.setVisible(true);
@@ -373,7 +378,7 @@ public class OscUI extends JPanel {
 	/** 2 
 	 * @param cons **/
 	private void addLogoPanel(JPanel mainPanel, GridBagConstraints cons) {
-		mainPanel.add(makeLabel("===IMAGE===", font30b), cons);
+		mainPanel.add(loadImage("logo.png"), cons);
 		
 	}
 
@@ -392,15 +397,19 @@ public class OscUI extends JPanel {
 		
 		// FX and TX
 		JPanel auFXPanel = new JPanel();
-		for (int i = 0; i < 5; i++){
-			auFXPanel.add(new EmptyPanel());
-		}
+		auFXPanel.add(new EmptyPanel("FX:LUMA",130, 90, 13, 18, 15));
+		auFXPanel.add(new SliderPanel("FX:FRAME",130, 90, 13, 18, 15));
+		auFXPanel.add(new EmptyPanel("FX:MBLUR",130, 90, 13, 18, 15));
+		auFXPanel.add(new EmptyPanel("FX:REFRACT",130, 90, 13, 18, 15));
+		auFXPanel.add(new EmptyPanel("FX:KALEI",130, 90, 13, 18, 15));
+
 		audioPanel.add(auFXPanel);
 		
 		JPanel auTXPanel = new JPanel();
-		for (int i = 0; i < 3; i++){
-			auTXPanel.add(new EmptyPanel());
-		}
+		auTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
+		auTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
+		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
+
 		audioPanel.add(auTXPanel);
 		
 		
@@ -434,18 +443,36 @@ public class OscUI extends JPanel {
 		JPanel videoPanel= new JPanel();
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
-		JButton videoButton = new JButton("Choose video file");
-		
+
+		JButton videoButton = new JButton("Choose wideo file");
+
 		videoButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser chooser = new JFileChooser();
+				chooser.setDialogTitle("Please select a video file");
+				chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				chooser.setAcceptAllFileFilterUsed(false);
+				String path = "";
+				
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//				  System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+				  System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+				  path = (chooser.getSelectedFile()).getPath();
+				} else {
+				  System.out.println("No Selection");
+				}
 //				doSendSlider((float)1000.00, 1000);
-				doSendVideo(1000,"/Documents/Oskelate/test.mp4");
+
+				
+				doSendVideo(1000,path);
+
 				
 			}
-
 		});
+		
 		videoPanel.add(videoButton);
 		
 		mainPanel.add(videoPanel, cons);
@@ -1082,6 +1109,7 @@ public class OscUI extends JPanel {
 		
 		try {
 			oscPortOut.send(msg);
+			System.out.println("Path sent to pd: "+path);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}

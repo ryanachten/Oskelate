@@ -25,7 +25,9 @@ public abstract class OSCPort {
 	public static final int DEFAULT_SC_OSC_PORT = 13000;
 
 	public static final int DEFAULT_SC_LANG_OSC_PORT = 13001;
-	
+
+	public static final int DEFAULT_SC_OSC_PORT_OUT = 13002;
+
 
 
 	
