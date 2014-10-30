@@ -62,18 +62,30 @@ public class OSCPatternAddressSelector implements AddressSelector {
 	public OSCPatternAddressSelector(String selector) {
 		this.patternParts = splitIntoParts(selector);
 	}
+	
+	@Override
+	public String toString(){
+		String str = "";
+		for (String s : patternParts)
+		{
+			str += s + '\n';
+		}
+		return str;
+		
+	}
 
 	@Override
 	public boolean matches(String messageAddress) {
-//		int index;
-//		if (messageAddress.contains(";")){
-//			System.out.println("ENTERED");
-//			index = messageAddress.indexOf(";");
-//		}
-		return (true);
-//		List<String> messageAddressParts = splitIntoParts(messageAddress);
-//		
-//		return matches(patternParts, 0, messageAddressParts, 0);
+//		return (true);
+		
+//		return true;
+		List<String> messageAddressParts = splitIntoParts(messageAddress);
+		
+		
+		boolean doesMatch = matches(patternParts, 0, messageAddressParts, 0);
+		if (!doesMatch)
+			System.out.println("NOT MATCHED: reason 4");
+		return doesMatch;
 	}
 
 	/**
@@ -109,15 +121,7 @@ public class OSCPatternAddressSelector implements AddressSelector {
 	 */
 	private static boolean matches(List<String> patternParts, int ppi, List<String> messageAddressParts, int api) {
 	
-		StringBuilder s = new StringBuilder();
-		for(String str : patternParts){
-			s.append(str);
-		}
-		for(String str : messageAddressParts){
-			
-			s.append(str);
-		}
-		System.out.println(s.toString());
+		
 		
 		while (ppi < patternParts.size()) {
 			// There might be some path-traversal wildcards (PTW) "//" in the pattern.
@@ -145,15 +149,18 @@ public class OSCPatternAddressSelector implements AddressSelector {
 				}
 				// end of address parts reached, but there are still non-PTW pattern parts
 				// left
+				System.out.println("NOT MATCHED: reason 1");
 				return false;
 			} else {
 				if ((ppi == patternParts.size()) != (api == messageAddressParts.size())) {
 					// end of pattern, no trailing PTW, but there are still address parts left
 					// OR
 					// end of address, but there are still non-PTW pattern parts left
+					System.out.println("NOT MATCHED: reason 2");
 					return false;
 				}
 				if (!matches(messageAddressParts.get(api), patternParts.get(ppi))) {
+					System.out.println("NOT MATCHED: reason 3");
 					return false;
 				}
 				api++;
