@@ -46,9 +46,9 @@ public class SliderPanel extends EffectPanel {
 		this.add(l1, c);
 		
 		Squares squares = new Squares();
-		squares.addSquare(0,0,55,8);
-		squares.addSquare(0,10,25,8);
-		squares.addSquare(0,20,55,8);
+		//squares.addSquare(0,0,55,8);
+		//squares.addSquare(0,10,25,8);
+		//squares.addSquare(0,20,55,8);
 		c.weightx = 1;
 		c.gridx = 0;
 		c.gridy = 1;
