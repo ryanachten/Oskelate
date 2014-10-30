@@ -166,7 +166,8 @@ public class OscUI extends JPanel {
 	
 	/****** ADD PANEL METHODS  ******/
 	/****** LOOK THE DIAGRAM BELOW **/
-
+	/****** GRIDBAGLAYOUT BRAH, GOOGLE IT
+	
 	/**|_____1______|  
 	/**| 2 | 3  | 4 |
 	/**|___|____|___|
@@ -213,37 +214,30 @@ public class OscUI extends JPanel {
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 0;
-		cons.gridheight = 1;
-		cons.gridwidth = 1;
 		addLogoPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 0;
-		cons.gridheight = 1;
 		cons.gridwidth = 2;
 		addSkeletalPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 0;
-		cons.gridheight = 1;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addLevelsPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 1;
-		cons.gridheight = 1;
 		cons.gridwidth = 1;
 		addGemPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 1;
-		cons.gridheight = 1;
 		cons.gridwidth = 2;
 		addAudioPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 1;
-		cons.gridheight = 1;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addVideoPanel(mainPanel, cons);
 		
@@ -401,12 +395,6 @@ public class OscUI extends JPanel {
 
 
 
-	private void addLeftPanel(JPanel panel) {
-		
-		
-		
-		
-	}
 
 	
 	
