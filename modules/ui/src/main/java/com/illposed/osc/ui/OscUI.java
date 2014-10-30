@@ -124,6 +124,7 @@ public class OscUI extends JPanel {
 		makeDisplay();
 		try {
 			oscPortOut = new OSCPortOut();
+			
 			oscPortIn = new OSCPortIn(OSCPort.defaultSCOSCPort());
 			oscPortIn.addListener("/livelevel", new OSCListener() {
 				private List<Integer> samples = new ArrayList<Integer>();
@@ -172,6 +173,17 @@ public class OscUI extends JPanel {
 //					}
 				}	
 			});
+			
+			// add listener for video_path
+//			oscPortIn.addListener("/video_path", new OSCListener() {
+//				
+//				@Override
+//				public void acceptMessage(Date time, OSCMessage message) {
+//					System.out.println("RECEIVED video_path message");
+//					
+//				}
+//			});
+			
 			oscPortIn.startListening();
 			
 		} catch (Exception ex) {
@@ -371,7 +383,7 @@ public class OscUI extends JPanel {
 	/** 2 
 	 * @param cons **/
 	private void addLogoPanel(JPanel mainPanel, GridBagConstraints cons) {
-		mainPanel.add(makeLabel("===IMAGE===", font30b), cons);
+		mainPanel.add(loadImage("logo.png"), cons);
 		
 	}
 
@@ -1094,6 +1106,7 @@ public class OscUI extends JPanel {
 		
 		try {
 			oscPortOut.send(msg);
+			System.out.println("Path sent to pd: "+path);
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}

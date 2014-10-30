@@ -160,7 +160,7 @@ public class OSCPatternAddressSelector implements AddressSelector {
 					return false;
 				}
 				if (!matches(messageAddressParts.get(api), patternParts.get(ppi))) {
-					System.out.println("NOT MATCHED: reason 3");
+					System.out.println("NOT MATCHED: reason 3. >>"+messageAddressParts.get(api)+"<< does not match >>"+patternParts.get(ppi)+"<<");
 					return false;
 				}
 				api++;

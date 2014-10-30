@@ -70,7 +70,7 @@ public class OSCPortOut extends OSCPort {
 	 * @throws SocketException when failing to create a (UDP) out socket
 	 */
 	public OSCPortOut(InetAddress address) throws SocketException {
-		this(address, DEFAULT_SC_OSC_PORT);
+		this(address, DEFAULT_SC_OSC_PORT_OUT);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class OSCPortOut extends OSCPort {
 	 * @throws SocketException when failing to create a (UDP) out socket
 	 */
 	public OSCPortOut() throws UnknownHostException, SocketException {
-		this(InetAddress.getLocalHost(), DEFAULT_SC_OSC_PORT);
+		this(InetAddress.getLocalHost(), DEFAULT_SC_OSC_PORT_OUT);
 	}
 
 	/**
