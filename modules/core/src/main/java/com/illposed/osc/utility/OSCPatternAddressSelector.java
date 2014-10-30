@@ -62,12 +62,30 @@ public class OSCPatternAddressSelector implements AddressSelector {
 	public OSCPatternAddressSelector(String selector) {
 		this.patternParts = splitIntoParts(selector);
 	}
+	
+	@Override
+	public String toString(){
+		String str = "";
+		for (String s : patternParts)
+		{
+			str += s + '\n';
+		}
+		return str;
+		
+	}
 
 	@Override
 	public boolean matches(String messageAddress) {
-
+//		return (true);
+		
+//		return true;
 		List<String> messageAddressParts = splitIntoParts(messageAddress);
-		return matches(patternParts, 0, messageAddressParts, 0);
+		
+		
+		boolean doesMatch = matches(patternParts, 0, messageAddressParts, 0);
+		if (!doesMatch)
+			System.out.println("NOT MATCHED: reason 4");
+		return doesMatch;
 	}
 
 	/**
@@ -102,11 +120,14 @@ public class OSCPatternAddressSelector implements AddressSelector {
 	 * @return true if the address matches, false otherwise
 	 */
 	private static boolean matches(List<String> patternParts, int ppi, List<String> messageAddressParts, int api) {
-
+	
+		
+		
 		while (ppi < patternParts.size()) {
 			// There might be some path-traversal wildcards (PTW) "//" in the pattern.
 			// "//" in the pattern translates to an empty String ("") in the pattern parts.
 			// We skip all consecutive "//"s at the current pattern position.
+			
 			boolean pathTraverser = false;
 			while ((ppi < patternParts.size()) && patternParts.get(ppi).isEmpty()) {
 				ppi++;
@@ -128,15 +149,18 @@ public class OSCPatternAddressSelector implements AddressSelector {
 				}
 				// end of address parts reached, but there are still non-PTW pattern parts
 				// left
+				System.out.println("NOT MATCHED: reason 1");
 				return false;
 			} else {
 				if ((ppi == patternParts.size()) != (api == messageAddressParts.size())) {
 					// end of pattern, no trailing PTW, but there are still address parts left
 					// OR
 					// end of address, but there are still non-PTW pattern parts left
+					System.out.println("NOT MATCHED: reason 2");
 					return false;
 				}
 				if (!matches(messageAddressParts.get(api), patternParts.get(ppi))) {
+					System.out.println("NOT MATCHED: reason 3");
 					return false;
 				}
 				api++;
@@ -146,6 +170,15 @@ public class OSCPatternAddressSelector implements AddressSelector {
 
 		return (api == messageAddressParts.size());
 	}
+	
+	public String getPattern(){
+		StringBuilder s = new StringBuilder();
+		for(String str : patternParts){
+			s.append(str);
+		}
+		return s.toString();
+	}
+
 
 	/**
 	 * Tries to match an OSC <i>Address Pattern</i> part to a part of

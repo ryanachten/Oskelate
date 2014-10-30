@@ -64,9 +64,17 @@ public class OSCPacketDispatcher {
 	}
 
 	private void dispatchMessage(OSCMessage message, Date time) {
+		List<Object> args = message.getArguments();
+		
 		System.out.println("RECIEVE "+message.toString());
 		for (Entry<AddressSelector, OSCListener> addrList : selectorToListener.entrySet()) {
+			OSCPatternAddressSelector s = (OSCPatternAddressSelector) addrList.getKey();
+			
+			
+			
+			System.out.println(s.getPattern());
 			if (addrList.getKey().matches(message.getAddress())) {
+				System.out.println("MATCHED: >>"+addrList.getKey().toString()+"<< matches with >>"+message.getAddress()+"<<");
 				addrList.getValue().acceptMessage(time, message);
 			}
 		}

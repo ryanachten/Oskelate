@@ -37,6 +37,7 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -111,7 +112,9 @@ public class OscUI extends JPanel {
 	private JSlider slider, slider2, slider3;
 
 	private OSCPortOut oscPortOut;
-	private OSCPortIn oscPortIn; 
+	private OSCPortIn oscPortIn;
+	private JPanel livePanel;
+	private JPanel averagePanel; 
 	
 	// create a constructor
 	// OscUI takes an argument of myParent which is a JFrame
@@ -123,14 +126,50 @@ public class OscUI extends JPanel {
 			oscPortOut = new OSCPortOut();
 			oscPortIn = new OSCPortIn(OSCPort.defaultSCOSCPort());
 			oscPortIn.addListener("/livelevel", new OSCListener() {
+				private List<Integer> samples = new ArrayList<Integer>();
+				private int count = 10;
+
 				@Override
 				public void acceptMessage(Date time, OSCMessage message) {
-					List<Object> args = message.getArguments();
-					for(Object a : args){
-						Float ar = (Float) a;
-						System.out.println("RECEIVED: "+ ar);
+					
+					
+					System.out.println("ACCEPTED MESAGE");
+					
+					List<Object> messageArgs = message.getArguments();
+					// args should have length 1 and have a float value
+					if (messageArgs != null && !messageArgs.isEmpty())
+					{
+						Object level = messageArgs.get(0);
+						if (level instanceof Float)
+						{
+							samples.add(Math.round((Float)level));
+							System.out.println("as int: "+Math.round((Float)level));
+							
+						}
+						if (samples.size() == count)
+						{
+							int total = 0;
+							for (Integer i : samples)
+							{
+								total += i;
+							}
+							fillLevels(total / count);
+							samples.clear();
+							
+						}
+						
+						System.out.println(level.getClass().getName());
 					}
-					JOptionPane.showMessageDialog(null, "RECEIVED:"+message.toString());
+					
+					
+					printArgs(messageArgs); // for debugging
+					
+					
+//					message.addArgument("$1");
+//					List<Object> args = message.getArguments();
+//					for(Object a : args){
+//						System.out.println("RECEIVED ARGS: " + a);
+//					}
 				}	
 			});
 			oscPortIn.startListening();
@@ -138,6 +177,40 @@ public class OscUI extends JPanel {
 		} catch (Exception ex) {
 			// this is just a demo program, so this is acceptable behavior
 			ex.printStackTrace();
+		}
+	}
+	
+	// tries to conver Object to int, returns null f it can't
+	private int toInt(Object obj){
+//		if (obj instanceof Float)
+			return 6;
+			
+		
+	}
+
+	/** Prints list of objects */
+	protected void printArgs(List<Object> args) {
+		if (args == null || args.isEmpty()) {
+			System.out.println("Argument list is null or empty");
+			return;
+		}
+		for (int i = 0; i < args.size(); i++){
+			Object o = args.get(i);
+			if (o instanceof String){
+				System.out.println("Arg "+i+": (String)"+o);
+			}
+			else if (o instanceof Integer){
+				System.out.println("Arg "+i+": (Integer)"+Integer.valueOf((Integer)o));
+			}
+			else if (o instanceof Float){
+				System.out.println("Arg "+i+": (Float)"+Float.valueOf((Float)o));
+			}
+			else 
+				System.out.println("Arg "+i+": not String, Integer or FLoat");
+
+			
+			
+			
 		}
 	}
 
@@ -166,7 +239,8 @@ public class OscUI extends JPanel {
 	
 	/****** ADD PANEL METHODS  ******/
 	/****** LOOK THE DIAGRAM BELOW **/
-
+	/****** GRIDBAGLAYOUT BRAH, GOOGLE IT
+	
 	/**|_____1______|  
 	/**| 2 | 3  | 4 |
 	/**|___|____|___|
@@ -213,37 +287,30 @@ public class OscUI extends JPanel {
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 0;
-		cons.gridheight = 1;
-		cons.gridwidth = 1;
 		addLogoPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 0;
-		cons.gridheight = 1;
 		cons.gridwidth = 2;
 		addSkeletalPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 0;
-		cons.gridheight = 1;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addLevelsPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 1;
-		cons.gridheight = 1;
 		cons.gridwidth = 1;
 		addGemPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 1;
-		cons.gridheight = 1;
 		cons.gridwidth = 2;
 		addAudioPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 1;
-		cons.gridheight = 1;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addVideoPanel(mainPanel, cons);
 		
@@ -370,7 +437,7 @@ public class OscUI extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				doSendSlider((float)1000.00, 1000);;
+				doSendSlider((float)1000.00, 1000);
 				
 			}
 		});
@@ -401,12 +468,6 @@ public class OscUI extends JPanel {
 
 
 
-	private void addLeftPanel(JPanel panel) {
-		
-		
-		
-		
-	}
 
 	
 	
@@ -424,14 +485,18 @@ public class OscUI extends JPanel {
 	private Component makeLevels() {
 		JPanel levelsPanel = new JPanel();
 		levelsPanel.setLayout(new GridLayout(1, 2, 20, 1));
-		JPanel livePanel= new JPanel();
+		livePanel= new JPanel();
 		livePanel.setLayout(new GridLayout(15, 1, 0, 1));
-		fillLevels(livePanel, 5);
 		levelsPanel.add(livePanel);
 		
-		JPanel averagePanel = new JPanel();
+		averagePanel = new JPanel();
 		averagePanel.setLayout(new GridLayout(15, 1, 0, 1));
-		fillLevels(averagePanel, 8);
+		
+		/** make sure you only call fillLevels once both livePanel and 
+		 * average panel have been created
+		 */
+		fillLevels(5);
+//		fillLevels(8);
 		levelsPanel.add(averagePanel);
 
 
@@ -440,19 +505,36 @@ public class OscUI extends JPanel {
 		return levelsPanel;
 	}
 
-	private void fillLevels(JPanel panel, int num) {
+	private void fillLevels(int num) {
+		livePanel.removeAll();
+		averagePanel.removeAll();
+		if (num < 0) num = 0;
+		num = num / 4;
+		if (num > 15) num = 15;		// SRIRAM DID THIS THANKS BRAH
+		
+		
 		for (int i = 0; i < (15 - num); i++)
 		{
-			panel.add(new JLabel("   "));
+			livePanel.add(new JLabel("   "));
+			averagePanel.add(new JLabel("   "));
+
 		}
 		for (int i = 0;  i < num; i++)
 		{
 			JLabel square = new JLabel("   ");
 			square.setOpaque(true);
 			square.setBackground(Color.GREEN);
-			panel.add(square);
+			averagePanel.add(square);
+			livePanel.add(square);
 		}
+		averagePanel.repaint();
+		averagePanel.revalidate();
+		livePanel.repaint();
+		livePanel.revalidate();
+		
 	}
+	
+	
 
 	protected void addFourthSynthPanel() {
 		// TODO Auto-generated method stub
