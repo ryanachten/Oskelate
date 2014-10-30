@@ -28,7 +28,7 @@ public class SliderPanel extends EffectPanel {
 	
 	public SliderPanel (String n, int w, int h, int f1, int f2, int p){
 		super("");
-		this.setPreferredSize( new Dimension( w, h ) );//130 90
+		this.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(w), ScreenRes.getScaledHeight(h) ) );//130 90
 		//add 3 white boxes
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -59,7 +59,7 @@ public class SliderPanel extends EffectPanel {
 		
 		JButton b1 = new JButton();
 		b1.setBackground(Color.RED);
-		b1.setPreferredSize(new Dimension(25, 15));
+		b1.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(25), ScreenRes.getScaledHeight(15)));
 		c.weightx = 1;
 		c.gridx = 2;
 		c.gridy = 1;
@@ -73,8 +73,8 @@ public class SliderPanel extends EffectPanel {
 }
 @SuppressWarnings("serial")
 class Squares extends JPanel {
-	   private int width = 60;
-	   private int height = 5;
+	   private int width = ScreenRes.getScaledWidth(60);
+	   private int height = ScreenRes.getScaledHeight(5);
 	   private List<Rectangle> squares = new ArrayList<Rectangle>();
 
 	   public void addSquare(int x, int y, int width, int height) {
