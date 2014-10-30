@@ -3,7 +3,8 @@
  * All rights reserved.
  *
  * This code is licensed under the BSD 3-Clause license.
- * See file LICENSE (or LICENSE.html) for more information.
+ * See file LICENSE (or LICENSE.html) for more information
+ * .
  */
 
 // this is the package we are in
@@ -20,6 +21,7 @@ import com.illposed.osc.OSCPortOut;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -282,7 +284,8 @@ public class OscUI extends JPanel {
 		
 
 		
-		add(mainPanel, BorderLayout.CENTER);
+		add(mainPanel, BorderLayout.AFTER_LAST_LINE);
+	
 		
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
@@ -341,11 +344,12 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addSkeletalPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel skeletalPanel = new JPanel();
+		skeletalPanel.setPreferredSize(new Dimension(400, 500));
 		skeletalPanel.setBackground(OSK_PALEPINK);
 		skeletalPanel.setOpaque(true);
 		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		skeletalPanel.setBorder(emptyBorder);
-		skeletalPanel.add(makeLabel("SKELETAL", font22));
+		skeletalPanel.add(makeLabel("<html><span style=\"font-weight: bold\">SKELETAL</span> RESPONSE<html>", font22));
 		
 		// FX and TX
 		JPanel skelFXPanel = new JPanel();
@@ -386,14 +390,16 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addAudioPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel audioPanel = new JPanel();
-		audioPanel.setBackground(OSK_PALEPINK);
+		audioPanel.setPreferredSize(new Dimension(400, 500));
+		audioPanel.setBackground(OSK_PALEGREY);
 		audioPanel.setOpaque(true);
 		audioPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		audioPanel.setBorder(emptyBorder);
-		audioPanel.add(makeLabel("AUDIO", font22));
+		audioPanel.add(makeLabel("<html><h1 style=\"color:white\"><span style=\"font-weight: bold\">AUDIO</span> RESPONSE</h><html>", font22));
 		
 		// FX and TX
 		JPanel auFXPanel = new JPanel();
+		auFXPanel.setBackground(OSK_PALEGREY);
 		auFXPanel.add(new EmptyPanel("FX:LUMA",130, 90, 13, 18, 15));
 		auFXPanel.add(new SliderPanel("FX:FRAME",130, 90, 13, 18, 15));
 		auFXPanel.add(new EmptyPanel("FX:MBLUR",130, 90, 13, 18, 15));
@@ -403,6 +409,7 @@ public class OscUI extends JPanel {
 		audioPanel.add(auFXPanel);
 		
 		JPanel auTXPanel = new JPanel();
+		auTXPanel.setBackground(OSK_PALEGREY);
 		auTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
 		auTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
 		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
@@ -503,6 +510,7 @@ public class OscUI extends JPanel {
 	/* returns JLabel with text*/
 	public static Component makeLabel(String name, Font font) {
 		JLabel temp = new JLabel();
+		temp.setHorizontalAlignment(JLabel.CENTER);
 		temp.setFont(font);
 		temp.setText(name);
 		temp.setBorder(emptyBorder);
