@@ -433,13 +433,16 @@ public class OscUI extends JPanel {
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
 		JButton videoButton = new JButton("Choose wideo file");
+		
 		videoButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				doSendSlider((float)1000.00, 1000);
+//				doSendSlider((float)1000.00, 1000);
+				doSendVideo("/Documents/video/fgt.mp4");
 				
 			}
+
 		});
 		videoPanel.add(videoButton);
 		
@@ -1037,6 +1040,8 @@ public class OscUI extends JPanel {
 	public void doPrintValue3(float freq) {
 		textBox3.setText(String.valueOf(freq));
 	}
+	
+	/** SEND METHODS */
 
 	// create a method for the doSend3 action (Send)
 	public void doSendSlider(float freq, int node) {
@@ -1060,6 +1065,23 @@ public class OscUI extends JPanel {
 		} catch (Exception e) {
 			showError("Couldn't send");
 		}
+	}
+	
+	private void doSendVideo(String path) {
+		if (null == oscPortOut) {
+			showError("Please set an address first");
+		}
+		
+		List<Object> args = new ArrayList<Object>(3);
+		args.add(path);
+		OSCMessage msg = new OSCMessage("/video_path", args);
+		
+		try {
+			oscPortOut.send(msg);
+		} catch (Exception e) {
+			showError("Couldn't send");
+		}
+
 	}
 
 	public void doSendGlobalOff(int node1, int node2, int node3) {
