@@ -349,15 +349,19 @@ public class OscUI extends JPanel {
 		
 		// FX and TX
 		JPanel skelFXPanel = new JPanel();
-		for (int i = 0; i < 5; i++){
-			skelFXPanel.add(new EmptyPanel());
-		}
+		skelFXPanel.add(new EmptyPanel("FX:LUMA",130,90, 13, 18, 15));
+		skelFXPanel.add(new SliderPanel("FX:FRAME",130,90, 13, 18, 15));
+		skelFXPanel.add(new EmptyPanel("FX:MBLUR",130,90, 13, 18, 15));
+		skelFXPanel.add(new EmptyPanel("FX:REFRACT",130,90, 13, 18, 15));
+		skelFXPanel.add(new EmptyPanel("FX:KALEI",130,90, 13, 18, 15));
+
 		skeletalPanel.add(skelFXPanel);
 		
 		JPanel skelTXPanel = new JPanel();
-		for (int i = 0; i < 3; i++){
-			skelTXPanel.add(new EmptyPanel());
-		}
+		skelTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
+		skelTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
+		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
+
 		skeletalPanel.add(skelTXPanel);
 		
 		skeletalPanel.setVisible(true);
@@ -390,15 +394,19 @@ public class OscUI extends JPanel {
 		
 		// FX and TX
 		JPanel auFXPanel = new JPanel();
-		for (int i = 0; i < 5; i++){
-			auFXPanel.add(new EmptyPanel());
-		}
+		auFXPanel.add(new EmptyPanel("FX:LUMA",130, 90, 13, 18, 15));
+		auFXPanel.add(new SliderPanel("FX:FRAME",130, 90, 13, 18, 15));
+		auFXPanel.add(new EmptyPanel("FX:MBLUR",130, 90, 13, 18, 15));
+		auFXPanel.add(new EmptyPanel("FX:REFRACT",130, 90, 13, 18, 15));
+		auFXPanel.add(new EmptyPanel("FX:KALEI",130, 90, 13, 18, 15));
+
 		audioPanel.add(auFXPanel);
 		
 		JPanel auTXPanel = new JPanel();
-		for (int i = 0; i < 3; i++){
-			auTXPanel.add(new EmptyPanel());
-		}
+		auTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
+		auTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
+		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
+
 		audioPanel.add(auTXPanel);
 		
 		
