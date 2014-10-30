@@ -106,12 +106,11 @@ public class OscUI extends JPanel {
 			oscPortIn.addListener("/livelevel", new OSCListener() {
 				@Override
 				public void acceptMessage(Date time, OSCMessage message) {
+					message.addArgument("$1");
 					List<Object> args = message.getArguments();
 					for(Object a : args){
-						Float ar = (Float) a;
-						System.out.println("RECEIVED: "+ ar);
+						System.out.println("RECEIVED ARGS: " + a);
 					}
-					JOptionPane.showMessageDialog(null, "RECEIVED:"+message.toString());
 				}	
 			});
 			oscPortIn.startListening();
@@ -215,7 +214,7 @@ public class OscUI extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				doSendSlider((float)1000.00, 1000);;
+				doSendSlider((float)1000.00, 1000);
 				
 			}
 		});

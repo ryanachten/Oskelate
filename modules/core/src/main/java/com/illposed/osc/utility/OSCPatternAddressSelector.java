@@ -65,9 +65,15 @@ public class OSCPatternAddressSelector implements AddressSelector {
 
 	@Override
 	public boolean matches(String messageAddress) {
-
-		List<String> messageAddressParts = splitIntoParts(messageAddress);
-		return matches(patternParts, 0, messageAddressParts, 0);
+//		int index;
+//		if (messageAddress.contains(";")){
+//			System.out.println("ENTERED");
+//			index = messageAddress.indexOf(";");
+//		}
+		return (true);
+//		List<String> messageAddressParts = splitIntoParts(messageAddress);
+//		
+//		return matches(patternParts, 0, messageAddressParts, 0);
 	}
 
 	/**
@@ -102,11 +108,22 @@ public class OSCPatternAddressSelector implements AddressSelector {
 	 * @return true if the address matches, false otherwise
 	 */
 	private static boolean matches(List<String> patternParts, int ppi, List<String> messageAddressParts, int api) {
-
+	
+		StringBuilder s = new StringBuilder();
+		for(String str : patternParts){
+			s.append(str);
+		}
+		for(String str : messageAddressParts){
+			
+			s.append(str);
+		}
+		System.out.println(s.toString());
+		
 		while (ppi < patternParts.size()) {
 			// There might be some path-traversal wildcards (PTW) "//" in the pattern.
 			// "//" in the pattern translates to an empty String ("") in the pattern parts.
 			// We skip all consecutive "//"s at the current pattern position.
+			
 			boolean pathTraverser = false;
 			while ((ppi < patternParts.size()) && patternParts.get(ppi).isEmpty()) {
 				ppi++;
@@ -146,6 +163,15 @@ public class OSCPatternAddressSelector implements AddressSelector {
 
 		return (api == messageAddressParts.size());
 	}
+	
+	public String getPattern(){
+		StringBuilder s = new StringBuilder();
+		for(String str : patternParts){
+			s.append(str);
+		}
+		return s.toString();
+	}
+
 
 	/**
 	 * Tries to match an OSC <i>Address Pattern</i> part to a part of
