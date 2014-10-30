@@ -370,7 +370,7 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addSkeletalPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel skeletalPanel = new JPanel();
-		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(700), ScreenRes.getScaledHeight(500)));
+		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(700), ScreenRes.getScaledHeight(375)));//700 500
 		skeletalPanel.setBackground(OSK_PALEPINK);
 		skeletalPanel.setOpaque(true);
 		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
@@ -416,7 +416,7 @@ public class OscUI extends JPanel {
 		JPanel title = new JPanel();
 		title.setBackground(new Color(255,238,239));
 		JLabel imgP = new JLabel(new ImageIcon(image));
-		title.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(500)));
+		title.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(375)));//250 500
 		title.setBorder(lineBorder);
 		title.setLayout(new GridLayout(2, 1, 0, 0));
 		title.add(imgP);
@@ -441,7 +441,7 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addAudioPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel audioPanel = new JPanel();
-		audioPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(400), ScreenRes.getScaledHeight(500)));
+		audioPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(400), ScreenRes.getScaledHeight(375)));//400 500
 		audioPanel.setBackground(OSK_PALEGREY);
 		audioPanel.setOpaque(true);
 		audioPanel.setLayout(new GridLayout(3, 1, 5, 5));
@@ -496,7 +496,7 @@ public class OscUI extends JPanel {
 	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
 		
 		JPanel videoPanel= new JPanel();
-		videoPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(500)));
+		videoPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(375)));//250 500
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
 		JButton videoButton = new JButton("Choose wideo file");

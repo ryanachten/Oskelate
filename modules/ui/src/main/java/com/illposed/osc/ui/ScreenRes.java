@@ -15,7 +15,7 @@ public abstract class ScreenRes {
 		if(width == 1920)
 			return w;
 		else
-			return (w/1920) * (int)width;
+			return w;
 	}
 	
 	public static int getScaledHeight(int h){
@@ -23,7 +23,7 @@ public abstract class ScreenRes {
 		if(height == 1080)
 			return h;
 		else
-			return (h/1080) * (int)height;
+			return h;
 	}
 	
 

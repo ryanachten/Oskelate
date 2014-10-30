@@ -34,7 +34,7 @@ public class EmptyPanel extends EffectPanel {
 		final JLabel l1 = new JLabel(n,JLabel.CENTER);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
-		c.ipady = p;      //make this component tall
+		c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		c.weightx = 0;
 		c.gridwidth = 5;
 		c.gridx = 0;
