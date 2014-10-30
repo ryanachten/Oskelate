@@ -8,6 +8,7 @@
 
 package com.illposed.osc.ui;
 
+
 import java.awt.Rectangle;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -23,6 +24,7 @@ import com.illposed.osc.OSCPortIn;
  */
 public class Main extends JFrame {
 // jason was here
+	
 	private OscUI myUi;
 	private OSCPortIn port;
 
@@ -56,6 +58,7 @@ public class Main extends JFrame {
 
 
 	public static void main(String[] args) {
+		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");//
 		new Main();
 	}
 }
