@@ -15,11 +15,12 @@ public abstract class EffectPanel extends JPanel{
 
 	public EffectPanel(String name) {
 //		setLayout(new GridLayout(7, 1, 5, 5));
-		setBorder(OscUI.lineBorder);
-		setBackground(OscUI.OSK_PALEPINK);
+		//setBorder(OscUI.lineBorder);
+		setBackground(OscUI.OSK_DARKGREY);
 		setOpaque(true);
 		add(OscUI.makeLabel(name, OscUI.font11));
 		setVisible(true);
+		
 		
 //		setLayout(new GridLayout(3, 1));
 //		setBorder(OscUI.lineBorder);
