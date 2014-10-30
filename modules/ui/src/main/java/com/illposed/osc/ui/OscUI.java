@@ -25,13 +25,17 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -290,30 +294,36 @@ public class OscUI extends JPanel {
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 0;
+		cons.weightx = 0.5;
 		addLogoPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 0;
-		cons.gridwidth = 2;
+		cons.gridwidth = 1;
+		cons.weightx = 1;
 		addSkeletalPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 0;
+		cons.weightx = 0.5;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addLevelsPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 1;
 		cons.gridwidth = 1;
+		cons.weightx = 0.5;
 		addGemPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 1;
-		cons.gridwidth = 2;
+		cons.gridwidth = 1;
+		cons.weightx = 1;
 		addAudioPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 1;
+		cons.weightx = 0.5;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addVideoPanel(mainPanel, cons);
 		
@@ -325,15 +335,19 @@ public class OscUI extends JPanel {
 	
 	/** 4 
 	 * @param cons **/
-	private void addLevelsPanel(JPanel upperPanel, GridBagConstraints cons) {
+	private void addLevelsPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel levelsPanel = new JPanel();
-		levelsPanel.setBackground(OSK_PALEPINK);
+		levelsPanel.setBackground(OSK_DARKGREY);
 		levelsPanel.setOpaque(true);
-		levelsPanel.setLayout(new BorderLayout());
-		levelsPanel.add(makeLabel("SOUND LEVEL", font22), BorderLayout.NORTH);
-		levelsPanel.add(makeLevels(), BorderLayout.CENTER);
+		GridBagLayout gridBag = new GridBagLayout();
+		levelsPanel.setLayout(gridBag);
+		GridBagConstraints cons2 = new GridBagConstraints();
+		cons2.weightx = 0.5;
 		
-		upperPanel.add(levelsPanel, cons);
+		
+		
+		
+		mainPanel.add(levelsPanel, cons);
 		
 	
 		
@@ -344,7 +358,7 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addSkeletalPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel skeletalPanel = new JPanel();
-		skeletalPanel.setPreferredSize(new Dimension(400, 500));
+		skeletalPanel.setPreferredSize(new Dimension(700, 500));
 		skeletalPanel.setBackground(OSK_PALEPINK);
 		skeletalPanel.setOpaque(true);
 		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
@@ -379,10 +393,32 @@ public class OscUI extends JPanel {
 	/** 2 
 	 * @param cons **/
 	private void addLogoPanel(JPanel mainPanel, GridBagConstraints cons) {
-		mainPanel.add(makeLabel("===IMAGE===", font30b), cons);
-		
+		BufferedImage image = null;
+	       try {                
+	           image = ImageIO.read(new File("src/main/java/com/illposed/osc/ui/Oskelate.PNG"));
+	        } catch (IOException ex) {
+	             System.out.println("Where is the image?");
+	        }
+	       
+		JPanel title = new JPanel();
+		title.setBackground(new Color(255,238,239));
+		JLabel imgP = new JLabel(new ImageIcon(image));
+		title.setPreferredSize(new Dimension(250, 500));
+		title.setBorder(lineBorder);
+		title.setLayout(new GridLayout(2, 1, 0, 0));
+		title.add(imgP);
+		title.add(makeLabel("<html>[<span style =\"font-weight: bold\">OSKELATE</span> VISUALISER]</html>", font30), cons);
+		mainPanel.add(title, cons);
 	}
-
+	
+	  private Image getScaledImage(Image srcImg, int w, int h){
+		    BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		    Graphics2D g2 = resizedImg.createGraphics();
+		    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		    g2.drawImage(srcImg, 0, 0, w, h, null);
+		    g2.dispose();
+		    return resizedImg;
+		}
 	
 
 
@@ -445,6 +481,7 @@ public class OscUI extends JPanel {
 	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
 		
 		JPanel videoPanel= new JPanel();
+		videoPanel.setPreferredSize(new Dimension(250, 500));
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
 		JButton videoButton = new JButton("Choose wideo file");
