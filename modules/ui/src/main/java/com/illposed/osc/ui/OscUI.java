@@ -433,17 +433,33 @@ public class OscUI extends JPanel {
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
 		JButton videoButton = new JButton("Choose wideo file");
-		
 		videoButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser chooser = new JFileChooser();
+				chooser.setDialogTitle("Please select a video file");
+				chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				chooser.setAcceptAllFileFilterUsed(false);
+				String path = "";
+				
+				if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//				  System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+				  System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+				  path = (chooser.getSelectedFile()).getPath();
+				} else {
+				  System.out.println("No Selection");
+				}
 //				doSendSlider((float)1000.00, 1000);
-				doSendVideo("/Documents/video/fgt.mp4");
+
+				
+				doSendVideo(path);
+
 				
 			}
-
 		});
+		
 		videoPanel.add(videoButton);
 		
 		mainPanel.add(videoPanel, cons);
