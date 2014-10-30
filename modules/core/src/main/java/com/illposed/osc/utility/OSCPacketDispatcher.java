@@ -70,8 +70,6 @@ public class OSCPacketDispatcher {
 		for (Entry<AddressSelector, OSCListener> addrList : selectorToListener.entrySet()) {
 			OSCPatternAddressSelector s = (OSCPatternAddressSelector) addrList.getKey();
 			
-			
-			
 			System.out.println(s.getPattern());
 			if (addrList.getKey().matches(message.getAddress())) {
 				System.out.println("MATCHED: >>"+addrList.getKey().toString()+"<< matches with >>"+message.getAddress()+"<<");

@@ -172,7 +172,9 @@ public class OscUI extends JPanel {
 //					}
 				}	
 			});
+			
 			oscPortIn.startListening();
+			
 			
 		} catch (Exception ex) {
 			// this is just a demo program, so this is acceptable behavior
@@ -334,7 +336,7 @@ public class OscUI extends JPanel {
 		
 	
 		
-		
+	
 	}
 
 	/** 3 
@@ -432,14 +434,14 @@ public class OscUI extends JPanel {
 		JPanel videoPanel= new JPanel();
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
-		JButton videoButton = new JButton("Choose wideo file");
+		JButton videoButton = new JButton("Choose video file");
 		
 		videoButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				doSendSlider((float)1000.00, 1000);
-				doSendVideo("/Documents/video/fgt.mp4");
+				doSendVideo(1000,"/Documents/Oskelate/test.mp4");
 				
 			}
 
@@ -1067,14 +1069,16 @@ public class OscUI extends JPanel {
 		}
 	}
 	
-	private void doSendVideo(String path) {
+	private void doSendVideo(int node, String path) {
 		if (null == oscPortOut) {
 			showError("Please set an address first");
 		}
 		
-		List<Object> args = new ArrayList<Object>(3);
+		List<Object> args = new ArrayList<Object>(2);
+		args.add("Video:");
 		args.add(path);
 		OSCMessage msg = new OSCMessage("/video_path", args);
+		msg.setAddress("/video_path");
 		
 		try {
 			oscPortOut.send(msg);
@@ -1170,6 +1174,6 @@ public class OscUI extends JPanel {
 	// create a showError method
 	protected void showError(String anErrorMessage) {
 		// tell the JOptionPane to showMessageDialog
-		JOptionPane.showMessageDialog(parent, anErrorMessage);
+		System.out.println(anErrorMessage);
 	}
 }
