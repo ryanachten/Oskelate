@@ -3,7 +3,8 @@
  * All rights reserved.
  *
  * This code is licensed under the BSD 3-Clause license.
- * See file LICENSE (or LICENSE.html) for more information.
+ * See file LICENSE (or LICENSE.html) for more information
+ * .
  */
 
 // this is the package we are in
@@ -20,16 +21,21 @@ import com.illposed.osc.OSCPortOut;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -174,17 +180,8 @@ public class OscUI extends JPanel {
 				}	
 			});
 			
-			// add listener for video_path
-//			oscPortIn.addListener("/video_path", new OSCListener() {
-//				
-//				@Override
-//				public void acceptMessage(Date time, OSCMessage message) {
-//					System.out.println("RECEIVED video_path message");
-//					
-//				}
-//			});
-			
 			oscPortIn.startListening();
+			
 			
 		} catch (Exception ex) {
 			// this is just a demo program, so this is acceptable behavior
@@ -294,35 +291,42 @@ public class OscUI extends JPanel {
 		
 
 		
-		add(mainPanel, BorderLayout.CENTER);
+		add(mainPanel, BorderLayout.AFTER_LAST_LINE);
+	
 		
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 0;
+		cons.weightx = 0.5;
 		addLogoPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 0;
-		cons.gridwidth = 2;
+		cons.gridwidth = 1;
+		cons.weightx = 1;
 		addSkeletalPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 0;
+		cons.weightx = 0.5;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addLevelsPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 1;
 		cons.gridwidth = 1;
+		cons.weightx = 0.5;
 		addGemPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 1;
-		cons.gridwidth = 2;
+		cons.gridwidth = 1;
+		cons.weightx = 1;
 		addAudioPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 3;
 		cons.gridy = 1;
+		cons.weightx = 0.5;
 		cons.gridwidth = GridBagConstraints.REMAINDER;
 		addVideoPanel(mainPanel, cons);
 		
@@ -334,7 +338,7 @@ public class OscUI extends JPanel {
 	
 	/** 4 
 	 * @param cons **/
-	private void addLevelsPanel(JPanel upperPanel, GridBagConstraints cons) {
+	private void addLevelsPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel levelsPanel = new JPanel();
 		levelsPanel.setBackground(OSK_PALEPINK);
 		levelsPanel.setOpaque(true);
@@ -342,10 +346,7 @@ public class OscUI extends JPanel {
 		levelsPanel.add(makeLabel("SOUND LEVEL", font22), BorderLayout.NORTH);
 		levelsPanel.add(makeLevels(), BorderLayout.CENTER);
 		
-		upperPanel.add(levelsPanel, cons);
-		
-	
-		
+		mainPanel.add(levelsPanel, cons);
 		
 	}
 
@@ -353,11 +354,12 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addSkeletalPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel skeletalPanel = new JPanel();
+		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(700), ScreenRes.getScaledHeight(375)));//700 500
 		skeletalPanel.setBackground(OSK_PALEPINK);
 		skeletalPanel.setOpaque(true);
 		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		skeletalPanel.setBorder(emptyBorder);
-		skeletalPanel.add(makeLabel("SKELETAL", font22));
+		skeletalPanel.add(makeLabel("<html><span style=\"font-weight: bold\">SKELETAL</span> RESPONSE<html>", font22));
 		
 		// FX and TX
 		JPanel skelFXPanel = new JPanel();
@@ -387,10 +389,35 @@ public class OscUI extends JPanel {
 	/** 2 
 	 * @param cons **/
 	private void addLogoPanel(JPanel mainPanel, GridBagConstraints cons) {
-		mainPanel.add(loadImage("logo.png"), cons);
-		
-	}
 
+		BufferedImage image = null;
+	       try {                
+	           image = ImageIO.read(new File("src/main/java/com/illposed/osc/ui/Oskelate.PNG"));
+	        } catch (IOException ex) {
+	             System.out.println("Where is the image?");
+	        }
+	       
+		JPanel title = new JPanel();
+		title.setBackground(new Color(255,238,239));
+		JLabel imgP = new JLabel(new ImageIcon(image));
+		title.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(375)));//250 500
+		title.setBorder(lineBorder);
+		title.setLayout(new GridLayout(2, 1, 0, 0));
+		title.add(imgP);
+		title.add(makeLabel("<html>[<span style =\"font-weight: bold\">OSKELATE</span> VISUALISER]</html>", font30), cons);
+		mainPanel.add(title, cons);
+
+	
+	}
+	
+	  private Image getScaledImage(Image srcImg, int w, int h){
+		    BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		    Graphics2D g2 = resizedImg.createGraphics();
+		    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		    g2.drawImage(srcImg, 0, 0, w, h, null);
+		    g2.dispose();
+		    return resizedImg;
+		}
 	
 
 
@@ -398,14 +425,16 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addAudioPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel audioPanel = new JPanel();
-		audioPanel.setBackground(OSK_PALEPINK);
+		audioPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(400), ScreenRes.getScaledHeight(375)));//400 500
+		audioPanel.setBackground(OSK_PALEGREY);
 		audioPanel.setOpaque(true);
 		audioPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		audioPanel.setBorder(emptyBorder);
-		audioPanel.add(makeLabel("AUDIO", font22));
+		audioPanel.add(makeLabel("<html><h1 style=\"color:white\"><span style=\"font-weight: bold\">AUDIO</span> RESPONSE</h><html>", font22));
 		
 		// FX and TX
 		JPanel auFXPanel = new JPanel();
+		auFXPanel.setBackground(OSK_PALEGREY);
 		auFXPanel.add(new EmptyPanel("FX:LUMA",130, 90, 13, 18, 15));
 		auFXPanel.add(new SliderPanel("FX:FRAME",130, 90, 13, 18, 15));
 		auFXPanel.add(new EmptyPanel("FX:MBLUR",130, 90, 13, 18, 15));
@@ -415,6 +444,7 @@ public class OscUI extends JPanel {
 		audioPanel.add(auFXPanel);
 		
 		JPanel auTXPanel = new JPanel();
+		auTXPanel.setBackground(OSK_PALEGREY);
 		auTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
 		auTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
 		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
@@ -450,9 +480,12 @@ public class OscUI extends JPanel {
 	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
 		
 		JPanel videoPanel= new JPanel();
+		videoPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(375)));//250 500
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
+
 		JButton videoButton = new JButton("Choose wideo file");
+
 		videoButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -474,7 +507,7 @@ public class OscUI extends JPanel {
 //				doSendSlider((float)1000.00, 1000);
 
 				
-				doSendVideo(path);
+				doSendVideo(1000,path);
 
 				
 			}
@@ -515,6 +548,7 @@ public class OscUI extends JPanel {
 	/* returns JLabel with text*/
 	public static Component makeLabel(String name, Font font) {
 		JLabel temp = new JLabel();
+		temp.setHorizontalAlignment(JLabel.CENTER);
 		temp.setFont(font);
 		temp.setText(name);
 		temp.setBorder(emptyBorder);
@@ -1103,14 +1137,16 @@ public class OscUI extends JPanel {
 		}
 	}
 	
-	private void doSendVideo(String path) {
+	private void doSendVideo(int node, String path) {
 		if (null == oscPortOut) {
 			showError("Please set an address first");
 		}
 		
-		List<Object> args = new ArrayList<Object>(3);
+		List<Object> args = new ArrayList<Object>(2);
+		args.add("Video:");
 		args.add(path);
 		OSCMessage msg = new OSCMessage("/video_path", args);
+		msg.setAddress("/video_path");
 		
 		try {
 			oscPortOut.send(msg);
@@ -1207,6 +1243,6 @@ public class OscUI extends JPanel {
 	// create a showError method
 	protected void showError(String anErrorMessage) {
 		// tell the JOptionPane to showMessageDialog
-		JOptionPane.showMessageDialog(parent, anErrorMessage);
+		System.out.println(anErrorMessage);
 	}
 }

@@ -23,7 +23,7 @@ public class EmptyPanel extends EffectPanel {
 	
 	public EmptyPanel (String n, int w, int h, int f1, int f2, int p){
 		super("");
-		this.setPreferredSize( new Dimension( w, h ) );//130 90
+		this.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(w), ScreenRes.getScaledHeight(h) ) );//130 90
 		//add 3 white boxes
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -34,7 +34,7 @@ public class EmptyPanel extends EffectPanel {
 		final JLabel l1 = new JLabel(n,JLabel.CENTER);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
-		c.ipady = p;      //make this component tall
+		c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		c.weightx = 0;
 		c.gridwidth = 5;
 		c.gridx = 0;
@@ -43,7 +43,7 @@ public class EmptyPanel extends EffectPanel {
 		
 		final JTextField t1 = new JTextField(1);
 		t1.setFont(font);
-		t1.setPreferredSize( new Dimension( 30, 20 ) );
+		t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(30), ScreenRes.getScaledHeight(20) ) );
 		t1.setEditable(false);
 		c.weightx = 0.1;
 		c.gridx = 1;
@@ -53,7 +53,7 @@ public class EmptyPanel extends EffectPanel {
 		
 		final JTextField t2 = new JTextField(1);
 		t2.setFont(font);
-		t2.setPreferredSize( new Dimension( 30, 20 ) );
+		t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(30), ScreenRes.getScaledHeight(20) ) );
 		t2.setEditable(false);
 		c.weightx = 0.1;
 		c.gridx = 2;
@@ -63,7 +63,7 @@ public class EmptyPanel extends EffectPanel {
 		
 		final JTextField t3 = new JTextField(1);
 		t3.setFont(font);
-		t3.setPreferredSize( new Dimension( 50, 20 ) );
+		t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(30), ScreenRes.getScaledHeight(20) ) );
 		t3.setEditable(false);
 		c.weightx = 0.1;
 		c.gridx = 3;
@@ -74,7 +74,7 @@ public class EmptyPanel extends EffectPanel {
 		
 		JButton b1 = new JButton();
 		b1.setBackground(Color.RED);
-		b1.setPreferredSize(new Dimension(25, 15));
+		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(25), ScreenRes.getScaledHeight(15) ) );
 		c.weightx = 1;
 		c.gridx = 4;
 		c.gridy = 1;
