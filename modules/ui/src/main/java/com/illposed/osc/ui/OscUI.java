@@ -340,21 +340,14 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addLevelsPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel levelsPanel = new JPanel();
-		levelsPanel.setBackground(OSK_DARKGREY);
+		levelsPanel.setBackground(OSK_PALEPINK);
 		levelsPanel.setOpaque(true);
-		GridBagLayout gridBag = new GridBagLayout();
-		levelsPanel.setLayout(gridBag);
-		GridBagConstraints cons2 = new GridBagConstraints();
-		cons2.weightx = 0.5;
-		
-		
-		
+		levelsPanel.setLayout(new BorderLayout());
+		levelsPanel.add(makeLabel("SOUND LEVEL", font22), BorderLayout.NORTH);
+		levelsPanel.add(makeLevels(), BorderLayout.CENTER);
 		
 		mainPanel.add(levelsPanel, cons);
 		
-	
-		
-	
 	}
 
 	/** 3 
