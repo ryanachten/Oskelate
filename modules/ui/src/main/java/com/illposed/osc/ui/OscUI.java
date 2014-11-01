@@ -125,7 +125,8 @@ public class OscUI extends JPanel {
 	private OSCPortOut oscPortOut;
 	private OSCPortIn oscPortIn;
 	private JPanel livePanel;
-	private JPanel averagePanel; 
+	private JPanel averagePanel;
+	private JButton addButton; 
 	
 	// create a constructor
 	// OscUI takes an argument of myParent which is a JFrame
@@ -474,46 +475,89 @@ public class OscUI extends JPanel {
 	/** 5 
 	 * @param cons **/
 	private void addGemPanel(JPanel mainPanel, GridBagConstraints cons) {
+		
 		JPanel gemPanel = new JPanel();
 		gemPanel.setLayout(new BorderLayout());
 		JPanel btnPanel = new JPanel();
-		JButton addButton = new JButton("Create GEM", loadImageAsIcon("plus.png"));
+		addButton = new JButton("Create GEM", loadImageAsIcon("plus.png"));
 		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		JButton closeButton = new JButton("Destroy GEM", loadImageAsIcon("close.png"));
-		closeButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		closeButton.setHorizontalTextPosition(SwingConstants.CENTER);
+//		JButton closeButton = new JButton("Destroy GEM", loadImageAsIcon("close.png"));
+//		closeButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+//		closeButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		btnPanel.add(addButton);
-		btnPanel.add(closeButton);
+//		btnPanel.add(closeButton);
 		
 		JPanel optionPanel = new JPanel();
 		optionPanel.setLayout(new BoxLayout(optionPanel,BoxLayout.PAGE_AXIS));
-		JCheckBox renderGem = new JCheckBox("Render Gem");
+
 		ButtonGroup bgroup = new ButtonGroup();
-		JRadioButton internalScreen = new JRadioButton("Internal Screen");
-		JRadioButton externalScreen = new JRadioButton("External Screen");
+		final JRadioButton internalScreen = new JRadioButton("Internal Screen");
+		final JRadioButton externalScreen = new JRadioButton("External Screen");
 		
-		renderGem.setFont(font22b);
 		internalScreen.setFont(font22b);
 		externalScreen.setFont(font22b);
-		
-		renderGem.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+	
 		internalScreen.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		externalScreen.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
 		bgroup.add(internalScreen);
 		bgroup.add(externalScreen);
 		
-		optionPanel.add(renderGem);
 		optionPanel.add(internalScreen);
 		optionPanel.add(externalScreen);
 	
+		addButton.addActionListener(new ActionListener() {
+			boolean isCreate = true;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(isCreate){
+				// TODO Auto-generated method stub
+					if(!internalScreen.isSelected() && !externalScreen.isSelected()){
+						JOptionPane.showMessageDialog(null, "Must select Screen Type", "WARNING!", JOptionPane.ERROR_MESSAGE);
+					}
+					else if(internalScreen.isSelected()){
+						doSendGemPanel("/internal");
+						doSendGemPanel("/render");
+						makeFalse();
+						isCreate = false;
+						
+					}
+					else if(externalScreen.isSelected()){
+						doSendGemPanel("/external");
+						doSendGemPanel("/render");
+						makeFalse();
+						isCreate = false;
+					}
+				}
+				else{
+					doSendGemPanel("/destroy");
+					isCreate = true;
+					makeTrue();
+				}
+			}
+		});
+		
 		gemPanel.add(btnPanel, BorderLayout.NORTH);
 		gemPanel.add(optionPanel,BorderLayout.CENTER);
 		mainPanel.add(gemPanel, cons);
 	}
 	
+	protected void makeTrue() {
+		addButton.setText("Create Gem");
+		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		this.addButton.setIcon(loadImageAsIcon("plus.png"));
+	}
+
+	protected void makeFalse() {
+		addButton.setText("Destroy Gem");
+		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		this.addButton.setIcon(loadImageAsIcon("close.png"));
+	}
+
 	/** 7 
 	 * @param cons **/
 	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
@@ -1207,6 +1251,20 @@ public class OscUI extends JPanel {
 			showError("Couldn't send");
 		}
 
+	}
+	
+	private void doSendGemPanel(String msg_name){
+		if(null == oscPortOut){
+			showError("Please set an Address first");
+		}
+
+		OSCMessage msg = new OSCMessage(msg_name);
+		try {
+			oscPortOut.send(msg);
+			System.out.println("MSG SENT: " + msg_name);
+		} catch (Exception e) {
+			showError("Couldn't send");
+		}
 	}
 	
 	public void doSendGlobalOff(int node1, int node2, int node3) {
