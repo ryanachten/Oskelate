@@ -11,12 +11,12 @@
 -1;
 #X msg 385 101 create;
 #X msg 384 124 destroy;
-#X obj 113 310 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 1
+#X obj 113 310 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
 1;
 #X msg 410 188 dimen 1200 300;
 #X obj 636 140 gemwin;
 #X obj 646 212 loadbang;
-#X obj 113 280 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 2
+#X obj 113 280 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
 2;
 #X msg 549 212 dimen 1920 480;
 #X obj 508 212 sel 2;
@@ -28,26 +28,25 @@
 #X text 143 250 Render;
 #X text 142 311 Small Screen (Test);
 #X text 142 280 Projection Screen (Main);
-#X obj 20 185 loadbang;
 #X obj 446 266 import mrpeach;
 #X obj 447 300 udpreceive 13002;
 #X obj 446 329 unpackOSC;
 #X obj 441 388 routeOSC /internal /external /render /destroy;
-#X msg 409 212 fullscreen;
+#X obj 20 185 loadbang;
+#X msg 407 218 fullscreen \$1;
 #X connect 3 0 7 0;
 #X connect 4 0 7 0;
 #X connect 6 0 7 0;
 #X connect 8 0 10 0;
 #X connect 10 0 7 0;
 #X connect 11 0 10 0;
+#X connect 20 0 21 0;
 #X connect 21 0 22 0;
-#X connect 22 0 23 0;
+#X connect 22 1 11 0;
+#X connect 22 1 24 0;
+#X connect 22 2 3 0;
+#X connect 22 3 4 0;
 #X connect 23 0 24 0;
-#X connect 23 1 24 0;
-#X connect 23 1 11 0;
-#X connect 23 1 19 0;
-#X connect 23 2 3 0;
-#X connect 23 3 4 0;
 #X connect 24 0 7 0;
 #X coords 0 -1 1 1 220 350 2 100 100;
 #X restore 21 60 pd GemWindow;
@@ -1113,7 +1112,7 @@ them;
 #X text 798 359 SOUND REACTOR;
 #X obj -43 129 average 20;
 #X obj 224 227 hsl 128 10 0 100 0 0 empty empty Sound_Average -2 -8
-0 10 -204800 -1 -1 0 1;
+0 10 -204800 -1 -1 9400 1;
 #X obj -125 615 average;
 #X obj 171 217 vu 30 200 empty empty -1 -8 0 10 -66577 -1 0 0;
 #X obj 120 217 vu 30 200 empty empty -1 -8 1 10 -66577 -1 0 0;
