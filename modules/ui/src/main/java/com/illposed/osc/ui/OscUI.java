@@ -47,17 +47,22 @@ import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -359,7 +364,7 @@ public class OscUI extends JPanel {
 		skeletalPanel.setOpaque(true);
 		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		skeletalPanel.setBorder(emptyBorder);
-		skeletalPanel.add(makeLabel("<html><span style=\"font-weight: bold\">SKELETAL</span> RESPONSE<html>", font22));
+		skeletalPanel.add(makeLabel("SKELETAL RESPONSE", font22));
 		
 		// FX and TX
 		JPanel skelFXPanel = new JPanel();
@@ -396,15 +401,14 @@ public class OscUI extends JPanel {
 	        } catch (IOException ex) {
 	             System.out.println("Where is the image?");
 	        }
-	       
+	    cons.weightx = 2;
 		JPanel title = new JPanel();
 		title.setBackground(new Color(255,238,239));
 		JLabel imgP = new JLabel(new ImageIcon(image));
-		title.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(375)));//250 500
+		title.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(300)));//250 500
 		title.setBorder(lineBorder);
-		title.setLayout(new GridLayout(2, 1, 0, 0));
+		title.setLayout(new GridLayout(1, 2, 0,0));
 		title.add(imgP);
-		title.add(makeLabel("<html>[<span style =\"font-weight: bold\">OSKELATE</span> VISUALISER]</html>", font30), cons);
 		mainPanel.add(title, cons);
 
 	
@@ -470,9 +474,44 @@ public class OscUI extends JPanel {
 	/** 5 
 	 * @param cons **/
 	private void addGemPanel(JPanel mainPanel, GridBagConstraints cons) {
-		mainPanel.add(makeLabel("====GEM====", font30b), cons);
-
+		JPanel gemPanel = new JPanel();
+		gemPanel.setLayout(new BorderLayout());
+		JPanel btnPanel = new JPanel();
+		JButton addButton = new JButton("Create GEM", loadImageAsIcon("plus.png"));
+		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		JButton closeButton = new JButton("Destroy GEM", loadImageAsIcon("close.png"));
+		closeButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		closeButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		
+		btnPanel.add(addButton);
+		btnPanel.add(closeButton);
+		
+		JPanel optionPanel = new JPanel();
+		optionPanel.setLayout(new BoxLayout(optionPanel,BoxLayout.PAGE_AXIS));
+		JCheckBox renderGem = new JCheckBox("Render Gem");
+		ButtonGroup bgroup = new ButtonGroup();
+		JRadioButton internalScreen = new JRadioButton("Internal Screen");
+		JRadioButton externalScreen = new JRadioButton("External Screen");
+		
+		renderGem.setFont(font22b);
+		internalScreen.setFont(font22b);
+		externalScreen.setFont(font22b);
+		
+		renderGem.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		internalScreen.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+		externalScreen.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+
+		bgroup.add(internalScreen);
+		bgroup.add(externalScreen);
+		
+		optionPanel.add(renderGem);
+		optionPanel.add(internalScreen);
+		optionPanel.add(externalScreen);
+	
+		gemPanel.add(btnPanel, BorderLayout.NORTH);
+		gemPanel.add(optionPanel,BorderLayout.CENTER);
+		mainPanel.add(gemPanel, cons);
 	}
 	
 	/** 7 
@@ -484,7 +523,7 @@ public class OscUI extends JPanel {
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
 
-		JButton videoButton = new JButton("Choose wideo file");
+		JButton videoButton = new JButton("Choose video file");
 
 		videoButton.addActionListener(new ActionListener() {
 			
@@ -531,11 +570,24 @@ public class OscUI extends JPanel {
 		  ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		  InputStream input = getClass().getResourceAsStream(path);
 		  Image logo = ImageIO.read(input);
+		  
 
 		  JLabel label = new JLabel( new ImageIcon( logo ) );
 		  return label;
 		}
 		catch ( Exception e ) { return new JLabel("image load failed"); }
+	}
+	
+	private ImageIcon loadImageAsIcon(String path){
+		try
+		{
+		  ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		  InputStream input = getClass().getResourceAsStream(path);
+		  Image logo = ImageIO.read(input);
+		  ImageIcon i = new ImageIcon(logo);
+		  return i;
+		}
+		catch ( Exception e ) { return null; }
 	}
 
 
@@ -1156,7 +1208,7 @@ public class OscUI extends JPanel {
 		}
 
 	}
-
+	
 	public void doSendGlobalOff(int node1, int node2, int node3) {
 		if (null == oscPortOut) {
 			showError("Please set an address first");
