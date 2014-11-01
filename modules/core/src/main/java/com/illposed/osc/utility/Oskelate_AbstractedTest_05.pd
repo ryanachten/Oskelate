@@ -1,18 +1,18 @@
 #N canvas 17 121 1280 648 10;
 #X declare -lib mrpeach;
+#X declare -lib mrpeach;
 #X obj 56 56 dumpOSC 57110;
-#N canvas 333 132 715 496 GemWindow 0;
+#N canvas 356 73 794 496 GemWindow 1;
 #X obj 100 100 cnv 15 220 350 empty empty G.E.M 15 20 0 24 -261752
 -66577 0;
-#X obj 113 149 bng 50 250 50 0 empty empty empty 17 7 0 10 -4032 -1
+#X obj 113 148 bng 50 250 50 0 empty empty empty 17 7 0 10 -4032 -1
 -1;
 #X obj 113 209 bng 30 250 50 0 empty empty empty 17 7 0 10 -4032 -1
 -1;
 #X msg 385 101 create;
 #X msg 384 124 destroy;
-#X obj 113 310 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
+#X obj 113 310 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 1
 1;
-#X msg 409 212 fullscreen \$1;
 #X msg 410 188 dimen 1200 300;
 #X obj 636 140 gemwin;
 #X obj 646 212 loadbang;
@@ -29,20 +29,26 @@
 #X text 142 311 Small Screen (Test);
 #X text 142 280 Projection Screen (Main);
 #X obj 20 185 loadbang;
-#X connect 1 0 3 0;
-#X connect 2 0 4 0;
-#X connect 3 0 8 0;
-#X connect 4 0 8 0;
-#X connect 5 0 6 0;
-#X connect 6 0 8 0;
-#X connect 7 0 8 0;
-#X connect 9 0 11 0;
-#X connect 10 0 6 0;
-#X connect 10 0 12 0;
-#X connect 11 0 8 0;
-#X connect 12 0 11 0;
-#X connect 13 0 8 0;
-#X connect 20 0 10 0;
+#X obj 446 266 import mrpeach;
+#X obj 447 300 udpreceive 13002;
+#X obj 446 329 unpackOSC;
+#X obj 441 388 routeOSC /internal /external /render /destroy;
+#X msg 409 212 fullscreen;
+#X connect 3 0 7 0;
+#X connect 4 0 7 0;
+#X connect 6 0 7 0;
+#X connect 8 0 10 0;
+#X connect 10 0 7 0;
+#X connect 11 0 10 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 24 0;
+#X connect 23 1 24 0;
+#X connect 23 1 11 0;
+#X connect 23 1 19 0;
+#X connect 23 2 3 0;
+#X connect 23 3 4 0;
+#X connect 24 0 7 0;
 #X coords 0 -1 1 1 220 350 2 100 100;
 #X restore 21 60 pd GemWindow;
 #N canvas 58 112 1280 648 openvideo 0;
@@ -1091,7 +1097,7 @@ them;
 #X connect 95 0 94 1;
 #X coords 0 -1 1 1 200 220 2 100 100;
 #X restore 1034 158 pd oskel;
-#N canvas 0 76 1280 649 audio 0;
+#N canvas 0 76 1280 649 audio 1;
 #X obj 100 100 cnv 30 280 350 empty empty AUDIO 105 20 0 22 -256741
 -66577 0;
 #X obj -160 328 adc~;
