@@ -1,5 +1,6 @@
 package com.illposed.osc.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -24,17 +25,17 @@ import javax.swing.SwingConstants;
 
 public class SliderPanel extends EffectPanel {
 
-	
-	
+	JSlider slider;
 	public SliderPanel (String n, int w, int h, int f1, int f2, int p){
 		super("");
 		this.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(w), ScreenRes.getScaledHeight(h) ) );//130 90
 		//add 3 white boxes
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		
+		slider = new JSlider(JSlider.HORIZONTAL,0,50,0);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
 		Font font1 = new Font("Verdana", Font.BOLD, f1);
-		
 		final JLabel l1 = new JLabel(n);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
@@ -54,12 +55,15 @@ public class SliderPanel extends EffectPanel {
 		c.gridy = 1;
 		c.gridwidth = 2;
 		this.add(squares, c);
-
 		
-		
+		c.gridx =0;
+		c.gridy =1;
+		c.gridwidth = 2;
+		this.add(slider,c);
+			
 		JButton b1 = new JButton();
 		b1.setBackground(Color.RED);
-		b1.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(25), ScreenRes.getScaledHeight(15)));
+		b1.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(15), ScreenRes.getScaledHeight(15)));
 		c.weightx = 1;
 		c.gridx = 2;
 		c.gridy = 1;
