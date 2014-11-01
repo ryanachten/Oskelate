@@ -126,7 +126,8 @@ public class OscUI extends JPanel {
 	private OSCPortIn oscPortIn;
 	private JPanel livePanel;
 	private JPanel averagePanel;
-	private JButton addButton; 
+	private JButton addButton;
+	private JButton renderButton; 
 	
 	// create a constructor
 	// OscUI takes an argument of myParent which is a JFrame
@@ -482,11 +483,18 @@ public class OscUI extends JPanel {
 		addButton = new JButton("Create GEM", loadImageAsIcon("plus.png"));
 		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		
+		renderButton = new JButton("Render", loadImageAsIcon("play.png"));
+		renderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		renderButton.setHorizontalTextPosition(SwingConstants.CENTER);
+
+		
 //		JButton closeButton = new JButton("Destroy GEM", loadImageAsIcon("close.png"));
 //		closeButton.setVerticalTextPosition(SwingConstants.BOTTOM);
 //		closeButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		btnPanel.add(addButton);
+		btnPanel.add(renderButton);
 //		btnPanel.add(closeButton);
 		
 		JPanel optionPanel = new JPanel();
@@ -518,23 +526,49 @@ public class OscUI extends JPanel {
 						JOptionPane.showMessageDialog(null, "Must select Screen Type", "WARNING!", JOptionPane.ERROR_MESSAGE);
 					}
 					else if(internalScreen.isSelected()){
-						doSendGemPanel("/internal");
-						doSendGemPanel("/render");
+						doSendMessage("/internal", null);
+						doSendMessage("/create", null);
+						
 						makeFalse();
 						isCreate = false;
 						
 					}
 					else if(externalScreen.isSelected()){
-						doSendGemPanel("/external");
-						doSendGemPanel("/render");
+						doSendMessage("/external",null);
+						doSendMessage("/create", null);
+					
 						makeFalse();
 						isCreate = false;
 					}
 				}
 				else{
-					doSendGemPanel("/destroy");
+					doSendMessage("/destroy", null);
 					isCreate = true;
 					makeTrue();
+				}
+			}
+		});
+		
+		renderButton.addActionListener(new ActionListener() {
+			boolean isPlay = true;
+			List<Object> args = new ArrayList<Object>();
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (isPlay)
+				{
+					makeStop();
+					isPlay = false;
+					args.clear();
+					args.add(new Integer(0));
+					doSendMessage("/render", args);
+				}
+				else {
+					makePlay();
+					isPlay = false;
+					args.clear();
+					args.add(new Integer(1));
+					doSendMessage("/render", args);
 				}
 			}
 		});
@@ -544,6 +578,20 @@ public class OscUI extends JPanel {
 		mainPanel.add(gemPanel, cons);
 	}
 	
+	protected void makePlay() {
+		renderButton.setText("Render");
+		renderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		renderButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		renderButton.setIcon(loadImageAsIcon("play.png"));
+	}
+
+	protected void makeStop() {
+		renderButton.setText("Stop Render");
+		renderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		renderButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		renderButton.setIcon(loadImageAsIcon("stop.png"));
+	}
+
 	protected void makeTrue() {
 		addButton.setText("Create Gem");
 		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -1259,12 +1307,22 @@ public class OscUI extends JPanel {
 
 	}
 	
-	private void doSendGemPanel(String msg_name){
+	private void doSendMessage(String msg_name, List<Object> args){
+		
 		if(null == oscPortOut){
 			showError("Please set an Address first");
 		}
+		OSCMessage msg = new OSCMessage();
+		if (args == null || args.isEmpty())
+		{
+			msg = new OSCMessage(msg_name);			
+		}
+		else 
+		{
+			msg = new OSCMessage(msg_name, args);
+		}
+		
 
-		OSCMessage msg = new OSCMessage(msg_name);
 		try {
 			oscPortOut.send(msg);
 			System.out.println("MSG SENT: " + msg_name);

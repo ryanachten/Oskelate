@@ -1,53 +1,58 @@
-#N canvas 17 121 1280 648 10;
+#N canvas 28 62 1280 648 10;
 #X declare -lib mrpeach;
 #X declare -lib mrpeach;
 #X obj 56 56 dumpOSC 57110;
-#N canvas 356 73 794 496 GemWindow 1;
-#X obj 100 100 cnv 15 220 350 empty empty G.E.M 15 20 0 24 -261752
--66577 0;
-#X obj 113 148 bng 50 250 50 0 empty empty empty 17 7 0 10 -4032 -1
--1;
-#X obj 113 209 bng 30 250 50 0 empty empty empty 17 7 0 10 -4032 -1
--1;
-#X msg 385 101 create;
-#X msg 384 124 destroy;
-#X obj 113 310 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
-1;
-#X msg 410 188 dimen 1200 300;
-#X obj 636 140 gemwin;
-#X obj 646 212 loadbang;
-#X obj 113 280 tgl 20 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
-2;
-#X msg 549 212 dimen 1920 480;
-#X obj 508 212 sel 2;
-#X obj 113 249 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 0
-1;
-#X text 234 64 GEMWIN;
-#X text 167 146 GEM Create;
-#X text 154 216 GEM Destroy;
-#X text 143 250 Render;
-#X text 142 311 Small Screen (Test);
-#X text 142 280 Projection Screen (Main);
-#X obj 446 266 import mrpeach;
-#X obj 447 300 udpreceive 13002;
-#X obj 446 329 unpackOSC;
-#X obj 441 388 routeOSC /internal /external /render /destroy;
-#X obj 20 185 loadbang;
-#X msg 407 218 fullscreen \$1;
-#X connect 3 0 7 0;
-#X connect 4 0 7 0;
-#X connect 6 0 7 0;
-#X connect 8 0 10 0;
-#X connect 10 0 7 0;
-#X connect 11 0 10 0;
-#X connect 20 0 21 0;
-#X connect 21 0 22 0;
-#X connect 22 1 11 0;
-#X connect 22 1 24 0;
-#X connect 22 2 3 0;
-#X connect 22 3 4 0;
-#X connect 23 0 24 0;
-#X connect 24 0 7 0;
+#N canvas 108 44 1172 719 GemWindow 1;
+#X msg 905 365 create;
+#X msg 905 291 destroy;
+#X msg 479 493 fullscreen \$1;
+#X msg 603 295 dimen 1200 300;
+#X obj 719 414 gemwin;
+#X obj 532 298 loadbang;
+#X msg 435 298 dimen 1920 480;
+#X obj 394 298 sel 2;
+#X msg 533 525 2;
+#X text 564 526 Send a 2 message to the fullscreen for the external
+option;
+#X msg 509 563 1;
+#X text 568 556 Send a 1 message to the fullscreen for the internal
+option;
+#X text 520 592 So if you had a toggle in Java that sends out a 1 or
+a 2 to be packed with a screen tag you could resolve this in ONE toggle
+;
+#X msg 905 258 1;
+#X text 903 237 Send a 1 message to destroy the GEM window;
+#X msg 904 340 1;
+#X obj 388 87 udpreceive 13002;
+#X obj 384 54 import mrpeach;
+#X obj 387 113 unpackOSC;
+#X obj 387 152 routeOSC /internal /external /render /create /destroy
+;
+#X text 566 113 Pack a 0 or a 1 with the 'render' message to turn on
+and off render;
+#X text 902 319 Send a 1 message to create the GEM window;
+#X msg 746 331 \$1;
+#X connect 0 0 4 0;
+#X connect 1 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 4 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 7 0 6 0;
+#X connect 8 0 2 0;
+#X connect 8 0 7 0;
+#X connect 10 0 2 0;
+#X connect 10 0 3 0;
+#X connect 13 0 1 0;
+#X connect 15 0 0 0;
+#X connect 16 0 18 0;
+#X connect 18 0 19 0;
+#X connect 19 0 10 0;
+#X connect 19 1 8 0;
+#X connect 19 2 22 0;
+#X connect 19 3 15 0;
+#X connect 19 4 13 0;
+#X connect 22 0 4 0;
 #X coords 0 -1 1 1 220 350 2 100 100;
 #X restore 21 60 pd GemWindow;
 #N canvas 58 112 1280 648 openvideo 0;
@@ -1112,7 +1117,7 @@ them;
 #X text 798 359 SOUND REACTOR;
 #X obj -43 129 average 20;
 #X obj 224 227 hsl 128 10 0 100 0 0 empty empty Sound_Average -2 -8
-0 10 -204800 -1 -1 9400 1;
+0 10 -204800 -1 -1 0 1;
 #X obj -125 615 average;
 #X obj 171 217 vu 30 200 empty empty -1 -8 0 10 -66577 -1 0 0;
 #X obj 120 217 vu 30 200 empty empty -1 -8 1 10 -66577 -1 0 0;
@@ -1168,6 +1173,7 @@ sound;
 #X obj 466 81 routeOSC /video_path;
 #X obj 467 119 print \$1;
 #X obj 468 14 udpreceive 13002;
+#X obj 37 37;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 4 0 5 0;
