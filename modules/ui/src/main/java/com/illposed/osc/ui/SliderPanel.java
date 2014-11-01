@@ -26,6 +26,8 @@ import javax.swing.SwingConstants;
 public class SliderPanel extends EffectPanel {
 
 	JSlider slider;
+	JSlider slider2;
+	JSlider slider3;
 	public SliderPanel (String n, double w, double h, int f1, int f2, double p){
 		super("");
 		this.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(w), ScreenRes.getScaledHeight(h) ) );//130 90
@@ -35,6 +37,17 @@ public class SliderPanel extends EffectPanel {
 		slider = new JSlider(JSlider.HORIZONTAL,0,50,0);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
+		slider.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.00093) ));
+
+		slider2 = new JSlider(JSlider.HORIZONTAL,0,50,0);
+		slider2.setPaintTicks(true);
+		slider2.setPaintLabels(true);
+		slider2.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.00093)));
+		
+		slider3 = new JSlider(JSlider.HORIZONTAL,0,50,0);
+		slider3.setPaintTicks(true);
+		slider3.setPaintLabels(true);
+		slider3.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.00093)));
 		Font font1 = new Font("Verdana", Font.BOLD, f1);
 		final JLabel l1 = new JLabel(n);
 		l1.setForeground(Color.white);
@@ -60,6 +73,16 @@ public class SliderPanel extends EffectPanel {
 		c.gridy =1;
 		c.gridwidth = 2;
 		this.add(slider,c);
+		
+		c.gridx =0;
+		c.gridy =2;
+		c.gridwidth = 2;
+		this.add(slider2,c);
+		
+		c.gridx =0;
+		c.gridy =3;
+		c.gridwidth = 2;
+		this.add(slider3,c);
 			
 		JButton b1 = new JButton();
 		b1.setBackground(Color.RED);
