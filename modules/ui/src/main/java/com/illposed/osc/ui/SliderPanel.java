@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 public class SliderPanel extends EffectPanel {
 
 	JSlider slider;
-	public SliderPanel (String n, int w, int h, int f1, int f2, int p){
+	public SliderPanel (String n, double w, double h, int f1, int f2, double p){
 		super("");
 		this.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(w), ScreenRes.getScaledHeight(h) ) );//130 90
 		//add 3 white boxes
@@ -39,7 +39,7 @@ public class SliderPanel extends EffectPanel {
 		final JLabel l1 = new JLabel(n);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
-		c.ipady = p;      //make this component tall
+		c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		c.weightx = 0;
 		c.gridwidth = 4;
 		c.gridx = 0;
@@ -63,7 +63,7 @@ public class SliderPanel extends EffectPanel {
 			
 		JButton b1 = new JButton();
 		b1.setBackground(Color.RED);
-		b1.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(15), ScreenRes.getScaledHeight(15)));
+		b1.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0078), ScreenRes.getScaledHeight(0.0139)));
 		c.weightx = 1;
 		c.gridx = 2;
 		c.gridy = 1;
@@ -77,8 +77,8 @@ public class SliderPanel extends EffectPanel {
 }
 @SuppressWarnings("serial")
 class Squares extends JPanel {
-	   private int width = ScreenRes.getScaledWidth(60);
-	   private int height = ScreenRes.getScaledHeight(5);
+	   private int width = ScreenRes.getScaledWidth(0.0313);
+	   private int height = ScreenRes.getScaledHeight(0.0019);
 	   private List<Rectangle> squares = new ArrayList<Rectangle>();
 
 	   public void addSquare(int x, int y, int width, int height) {

@@ -10,20 +10,22 @@ public abstract class ScreenRes {
 	static double height = screenSize.getHeight();
 
 	
-	public static int getScaledWidth(int w){
+	public static int getScaledWidth(double w){
 		
-		if(width == 1920)
-			return w;
-		else
-			return w;
+		return (int) (width*w);
+		//if(width == 1920)
+			//return w;
+		//else
+			//return w;
 	}
 	
-	public static int getScaledHeight(int h){
+	public static int getScaledHeight(double h){
 		
-		if(height == 1080)
-			return h;
-		else
-			return h;
+		return (int) (height*h);
+		//if(height == 1080)
+		//	return h;
+		//else
+		//	return h;
 	}
 	
 

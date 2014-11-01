@@ -360,7 +360,7 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addSkeletalPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel skeletalPanel = new JPanel();
-		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(700), ScreenRes.getScaledHeight(375)));//700 500
+		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.3646), ScreenRes.getScaledHeight(0.3472)));//700 500
 		skeletalPanel.setBackground(OSK_PALEPINK);
 		skeletalPanel.setOpaque(true);
 		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
@@ -369,18 +369,18 @@ public class OscUI extends JPanel {
 		
 		// FX and TX
 		JPanel skelFXPanel = new JPanel();
-		skelFXPanel.add(new EmptyPanel("FX:LUMA",130,90, 13, 18, 15));
-		skelFXPanel.add(new SliderPanel("FX:FRAME",130,90, 13, 18, 15));
-		skelFXPanel.add(new EmptyPanel("FX:MBLUR",130,90, 13, 18, 15));
-		skelFXPanel.add(new EmptyPanel("FX:REFRACT",130,90, 13, 18, 15));
-		skelFXPanel.add(new EmptyPanel("FX:KALEI",130,90, 13, 18, 15));
+		skelFXPanel.add(new EmptyPanel("FX:LUMA",0.0678,0.0833, 13, 18, 0.0078));
+		skelFXPanel.add(new SliderPanel("FX:FRAME",0.0678,0.0833, 13, 18, 0.0078));
+		skelFXPanel.add(new EmptyPanel("FX:MBLUR",0.0678,0.0833, 13, 18, 0.0078));
+		skelFXPanel.add(new EmptyPanel("FX:REFRACT",0.0678,0.0833, 13, 18, 0.0078));
+		skelFXPanel.add(new EmptyPanel("FX:KALEI",0.0678,0.0833, 13, 18, 0.0078));
 
 		skeletalPanel.add(skelFXPanel);
 		
 		JPanel skelTXPanel = new JPanel();
-		skelTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
-		skelTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
-		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
+		skelTXPanel.add(new EmptyPanel("NORMAL TX",0.0938, 0.1111, 18,35, 0.0130));
+		skelTXPanel.add(new EmptyPanel("TX:CUBISM",0.0938, 0.1111, 18,35, 0.0130));
+		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.0938, 0.1111, 18,35, 0.0130));
 
 		skeletalPanel.add(skelTXPanel);
 		
@@ -406,7 +406,7 @@ public class OscUI extends JPanel {
 		JPanel title = new JPanel();
 		title.setBackground(new Color(255,238,239));
 		JLabel imgP = new JLabel(new ImageIcon(image));
-		title.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(300)));//250 500
+		title.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.1302), ScreenRes.getScaledHeight(0.2778)));//250 500
 		title.setBorder(lineBorder);
 		title.setLayout(new GridLayout(1, 2, 0,0));
 		title.add(imgP);
@@ -430,7 +430,7 @@ public class OscUI extends JPanel {
 	 * @param cons **/
 	private void addAudioPanel(JPanel mainPanel, GridBagConstraints cons) {
 		JPanel audioPanel = new JPanel();
-		audioPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(400), ScreenRes.getScaledHeight(375)));//400 500
+		audioPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.2083), ScreenRes.getScaledHeight(0.3472)));//400 500
 		audioPanel.setBackground(OSK_PALEGREY);
 		audioPanel.setOpaque(true);
 		audioPanel.setLayout(new GridLayout(3, 1, 5, 5));
@@ -440,19 +440,19 @@ public class OscUI extends JPanel {
 		// FX and TX
 		JPanel auFXPanel = new JPanel();
 		auFXPanel.setBackground(OSK_PALEGREY);
-		auFXPanel.add(new EmptyPanel("FX:LUMA",130, 90, 13, 18, 15));
-		auFXPanel.add(new SliderPanel("FX:FRAME",130, 90, 13, 18, 15));
-		auFXPanel.add(new EmptyPanel("FX:MBLUR",130, 90, 13, 18, 15));
-		auFXPanel.add(new EmptyPanel("FX:REFRACT",130, 90, 13, 18, 15));
-		auFXPanel.add(new EmptyPanel("FX:KALEI",130, 90, 13, 18, 15));
+		auFXPanel.add(new EmptyPanel("FX:LUMA",0.0678, 0.0833, 13, 18, 0.0078));
+		auFXPanel.add(new SliderPanel("FX:FRAME",0.0678, 0.0833, 13, 18, 0.0078));
+		auFXPanel.add(new EmptyPanel("FX:MBLUR",0.0678, 0.0833, 13, 18, 0.0078));
+		auFXPanel.add(new EmptyPanel("FX:REFRACT",0.0678, 0.0833, 13, 18, 0.0078));
+		auFXPanel.add(new EmptyPanel("FX:KALEI",0.0678, 0.0833, 13, 18, 0.0078));
 
 		audioPanel.add(auFXPanel);
 		
 		JPanel auTXPanel = new JPanel();
 		auTXPanel.setBackground(OSK_PALEGREY);
-		auTXPanel.add(new EmptyPanel("NORMAL TX",180, 120, 18,35, 25));
-		auTXPanel.add(new EmptyPanel("TX:CUBISM",180, 120, 18,35, 25));
-		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",180, 120, 18,35, 25));
+		auTXPanel.add(new EmptyPanel("NORMAL TX",0.0938, 0.1111, 18,35, 0.0130));
+		auTXPanel.add(new EmptyPanel("TX:CUBISM",0.0938, 0.1111, 18,35, 0.0130));
+		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.0938, 0.1111, 18,35, 0.0130));
 
 		audioPanel.add(auTXPanel);
 		
@@ -563,7 +563,7 @@ public class OscUI extends JPanel {
 	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
 		
 		JPanel videoPanel= new JPanel();
-		videoPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(250), ScreenRes.getScaledHeight(375)));//250 500
+		videoPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.1302), ScreenRes.getScaledHeight(0.3472)));//250 500
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
 
