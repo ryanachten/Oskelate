@@ -1,0 +1,73 @@
+#N canvas 0 22 1280 752 10;
+#X declare -lib mrpeach;
+#X obj 420 226 pix_kaleidoscope;
+#X obj 421 435 pack;
+#X obj 475 435 t b f;
+#X obj 421 415 * 0.01;
+#X obj 473 415 * 0.01;
+#X obj 419 386 pack;
+#X obj 473 386 t b f;
+#X obj 419 366 * 0.01;
+#X obj 471 366 * 0.01;
+#X obj 112 188 hsl 128 15 2 5 0 0 empty empty empty -2 -8 0 10 -261752
+-1 -1 0 1;
+#X obj 136 40 autoscale 2 5;
+#X obj 257 188 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-261752 -1 -1 0 256;
+#X obj 256 227 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-261752 -1 -1 0 256;
+#X obj 256 263 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-261752 -1 -1 0 256;
+#X obj 103 315 outlet;
+#X text 102 285 OUT;
+#X obj 104 74 inlet;
+#X obj 163 74 inlet;
+#X obj 654 142 inlet;
+#X obj 283 73 inlet;
+#X obj 112 227 hsl 128 15 -100 100 0 0 empty empty empty -2 -8 0 10
+-261752 -1 -1 0 1;
+#X obj 256 31 autoscale -100 100;
+#X obj 574 193 autoscale -100 100;
+#X obj 111 263 hsl 128 15 -100 100 0 0 empty empty empty -2 -8 0 10
+-261752 -1 -1 0 1;
+#X text 112 163 Segment Number (sn);
+#X text 110 210 Input Angle (ia);
+#X text 108 246 Output Angle (oa);
+#X obj 500 114 loadbang;
+#X obj 500 90 loadbang;
+#X text 113 151 Kalei Fractal Segments;
+#X obj 101 300 cnv 10 10 10 empty empty empty 5 -10 0 10 -262144 -66577
+0;
+#X obj 195 -150 udpreceive 13002;
+#X obj 191 -183 import mrpeach;
+#X obj 194 -124 unpackOSC;
+#X obj 194 -85 routeOSC /activate;
+#X connect 0 0 14 0;
+#X connect 1 0 0 5;
+#X connect 2 0 1 0;
+#X connect 2 1 1 1;
+#X connect 3 0 1 0;
+#X connect 4 0 2 0;
+#X connect 5 0 0 3;
+#X connect 6 0 5 0;
+#X connect 6 1 5 1;
+#X connect 7 0 5 0;
+#X connect 8 0 6 0;
+#X connect 10 0 11 0;
+#X connect 11 0 0 1;
+#X connect 11 0 9 0;
+#X connect 12 0 0 2;
+#X connect 12 0 20 0;
+#X connect 13 0 0 4;
+#X connect 13 0 23 0;
+#X connect 16 0 0 0;
+#X connect 17 0 10 0;
+#X connect 18 0 22 0;
+#X connect 19 0 21 0;
+#X connect 21 0 13 0;
+#X connect 22 0 12 0;
+#X connect 27 0 0 0;
+#X connect 28 0 27 0;
+#X connect 31 0 33 0;
+#X connect 33 0 34 0;
+#X connect 34 1 28 0;

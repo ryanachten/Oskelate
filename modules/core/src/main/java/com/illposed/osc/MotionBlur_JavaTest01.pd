@@ -1,0 +1,27 @@
+#N canvas 0 22 1280 752 10;
+#X declare -lib mrpeach;
+#X obj 347 140 pix_motionblur;
+#X obj 347 -55 inlet;
+#X obj 478 4 inlet;
+#X obj 347 179 outlet;
+#X obj 483 57 autoscale 0 1;
+#X obj 383 17 loadbang;
+#X obj 383 -7 loadbang;
+#X obj 487 83 hsl 128 15 0 0.9 0 0 empty empty empty -2 -8 0 10 -261752
+-1 -1 0 1;
+#X text 481 35 Motion Blur Magnitude;
+#X obj 454 -196 udpreceive 13002;
+#X obj 450 -229 import mrpeach;
+#X obj 453 -170 unpackOSC;
+#X text 505 -107 send a 1 to activate and 0 to deactivate;
+#X obj 453 -131 routeOSC /activate;
+#X connect 0 0 3 0;
+#X connect 1 0 0 0;
+#X connect 2 0 4 0;
+#X connect 4 0 7 0;
+#X connect 5 0 0 0;
+#X connect 6 0 5 0;
+#X connect 7 0 0 1;
+#X connect 9 0 11 0;
+#X connect 11 0 13 0;
+#X connect 13 1 0 0;

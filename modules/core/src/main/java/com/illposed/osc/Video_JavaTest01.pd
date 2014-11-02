@@ -1,0 +1,47 @@
+#N canvas 0 22 1280 752 10;
+#X declare -lib mrpeach;
+#X obj 747 150 gemhead;
+#X obj 487 317 unpack 0 0 0;
+#X obj 252 138 openpanel;
+#X msg 252 158 open \$1;
+#X obj 353 353 pix_film;
+#X msg 464 150 auto \$1;
+#X msg 451 366 0;
+#X obj 455 391 bng 20 250 50 0 empty empty empty 17 7 0 10 -204800
+-1 -1;
+#X obj 488 343 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
+-1 -1 0 256;
+#X obj 629 342 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
+-1 -1 0 256;
+#X obj 560 342 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
+-1 -1 0 256;
+#X obj 343 410 outlet;
+#X obj 252 110 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 304 -123 udpreceive 13002;
+#X obj 300 -156 import mrpeach;
+#X obj 303 -97 unpackOSC;
+#X text 278 104 Open Video Send a 1 to open;
+#X obj 303 -58 routeOSC /open /play /stop /render /norender;
+#X text 436 176 Play video Send a 1 to play and a 0 to stop;
+#X text 800 139 Render video Send a 1 to render and a 0 to stop;
+#X connect 0 0 4 0;
+#X connect 1 0 8 0;
+#X connect 1 1 10 0;
+#X connect 1 2 9 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 11 0;
+#X connect 4 1 1 0;
+#X connect 4 2 7 0;
+#X connect 5 0 4 0;
+#X connect 6 0 4 1;
+#X connect 7 0 6 0;
+#X connect 12 0 2 0;
+#X connect 13 0 15 0;
+#X connect 15 0 17 0;
+#X connect 17 1 12 0;
+#X connect 17 2 5 0;
+#X connect 17 3 5 0;
+#X connect 17 4 0 0;
+#X connect 17 5 0 0;

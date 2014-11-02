@@ -1,0 +1,33 @@
+#N canvas 0 22 1280 752 10;
+#X declare -lib mrpeach;
+#X obj 291 -160 hsl 160 20 0 50 0 0 empty empty empty -2 -8 0 10 -261752
+-1 -1 0 1;
+#X obj 111 40 pix_delay;
+#X obj 309 -271 autoscale 0 50;
+#X obj 93 -31 inlet;
+#X obj 124 274 outlet;
+#X obj 309 -230 inlet;
+#X text 123 244 OUT;
+#X text 134 176 Delay Magnitude;
+#X text 133 161 Framesync Video<->Sound;
+#X obj 451 126 loadbang;
+#X obj 451 102 loadbang;
+#X obj 120 121 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
+0;
+#X obj 120 260 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
+0;
+#X obj 531 -206 udpreceive 13002;
+#X obj 527 -239 import mrpeach;
+#X obj 530 -180 unpackOSC;
+#X text 582 -117 send a 1 to activate and 0 to deactivate;
+#X obj 530 -141 routeOSC /activate;
+#X connect 0 0 1 1;
+#X connect 1 0 4 0;
+#X connect 2 0 0 0;
+#X connect 3 0 1 0;
+#X connect 5 0 2 0;
+#X connect 9 0 1 0;
+#X connect 10 0 9 0;
+#X connect 13 0 15 0;
+#X connect 15 0 17 0;
+#X connect 17 0 1 0;
