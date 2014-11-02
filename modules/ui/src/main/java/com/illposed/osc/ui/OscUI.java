@@ -127,7 +127,8 @@ public class OscUI extends JPanel {
 	private JPanel livePanel;
 	private JPanel averagePanel;
 	private JButton addButton;
-	private JButton renderButton; 
+	private JButton renderButton;
+	private boolean videoChosen; 
 	
 	// create a constructor
 	// OscUI takes an argument of myParent which is a JFrame
@@ -277,6 +278,19 @@ public class OscUI extends JPanel {
 		titlePanel.add(makeLabel("]", font30));
 		titlePanel.setBackground(OSK_PINK);
 		titlePanel.setOpaque(true);
+		
+		JButton exitButton = new JButton("Exit", loadImageAsIcon("close.png"));
+		exitButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				oscPortOut.close();
+				oscPortIn.close();
+				
+			}
+		});
+		topPanel.add(exitButton, BorderLayout.EAST);
+		
 		topPanel.add(titlePanel, BorderLayout.CENTER);
 		
 //		JTextArea textArea = new JTextArea();
@@ -529,7 +543,7 @@ public class OscUI extends JPanel {
 						doSendMessage("/internal", null);
 						doSendMessage("/create", null);
 						
-						makeFalse();
+						changeButton(addButton, "Destroy Gem", "close.png");
 						isCreate = false;
 						
 					}
@@ -537,14 +551,14 @@ public class OscUI extends JPanel {
 						doSendMessage("/external",null);
 						doSendMessage("/create", null);
 					
-						makeFalse();
+						changeButton(addButton, "Destroy Gem", "close.png");
 						isCreate = false;
 					}
 				}
 				else{
 					doSendMessage("/destroy", null);
 					isCreate = true;
-					makeTrue();
+					changeButton(addButton,"Create Gem","plus.png");
 				}
 			}
 		});
@@ -557,14 +571,14 @@ public class OscUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (isPlay)
 				{
-					makeStop();
+					changeButton(renderButton,"Stop Render", "stop.png");
 					isPlay = false;
 					args.clear();
 					args.add(new Integer(0));
 					doSendMessage("/render", args);
 				}
 				else {
-					makePlay();
+					changeButton(renderButton, "Render", "play.png");
 					isPlay = false;
 					args.clear();
 					args.add(new Integer(1));
@@ -577,54 +591,84 @@ public class OscUI extends JPanel {
 		gemPanel.add(optionPanel,BorderLayout.CENTER);
 		mainPanel.add(gemPanel, cons);
 	}
+	protected void changeButton(JButton b, String name, String path){
+		
+		b.setText(name);
+		b.setVerticalTextPosition(SwingConstants.BOTTOM);
+		b.setHorizontalTextPosition(SwingConstants.CENTER);
+		if(path != null){
+			b.setIcon(loadImageAsIcon(path));
+		}
+	}
 	
-	protected void makePlay() {
-		renderButton.setText("Render");
-		renderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		renderButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		renderButton.setIcon(loadImageAsIcon("play.png"));
-	}
-
-	protected void makeStop() {
-		renderButton.setText("Stop Render");
-		renderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		renderButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		renderButton.setIcon(loadImageAsIcon("stop.png"));
-	}
-
-	protected void makeTrue() {
-		addButton.setText("Create Gem");
-		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		this.addButton.setIcon(loadImageAsIcon("plus.png"));
-	}
-
-	protected void makeFalse() {
-		addButton.setText("Destroy Gem");
-		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		addButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		this.addButton.setIcon(loadImageAsIcon("close.png"));
-	}
-
 	/** 7 
 	 * @param cons **/
 	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
-		
+
 		JPanel videoPanel= new JPanel();
 		videoPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.2), ScreenRes.getScaledHeight(0.3472)));//250 500
 		videoPanel.setBackground(OSK_PALEPINK);
 		videoPanel.setOpaque(true);
-		
-		
-		
-		
-		
-		
 
 		JButton videoButton = new JButton("Choose video file");
+		
+		final JButton playButton = new JButton("Play Video", loadImageAsIcon("play.png"));
+		final JButton renderButton = new JButton("Render Video", loadImageAsIcon("gear.png"));
+		
+		playButton.addActionListener(new ActionListener() {
+			boolean isPlay = true;
+			List<Object> args = new ArrayList<Object>();
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!videoChosen){
+					JOptionPane.showMessageDialog(null, "Must Choose WIDEO", "ERROR FGT", JOptionPane.ERROR_MESSAGE);
+				}
+				else if(isPlay){
+					changeButton(playButton, "Stop Video", "stop.png");
+					isPlay = false;
+					args.clear();
+					args.add(new Integer(1));
+					doSendMessage("/play", args);
+				}
+				else{
+					changeButton(playButton, "Play Video", "play.png");
+					args.clear();
+					args.add(new Integer(0));
+					doSendMessage("/play", args);
+					isPlay = true;
+				}
+			}
+		});
+		renderButton.addActionListener(new ActionListener() {
+			List<Object> args = new ArrayList<Object>();
+			boolean isRender = true;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!videoChosen){
+					JOptionPane.showMessageDialog(null, "Cannot Render an Empty Video...CMON!!", "ERROR FGT", JOptionPane.ERROR_MESSAGE);
 
+				}
+				else if(isRender){
+					changeButton(renderButton,"Stop Render",null);
+					args.clear();
+					args.add(new Integer(1));
+					doSendMessage("/render",args);
+					isRender = false;
+				}
+				else{
+					changeButton(renderButton,"Start Render", null);
+					args.clear();
+					args.add(new Integer(0));
+					doSendMessage("/render",args);
+					isRender = true;
+				}
+				
+			}
+		});
+		videoPanel.add(playButton);
+		videoPanel.add(renderButton);
 		videoButton.addActionListener(new ActionListener() {
-			
+			List<Object> args = new ArrayList<Object>();
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -638,15 +682,17 @@ public class OscUI extends JPanel {
 //				  System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
 				  System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
 				  path = (chooser.getSelectedFile()).getPath();
+				  makeVideoChosen();
+				  
 				} else {
 				  System.out.println("No Selection");
 				}
 //				doSendSlider((float)1000.00, 1000);
 
-				
-				doSendVideo(1000,path);
-
-				
+				args.clear();
+				args.add("open:");
+				args.add(path);
+				doSendMessage("/open", args);
 			}
 		});
 		
@@ -656,6 +702,11 @@ public class OscUI extends JPanel {
 
 	}
 	
+
+	protected void makeVideoChosen() {
+		videoChosen = true;	
+	}
+
 	/** THAT'S ALL THE MAIN PANELS **/
 
 	
@@ -1287,25 +1338,6 @@ public class OscUI extends JPanel {
 		}
 	}
 	
-	private void doSendVideo(int node, String path) {
-		if (null == oscPortOut) {
-			showError("Please set an address first");
-		}
-		
-		List<Object> args = new ArrayList<Object>(2);
-		args.add("Video:");
-		args.add(path);
-		OSCMessage msg = new OSCMessage("/video_path", args);
-		msg.setAddress("/video_path");
-		
-		try {
-			oscPortOut.send(msg);
-			System.out.println("Path sent to pd: "+path);
-		} catch (Exception e) {
-			showError("Couldn't send");
-		}
-
-	}
 	
 	private void doSendMessage(String msg_name, List<Object> args){
 		
@@ -1325,6 +1357,9 @@ public class OscUI extends JPanel {
 
 		try {
 			oscPortOut.send(msg);
+			for(Object a : args){
+				System.out.println(msg_name + " " + a);
+			}
 			System.out.println("MSG SENT: " + msg_name);
 		} catch (Exception e) {
 			showError("Couldn't send");

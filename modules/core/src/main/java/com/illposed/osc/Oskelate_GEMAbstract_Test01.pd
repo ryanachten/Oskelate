@@ -2,44 +2,35 @@
 #X declare -lib mrpeach;
 #X declare -lib mrpeach;
 #X obj 56 56 dumpOSC 57110;
-#N canvas 41 53 1172 644 GemWindow 1;
-#X msg 610 256 create;
-#X msg 610 182 destroy;
-#X msg 456 205 fullscreen \$1;
-#X msg 578 173 dimen 1200 300;
-#X obj 548 287 gemwin;
-#X obj 507 176 loadbang;
-#X msg 410 176 dimen 1920 480;
-#X obj 369 176 sel 2;
-#X msg 510 237 2;
-#X msg 486 275 1;
-#X msg 730 156 1;
-#X msg 609 231 1;
-#X obj 388 87 udpreceive 13002;
-#X obj 384 54 import mrpeach;
-#X obj 387 113 unpackOSC;
-#X obj 387 152 routeOSC /internal /external /render /create /destroy
+#N canvas 267 152 1280 752 GemWindow 0;
+#X msg 590 83 create;
+#X msg 679 97 destroy;
+#X msg 432 335 fullscreen \$1;
+#X msg 556 137 dimen 1200 300;
+#X obj 660 283 gemwin;
+#X obj 485 140 loadbang;
+#X msg 388 140 dimen 1920 480;
+#X obj 347 140 sel 2;
+#X msg 465 49 2;
+#X text 406 386 Send a 2 message to the fullscreen for the external
+option;
+#X msg 399 49 1;
+#X text 410 416 Send a 1 message to the fullscreen for the internal
+option;
+#X text 362 452 So if you had a toggle in Java that sends out a 1 or
+a 2 to be packed with a screen tag you could resolve this in ONE toggle
 ;
-#X msg 575 204 \$1;
-#X obj 174 77 gemhead;
-#X obj 163 95 unpack 0 0 0;
-#X msg 22 61 open \$1;
-#X obj 29 131 pix_film;
-#X msg 78 62 auto \$1;
-#X msg 108 200 0;
-#X obj 131 169 bng 20 250 50 0 empty empty empty 17 7 0 10 -204800
--1 -1;
-#X obj 164 121 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 88375 256;
-#X obj 305 120 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 360 256;
-#X obj 236 120 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 640 256;
-#X obj 19 188 outlet;
-#X obj 46 22 routeOSC /open /play /stop /render /norender;
-#X text 568 248 comment;
-#X text 517 110 comment;
-#X text 163 162;
+#X text 680 76 Send a 1 message to destroy the GEM window;
+#X text 744 179 Send a 1 message to destroy the GEM window;
+#X text 388 -11 Internal;
+#X text 462 -9 External;
+#X text 663 21 Destroy;
+#X text 581 23 Create;
+#X obj 399 10 inlet;
+#X obj 469 10 inlet;
+#X obj 590 45 inlet;
+#X obj 676 51 inlet;
+#X obj 525 38 inlet;
 #X connect 0 0 4 0;
 #X connect 1 0 4 0;
 #X connect 2 0 4 0;
@@ -49,37 +40,15 @@
 #X connect 7 0 6 0;
 #X connect 8 0 2 0;
 #X connect 8 0 7 0;
-#X connect 9 0 2 0;
-#X connect 9 0 3 0;
-#X connect 10 0 1 0;
-#X connect 11 0 0 0;
-#X connect 12 0 14 0;
-#X connect 14 0 15 0;
-#X connect 14 0 28 0;
-#X connect 15 0 9 0;
-#X connect 15 1 8 0;
-#X connect 15 2 16 0;
-#X connect 15 3 11 0;
-#X connect 15 4 10 0;
-#X connect 16 0 4 0;
-#X connect 17 0 20 0;
-#X connect 18 0 24 0;
-#X connect 18 1 26 0;
-#X connect 18 2 25 0;
-#X connect 19 0 20 0;
-#X connect 20 0 27 0;
-#X connect 20 1 18 0;
-#X connect 20 2 23 0;
-#X connect 21 0 20 0;
-#X connect 22 0 20 1;
-#X connect 23 0 22 0;
-#X connect 28 0 19 0;
-#X connect 28 1 21 0;
-#X connect 28 2 21 0;
-#X connect 28 3 17 0;
-#X connect 28 4 17 0;
+#X connect 10 0 2 0;
+#X connect 10 0 3 0;
+#X connect 19 0 10 0;
+#X connect 20 0 8 0;
+#X connect 21 0 0 0;
+#X connect 22 0 1 0;
+#X connect 23 0 4 0;
 #X coords 0 -1 1 1 220 350 2 100 100;
-#X restore 21 60 pd GemWindow;
+#X restore 196 60 pd GemWindow;
 #N canvas 0 22 1280 752 kaleie 0;
 #X obj 100 100 cnv 15 220 210 empty empty FX:_K_A_L_E_I 30 35 0 18
 -139264 -66577 0;
@@ -1117,6 +1086,20 @@ sound;
 #X connect 55 0 53 0;
 #X coords 0 -1 1 1 280 350 2 100 100;
 #X restore 605 64 pd audio;
+#X obj 230 -53 udpreceive 13002;
+#X obj 226 -86 import mrpeach;
+#X obj 229 -27 unpackOSC;
+#X text 408 -27 Pack a 0 or a 1 with the 'render' message to turn on
+and off render;
+#X obj 229 12 routeOSC /internal /external /render /create /destroy
+;
 #X connect 2 0 3 0;
 #X connect 3 0 5 0;
 #X connect 4 0 2 0;
+#X connect 14 0 16 0;
+#X connect 16 0 18 0;
+#X connect 18 1 1 0;
+#X connect 18 2 1 1;
+#X connect 18 3 1 2;
+#X connect 18 4 1 3;
+#X connect 18 5 1 4;
