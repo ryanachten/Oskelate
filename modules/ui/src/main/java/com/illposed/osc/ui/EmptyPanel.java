@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -43,47 +44,75 @@ public class EmptyPanel extends EffectPanel {
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
 		c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
+		c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
 		c.weightx = 0;
 		c.gridwidth = 5;
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(l1, c);
 		
-		final JTextField t1 = new JTextField(1);
-		t1.setFont(font);
+		final JButton t1 = new JButton();
 		t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
-		t1.setEditable(false);
+		t1.setBackground(Color.RED);
 		c.weightx = 0.1;
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(t1, c);
 		
-		final JTextField t2 = new JTextField(1);
-		t2.setFont(font);
+		t1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(t1.getBackground() == Color.RED)
+					t1.setBackground(Color.GREEN);
+				else
+					t1.setBackground(Color.RED);
+			}		
+		});
+		
+		final JButton t2 = new JButton();
 		t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
-		t2.setEditable(false);
+		t2.setBackground(Color.RED);
 		c.weightx = 0.1;
 		c.gridx = 2;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(t2, c);
 		
-		final JTextField t3 = new JTextField(1);
-		t3.setFont(font);
+		t2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {	
+				if(t2.getBackground() == Color.RED)
+					t2.setBackground(Color.GREEN);
+				else
+					t2.setBackground(Color.RED);
+			}		
+		});
+		
+		final JButton t3 = new JButton();
 		t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
-		t3.setEditable(false);
+		t3.setBackground(Color.RED);
 		c.weightx = 0.1;
 		c.gridx = 3;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(t3, c);
 		
+		t3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {	
+				if(t3.getBackground() == Color.RED)
+					t3.setBackground(Color.GREEN);
+				else
+					t3.setBackground(Color.RED);
+			}		
+		});
+		
 		
 		JButton b1 = new JButton();
 		b1.setName(name);
 		b1.setBackground(Color.RED);
-		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0030), ScreenRes.getScaledHeight(0.0139) ) );
+		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01), ScreenRes.getScaledHeight(0.01) ) );
 		b1.addActionListener(new ActionListener() {
 			
 			@Override
