@@ -402,9 +402,9 @@ public class OscUI extends JPanel {
 		skeletalPanel.add(skelFXPanel);
 		
 		JPanel skelTXPanel = new JPanel();
-		skelTXPanel.add(new EmptyPanel("NORMAL TX",0.12, 0.13, 18,35, 0.0130, this));
-		skelTXPanel.add(new EmptyPanel("TX:CUBISM",0.12, 0.13, 18,35, 0.0130, this));
-		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.12, 0.13, 18,35, 0.0130, this));//0.15 0.1111
+		skelTXPanel.add(new EmptyPanel("NORMAL TX",0.1, 0.1, 13,18, 0.0078, this));//0.12 0.13
+		skelTXPanel.add(new EmptyPanel("TX:CUBISM",0.1, 0.1, 13,18, 0.0078, this));
+		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.1, 0.1, 13,18, 0.0078, this));//0.15 0.1111
 
 		skeletalPanel.add(skelTXPanel);
 		
@@ -474,9 +474,9 @@ public class OscUI extends JPanel {
 		
 		JPanel auTXPanel = new JPanel();
 		auTXPanel.setBackground(OSK_PALEGREY);
-		auTXPanel.add(new EmptyPanel("NORMAL TX",0.12, 0.13, 18,35, 0.0130, this));
-		auTXPanel.add(new EmptyPanel("TX:CUBISM",0.12, 0.13, 18,35, 0.0130, this));
-		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.12, 0.13, 18,35, 0.0130, this));
+		auTXPanel.add(new EmptyPanel("NORMAL TX",0.1, 0.1, 13,18, 0.0078, this));//0.0130  18,35
+		auTXPanel.add(new EmptyPanel("TX:CUBISM",0.1, 0.1, 13,18, 0.0078, this));
+		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.1, 0.1, 13,18, 0.0078, this));
 
 		audioPanel.add(auTXPanel);
 		
