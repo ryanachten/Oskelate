@@ -393,7 +393,7 @@ public class OscUI extends JPanel {
 		skeletalPanel.add(new FXLuma("FX:_L_U_M_A"));
 		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R"));
 
-
+		
 		
 		
 		/// audio

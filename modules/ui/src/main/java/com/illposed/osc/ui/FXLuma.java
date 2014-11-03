@@ -19,7 +19,7 @@ public class FXLuma extends EffectPanel{
 	public FXLuma(String name) {
 		super("");
 		double scaler = 1.5;
-		this.setPreferredSize( new Dimension((int)(250*scaler),(int)(260*scaler)) );
+		this.setPreferredSize( new Dimension((int)(200*scaler),(int)(230*scaler)) );
 		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -46,7 +46,7 @@ public class FXLuma extends EffectPanel{
 		JLabel l1 = new JLabel(name,JLabel.CENTER);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
-		c.insets = new Insets((int)(-60*scaler),0,0,0);//28
+		c.insets = new Insets((int)(-40*scaler),0,0,0);//28
 		c.gridwidth = 6;
 		c.gridx = 0;
 		c.gridy = 0;
@@ -55,7 +55,7 @@ public class FXLuma extends EffectPanel{
 		JLabel l2 = new JLabel("Luma Offset Distribution",JLabel.CENTER);
 		l2.setForeground(Color.white);
 		l2.setFont(font2);
-		c.insets = new Insets((int)(-25*scaler),0,0,0);//28
+		c.insets = new Insets((int)(-10*scaler),0,0,0);//28
 		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
 		c.gridwidth = 6;
