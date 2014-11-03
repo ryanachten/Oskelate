@@ -112,6 +112,8 @@ public class EmptyPanel extends EffectPanel {
 		JButton b1 = new JButton();
 		b1.setName(name);
 		b1.setBackground(Color.RED);
+		b1.setBorderPainted(false);
+		b1.setOpaque(true);
 
 		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01), ScreenRes.getScaledHeight(0.01) ) );
 		b1.addActionListener(new ActionListener() {
