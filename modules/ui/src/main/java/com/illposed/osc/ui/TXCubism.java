@@ -16,9 +16,9 @@ import javax.swing.JTextArea;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 
-public class FXRefract extends EffectPanel{
+public class TXCubism extends EffectPanel{
 
-	public FXRefract(String name) {
+	public TXCubism(String name) {
 		super("");
 		double scaler = 1.5;
 		this.setPreferredSize( new Dimension(ScreenRes.getScaledWidth(0.1042*scaler),ScreenRes.getScaledHeight(0.213*scaler)) );
@@ -48,16 +48,65 @@ public class FXRefract extends EffectPanel{
 
 		this.add(l1);
 		
-		JLabel l2 = new JLabel("Video Refraction",JLabel.LEFT);
+		JSlider slider7 = new JSlider(JSlider.VERTICAL,0,50,0);
+		slider7.setBackground(new Color(109, 110, 115));
+		slider7.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.06*scaler) ) );
+		//slider4.setBounds(60,-80,0,0);
+		layout.putConstraint(SpringLayout.NORTH, slider7,
+				ScreenRes.getScaledHeight(0.05),
+                SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, slider7,
+				ScreenRes.getScaledWidth(0.022),
+                SpringLayout.NORTH, this);
+		//c.insets = new Insets(60,-80,0,0);
+		slider7.setPaintTicks(true);
+		slider7.setPaintLabels(true);		
+
+		this.add(slider7);
+		
+		JSlider slider8 = new JSlider(JSlider.VERTICAL,0,50,0);
+		slider8.setBackground(new Color(109, 110, 115));
+		slider8.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.06*scaler) ) );
+		//slider4.setBounds(60,-80,0,0);
+		layout.putConstraint(SpringLayout.NORTH, slider8,
+				ScreenRes.getScaledHeight(0.05),
+                SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, slider8,
+				ScreenRes.getScaledWidth(0.072),
+                SpringLayout.NORTH, this);
+		//c.insets = new Insets(60,-80,0,0);
+		slider8.setPaintTicks(true);
+		slider8.setPaintLabels(true);		
+
+		this.add(slider8);
+		
+		JSlider slider9 = new JSlider(JSlider.VERTICAL,0,50,0);
+		slider9.setBackground(new Color(109, 110, 115));
+		slider9.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.06*scaler) ) );
+		//slider4.setBounds(60,-80,0,0);
+		layout.putConstraint(SpringLayout.NORTH, slider9,
+				ScreenRes.getScaledHeight(0.05),
+                SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, slider9,
+				ScreenRes.getScaledWidth(0.125),
+                SpringLayout.NORTH, this);
+		//c.insets = new Insets(60,-80,0,0);
+		slider9.setPaintTicks(true);
+		slider9.setPaintLabels(true);		
+
+		this.add(slider9);
+
+		
+		JLabel l2 = new JLabel("Rotate X",JLabel.LEFT);
 		l2.setForeground(Color.white);
 		l2.setFont(font2);
 		//l2.setBounds(ScreenRes.getScaledHeight((0.02*scaler)),ScreenRes.getScaledWidth((-0.05*scaler)),0,0);
 		
 		layout.putConstraint(SpringLayout.NORTH, l2,
-				ScreenRes.getScaledHeight(0.0463),
+				ScreenRes.getScaledHeight(0.175),
                 SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, l2,
-				ScreenRes.getScaledWidth(0.0078),
+				ScreenRes.getScaledWidth(0.008),
                 SpringLayout.NORTH, this);
 
 		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
@@ -65,101 +114,39 @@ public class FXRefract extends EffectPanel{
 
 		this.add(l2);
 		
-		JButton b1 = new JButton();
-		b1.setBackground(Color.RED);
-		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.018*scaler),ScreenRes.getScaledHeight(0.0324*scaler) ) );
-		//b1.setBounds(ScreenRes.getScaledHeight(-0.1),ScreenRes.getScaledWidth(0.1),0,0);
-		layout.putConstraint(SpringLayout.NORTH, b1,
-				ScreenRes.getScaledHeight(0.04623),
-                SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, b1,
-				ScreenRes.getScaledWidth(0.1094),
-                SpringLayout.NORTH, this);
-		//c.insets = new Insets(ScreenRes.getScaledHeight(-0.1),ScreenRes.getScaledWidth(0.1),0,0);
-		this.add(b1);
+		JLabel l3 = new JLabel("Rotate Y",JLabel.LEFT);
+		l3.setForeground(Color.white);
+		l3.setFont(font2);
+		//l2.setBounds(ScreenRes.getScaledHeight((0.02*scaler)),ScreenRes.getScaledWidth((-0.05*scaler)),0,0);
 		
-		
-		JLabel lmin = new JLabel("min");
-		lmin.setFont(font2);
-		lmin.setForeground(Color.white);
-		lmin.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
-		lmin.setBackground(new Color(109, 110, 115));
-		lmin.setOpaque(true);
-		lmin.setFont(font2);
-		//lmin.setBounds(-200,-200,0,0);
-		
-		layout.putConstraint(SpringLayout.NORTH, lmin,
-				ScreenRes.getScaledHeight(0.07407),
+		layout.putConstraint(SpringLayout.NORTH, l3,
+				ScreenRes.getScaledHeight(0.175),
                 SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, lmin,
-				ScreenRes.getScaledWidth(0.0078),
+		layout.putConstraint(SpringLayout.WEST, l3,
+				ScreenRes.getScaledWidth(0.06),
                 SpringLayout.NORTH, this);
 
-		//c.insets = new Insets(-200,-200,0,0);;
-		this.add(lmin);
-		
-		JLabel lmax = new JLabel("max");
-		lmax.setFont(font2);
-		lmax.setForeground(Color.white);
-		lmax.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
-		lmax.setBackground(new Color(109, 110, 115));
-		lmax.setOpaque(true);
-		
-		//lmax.setBounds(-130,-200,0,0);
-		layout.putConstraint(SpringLayout.NORTH, lmax,
-				ScreenRes.getScaledHeight(0.1204),
-                SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, lmax,
-				ScreenRes.getScaledWidth(0.0078),
-                SpringLayout.NORTH, this);
-		//c.insets = new Insets(-130,-200,0,0);
-		this.add(lmax);
-		
-		JLabel lmag = new JLabel("mag");
-		lmag.setFont(font2);
-		lmag.setForeground(Color.white);
-		lmag.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
-		lmag.setBackground(new Color(109, 110, 115));
-		lmag.setOpaque(true);
-		//lmag.setBounds(-200,195,0,0);
-		//c.insets = new Insets(-130,195,0,0);
-		layout.putConstraint(SpringLayout.NORTH, lmag,
-				ScreenRes.getScaledHeight(0.1111),
-                SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, lmag,
-				ScreenRes.getScaledWidth(0.1146),
-                SpringLayout.NORTH, this);
-		this.add(lmag);
-		
-		JButton b2 = new JButton();
-		b2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.018*scaler),ScreenRes.getScaledHeight(0.0324*scaler) ) );
+		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
+		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
 
-		//b2.setBounds(-50,ScreenRes.getScaledWidth(0.1),0,0);
-		//c.insets = new Insets(-50,ScreenRes.getScaledWidth(0.1),0,0);
-		layout.putConstraint(SpringLayout.NORTH, b2,
-				ScreenRes.getScaledHeight(0.1389),
-                SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, b2,
-				ScreenRes.getScaledWidth(0.1094),
-                SpringLayout.NORTH, this);
+		this.add(l3);
 		
-		this.add(b2);
+		JLabel l4 = new JLabel("Rotate Z",JLabel.LEFT);
+		l4.setForeground(Color.white);
+		l4.setFont(font2);
+		//l2.setBounds(ScreenRes.getScaledHeight((0.02*scaler)),ScreenRes.getScaledWidth((-0.05*scaler)),0,0);
 		
-		JSlider slider2 = new JSlider(JSlider.HORIZONTAL,0,50,0);
-		slider2.setPreferredSize(new Dimension(120,40));
-		slider2.setBackground(new Color(109, 110, 115));
-		//slider2.setBounds(-150,-130,0,0);
-		layout.putConstraint(SpringLayout.NORTH, slider2,
-				ScreenRes.getScaledHeight(0.0926),
+		layout.putConstraint(SpringLayout.NORTH, l4,
+				ScreenRes.getScaledHeight(0.175),
                 SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, slider2,
-				ScreenRes.getScaledWidth(0.0078),
+		layout.putConstraint(SpringLayout.WEST, l4,
+				ScreenRes.getScaledWidth(0.115),
                 SpringLayout.NORTH, this);
-		//c.insets = new Insets(-150,-130,0,0);
-		slider2.setPaintTicks(true);
-		slider2.setPaintLabels(true);		
 
-		this.add(slider2);
+		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
+		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
+
+		this.add(l4);
 		
 		JLabel t1 = new JLabel("0");
 		t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
@@ -168,26 +155,12 @@ public class FXRefract extends EffectPanel{
 		//t1.setBounds(-160,80,0,0);
 		//c.insets = new Insets(-160,80,0,0);
 		layout.putConstraint(SpringLayout.NORTH, t1,
-				ScreenRes.getScaledHeight(0.0926),
-                SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, t1,
-				ScreenRes.getScaledWidth(0.0729),
-                SpringLayout.NORTH, this);
-		this.add(t1);
-		
-		JLabel t11 = new JLabel("0");
-		t11.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
-		t11.setBackground(Color.WHITE);
-		t11.setOpaque(true);
-		//t1.setBounds(-160,80,0,0);
-		//c.insets = new Insets(-160,80,0,0);
-		layout.putConstraint(SpringLayout.NORTH, t11,
 				ScreenRes.getScaledHeight(0.218),
                 SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, t11,
+		layout.putConstraint(SpringLayout.WEST, t1,
 				ScreenRes.getScaledWidth(0.12),
                 SpringLayout.NORTH, this);
-		this.add(t11);
+		this.add(t1);
 
 		JLabel t2 = new JLabel("0");
 		t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
@@ -217,37 +190,47 @@ public class FXRefract extends EffectPanel{
                 SpringLayout.NORTH, this);
 		this.add(t31);
 		
-		JLabel t22 = new JLabel("0");
-		t22.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
-		t22.setBackground(Color.WHITE);
-		t22.setOpaque(true);
-		layout.putConstraint(SpringLayout.NORTH, t22,
-				ScreenRes.getScaledHeight(0.1389),
+		JLabel t32 = new JLabel("0");
+		t32.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
+		t32.setBackground(Color.WHITE);
+		t32.setOpaque(true);
+		//t1.setBounds(-160,80,0,0);
+		//c.insets = new Insets(-160,80,0,0);
+		layout.putConstraint(SpringLayout.NORTH, t32,
+				ScreenRes.getScaledHeight(0.15),
                 SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, t22,
-				ScreenRes.getScaledWidth(0.0729),//0.0729
+		layout.putConstraint(SpringLayout.WEST, t32,
+				ScreenRes.getScaledWidth(0.12),
                 SpringLayout.NORTH, this);
-		//t2.setBounds(-90,80,0,0);
-
-		//c.insets = new Insets(-90,80,0,0);
-
-		this.add(t22);
+		this.add(t32);
 		
-		JSlider slider3 = new JSlider(JSlider.HORIZONTAL,0,50,0);
-		slider3.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625),ScreenRes.getScaledHeight(0.0370)));
-		slider3.setBackground(new Color(109, 110, 115));
-		//slider3.setBounds(-80,-130,0,0);
-		//c.insets = new Insets(-80,-130,0,0);
-		layout.putConstraint(SpringLayout.NORTH, slider3,
-				ScreenRes.getScaledHeight(0.1389),
+		JLabel t33 = new JLabel("0");
+		t33.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
+		t33.setBackground(Color.WHITE);
+		t33.setOpaque(true);
+		//t1.setBounds(-160,80,0,0);
+		//c.insets = new Insets(-160,80,0,0);
+		layout.putConstraint(SpringLayout.NORTH, t33,
+				ScreenRes.getScaledHeight(0.15),
                 SpringLayout.NORTH, this);
-		layout.putConstraint(SpringLayout.WEST, slider3,
-				ScreenRes.getScaledWidth(0.0078),
+		layout.putConstraint(SpringLayout.WEST, t33,
+				ScreenRes.getScaledWidth(0.068),
                 SpringLayout.NORTH, this);
-		slider3.setPaintTicks(true);
-		slider3.setPaintLabels(true);		
-
-		this.add(slider3);
+		this.add(t33);
+		
+		JLabel t34 = new JLabel("0");
+		t34.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
+		t34.setBackground(Color.WHITE);
+		t34.setOpaque(true);
+		//t1.setBounds(-160,80,0,0);
+		//c.insets = new Insets(-160,80,0,0);
+		layout.putConstraint(SpringLayout.NORTH, t34,
+				ScreenRes.getScaledHeight(0.15),
+                SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, t34,
+				ScreenRes.getScaledWidth(0.018),
+                SpringLayout.NORTH, this);
+		this.add(t34);
 		
 		JLabel t3 = new JLabel("Refraction Magnitude");
 		t3.setFont(font2);
