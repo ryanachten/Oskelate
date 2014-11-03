@@ -63,6 +63,7 @@ public class EmptyPanel extends EffectPanel {
 		//t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02), ScreenRes.getScaledHeight(0.02) ) );
 		//t1.setSize(new Dimension(1,1));
 		//c.weightx = 0.1;
+		t1.setOpaque(false);
 		t1.setBorder(BorderFactory.createEmptyBorder());
 		//c.weightx = 0.1;
 		c.gridx = 1;
@@ -90,6 +91,7 @@ public class EmptyPanel extends EffectPanel {
 		final JButton t2 = new JButton(loadImageAsIcon("redBut.png"));
 		//t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		//c.weightx = 0.1;
+		t2.setOpaque(false);
 		t2.setBorder(BorderFactory.createEmptyBorder());
 		c.gridx = 3;
 		c.gridy = 1;
@@ -117,6 +119,7 @@ public class EmptyPanel extends EffectPanel {
 		//t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		//c.weightx = 0.1;
 		//c.weightx = 0.1;
+		t3.setOpaque(false);
 		t3.setBorder(BorderFactory.createEmptyBorder());
 		c.gridx = 5;
 		c.gridy = 1;

@@ -58,6 +58,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -328,38 +329,27 @@ public class OscUI extends JPanel {
 		cons.gridx = 0;
 		cons.gridy = 0;
 		cons.weightx = 0.5;
-		addLogoPanel(mainPanel, cons);
+		addLevelsPanel(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 1;
 		cons.gridy = 0;
-		cons.gridwidth = 1;
+		cons.gridwidth = 3;
+		cons.gridheight = 2;
 		cons.weightx = 1;
-		addSkeletalPanel(mainPanel, cons);
-		cons.fill = GridBagConstraints.BOTH;
-		cons.gridx = 3;
-		cons.gridy = 0;
-		cons.weightx = 0.5;
-		cons.gridwidth = GridBagConstraints.REMAINDER;
-		addLevelsPanel(mainPanel, cons);
+		addTabbedPane(mainPanel, cons);
 		cons.fill = GridBagConstraints.BOTH;
 		cons.gridx = 0;
 		cons.gridy = 1;
 		cons.gridwidth = 1;
 		cons.weightx = 0.5;
 		addGemPanel(mainPanel, cons);
-		cons.fill = GridBagConstraints.BOTH;
-		cons.gridx = 1;
-		cons.gridy = 1;
-		cons.gridwidth = 1;
-		cons.weightx = 1;
-		addAudioPanel(mainPanel, cons);
-		cons.fill = GridBagConstraints.BOTH;
-		cons.gridx = 3;
-		cons.gridy = 1;
-		cons.weightx = 0.5;
-		cons.gridwidth = GridBagConstraints.REMAINDER;
-		addVideoPanel(mainPanel, cons);
-		
+//		cons.fill = GridBagConstraints.BOTH;
+//		cons.gridx = 1;
+//		cons.gridy = 1;
+//		cons.gridwidth = 1;
+//		cons.weightx = 1;
+//		addAudioPanel(mainPanel, cons);
+
 
 		
 	}
@@ -382,36 +372,92 @@ public class OscUI extends JPanel {
 
 	/** 3 
 	 * @param cons **/
-	private void addSkeletalPanel(JPanel mainPanel, GridBagConstraints cons) {
+	private void addTabbedPane(JPanel mainPanel, GridBagConstraints cons) {
+
 		JPanel skeletalPanel = new JPanel();
-		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.55), ScreenRes.getScaledHeight(0.4630)));//700 500
+
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
+		//skeletalScroll.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.55), ScreenRes.getScaledHeight(0.4630)));//700 500
+		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.55), ScreenRes.getScaledHeight(0.9)));//700 500
 		skeletalPanel.setBackground(OSK_PALEPINK);
 		skeletalPanel.setOpaque(true);
 		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
+		//skeletalPanel.setLayout(new FlowLayout());
 		skeletalPanel.setBorder(emptyBorder);
 		skeletalPanel.add(makeLabel("SKELETAL RESPONSE", font22));
+
+		
+		skeletalPanel.add(new EmptyPanel("FX:LUMA",0.1,0.1, 13, 18, 0.0078, this));
+		skeletalPanel.add(new SliderPanel("FX:FRAME",0.1,0.1, 13, 18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("FX:MBLUR",0.1,0.1, 13, 18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("FX:REFRACT",0.1,0.1, 13, 18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("FX:KALEI",0.1,0.1, 13, 18, 0.0078, this));
+		
+		
+		
+		
+		skeletalPanel.add(new EmptyPanel("NORMAL TX",0.1, 0.1, 13,18, 0.0078, this));//0.12 0.13
+		skeletalPanel.add(new EmptyPanel("TX:CUBISM",0.1, 0.1, 13,18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("TX:OSKWAVE",0.1, 0.1, 13,18, 0.0078, this));//0.15 0.1111
+		
+		
+		/// audio
+		
+		
+		JPanel audioPanel = new JPanel();
+		audioPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.2083), ScreenRes.getScaledHeight(0.4630)));//400 500
+		audioPanel.setBackground(OSK_PALEGREY);
+		audioPanel.setOpaque(true);
+		audioPanel.setLayout(new GridLayout(3, 1, 5, 5));
+		audioPanel.setBorder(emptyBorder);
+		audioPanel.add(makeLabel("<html><h1 style=\"color:white\"><span style=\"font-weight: bold\">AUDIO</span> RESPONSE</h><html>", font22));
 		
 		// FX and TX
-		JPanel skelFXPanel = new JPanel();
-		skelFXPanel.add(new EmptyPanel("FX:LUMA",0.1,0.1, 13, 18, 0.0078, this));
-		skelFXPanel.add(new SliderPanel("FX:FRAME",0.1,0.1, 13, 18, 0.0078, this));
-		skelFXPanel.add(new EmptyPanel("FX:MBLUR",0.1,0.1, 13, 18, 0.0078, this));
-		skelFXPanel.add(new EmptyPanel("FX:REFRACT",0.1,0.1, 13, 18, 0.0078, this));
-		skelFXPanel.add(new EmptyPanel("FX:KALEI",0.1,0.1, 13, 18, 0.0078, this));
+		JPanel auFXPanel = new JPanel();
+		auFXPanel.setBackground(OSK_PALEGREY);
+		auFXPanel.add(new EmptyPanel("FX:LUMA",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new SliderPanel("FX:FRAME",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new EmptyPanel("FX:MBLUR",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new EmptyPanel("FX:REFRACT",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new EmptyPanel("FX:KALEI",0.1, 0.1, 13, 18, 0.0078, this));//0.0678 0.0833
 
-		skeletalPanel.add(skelFXPanel);
+		audioPanel.add(auFXPanel);
 		
-		JPanel skelTXPanel = new JPanel();
-		skelTXPanel.add(new EmptyPanel("NORMAL TX",0.1, 0.1, 13,18, 0.0078, this));//0.12 0.13
-		skelTXPanel.add(new EmptyPanel("TX:CUBISM",0.1, 0.1, 13,18, 0.0078, this));
-		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.1, 0.1, 13,18, 0.0078, this));//0.15 0.1111
+		JPanel auTXPanel = new JPanel();
+		auTXPanel.setBackground(OSK_PALEGREY);
+		auTXPanel.add(new EmptyPanel("NORMAL TX",0.1, 0.1, 13,18, 0.0078, this));//0.0130  18,35
+		auTXPanel.add(new EmptyPanel("TX:CUBISM",0.1, 0.1, 13,18, 0.0078, this));
+		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.1, 0.1, 13,18, 0.0078, this));
 
-		skeletalPanel.add(skelTXPanel);
+		audioPanel.add(auTXPanel);
 		
-		skeletalPanel.setVisible(true);
-		skeletalPanel.setOpaque(true);
 		
-		mainPanel.add(skeletalPanel, cons);
+		
+		
+		
+		
+	
+		
+		for (int i = 0; i < 8; i++){
+//			audioPanel.add(new EmptyPanel());
+		}
+		
+		audioPanel.setVisible(true);
+		audioPanel.setOpaque(true);
+		
+		
+		tabbedPane.add("Skeletal", skeletalPanel);
+		
+		tabbedPane.addTab("Audio", audioPanel);
+		
+		tabbedPane.setVisible(true);
+		
+		mainPanel.add(tabbedPane, cons);
+		
+		
+		
+		
 
 		
 	}
@@ -501,7 +547,8 @@ public class OscUI extends JPanel {
 	private void addGemPanel(JPanel mainPanel, GridBagConstraints cons) {
 		
 		JPanel gemPanel = new JPanel();
-		gemPanel.setLayout(new BorderLayout());
+		gemPanel.setLayout(new BoxLayout(gemPanel, BoxLayout.PAGE_AXIS));
+		
 		JPanel btnPanel = new JPanel();
 		addButton = new JButton("Create GEM", loadImageAsIcon("plus.png"));
 		addButton.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -596,24 +643,9 @@ public class OscUI extends JPanel {
 			}
 		});
 		
-		gemPanel.add(btnPanel, BorderLayout.NORTH);
-		gemPanel.add(optionPanel,BorderLayout.CENTER);
-		mainPanel.add(gemPanel, cons);
-	}
-	protected void changeButton(JButton b, String name, String path){
+		gemPanel.add(btnPanel);
+		gemPanel.add(optionPanel);
 		
-		b.setText(name);
-		b.setVerticalTextPosition(SwingConstants.BOTTOM);
-		b.setHorizontalTextPosition(SwingConstants.CENTER);
-		if(path != null){
-			b.setIcon(loadImageAsIcon(path));
-		}
-	}
-	
-	/** 7 
-	 * @param cons **/
-	private void addVideoPanel(JPanel mainPanel, GridBagConstraints cons) {
-
 		JPanel videoPanel= new JPanel();
 		videoPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.2), ScreenRes.getScaledHeight(0.3472)));//250 500
 		videoPanel.setBackground(OSK_PALEPINK);
@@ -707,9 +739,25 @@ public class OscUI extends JPanel {
 		
 		videoPanel.add(videoButton);
 		
-		mainPanel.add(videoPanel, cons);
-
+		
+		//mainPanel.add(videoPanel, cons);
+		gemPanel.add(videoPanel);
+		
+		
+		
+		
+		mainPanel.add(gemPanel, cons);
 	}
+	protected void changeButton(JButton b, String name, String path){
+		
+		b.setText(name);
+		b.setVerticalTextPosition(SwingConstants.BOTTOM);
+		b.setHorizontalTextPosition(SwingConstants.CENTER);
+		if(path != null){
+			b.setIcon(loadImageAsIcon(path));
+		}
+	}
+	
 	
 
 	protected void makeVideoChosen() {
