@@ -19,12 +19,12 @@ public class FXLuma extends EffectPanel{
 	public FXLuma(String name) {
 		super("");
 		double scaler = 1.5;
-		this.setPreferredSize( new Dimension((int)(200*scaler),(int)(230*scaler)) );
+		this.setPreferredSize( new Dimension(ScreenRes.getScaledWidth(0.1042*scaler),ScreenRes.getScaledHeight(0.213*scaler)) );
 		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		Font font1 = new Font("Verdana", Font.BOLD, (int)(20*scaler));
-		Font font2 = new Font("Verdana", Font.BOLD, (int)(10*scaler));
+		Font font1 = new Font("Verdana", Font.BOLD, ScreenRes.getScaledHeight(0.016*scaler));
+		Font font2 = new Font("Verdana", Font.BOLD, ScreenRes.getScaledHeight(0.008*scaler));
 		
 //		JPanel bufferLeft = new JPanel();
 //		c.weightx = 0;
@@ -46,7 +46,7 @@ public class FXLuma extends EffectPanel{
 		JLabel l1 = new JLabel(name,JLabel.CENTER);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
-		c.insets = new Insets((int)(-40*scaler),0,0,0);//28
+		c.insets = new Insets(ScreenRes.getScaledHeight((-0.04*scaler)),0,0,0);//28   -40*scaler
 		c.gridwidth = 6;
 		c.gridx = 0;
 		c.gridy = 0;
@@ -55,7 +55,7 @@ public class FXLuma extends EffectPanel{
 		JLabel l2 = new JLabel("Luma Offset Distribution",JLabel.CENTER);
 		l2.setForeground(Color.white);
 		l2.setFont(font2);
-		c.insets = new Insets((int)(-10*scaler),0,0,0);//28
+		c.insets = new Insets(ScreenRes.getScaledHeight(-0.01*scaler),0,0,0);//28 -10
 		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
 		c.gridwidth = 6;
@@ -63,16 +63,15 @@ public class FXLuma extends EffectPanel{
 		c.gridy = 1;
 		this.add(l2, c);
 		
-		
 		JButton b1 = new JButton();
-		b1.setPreferredSize( new Dimension( (int)(35*scaler),(int)(35*scaler) ) );
+		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.018*scaler),ScreenRes.getScaledHeight(0.0324*scaler) ) );
 		//t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02), ScreenRes.getScaledHeight(0.02) ) );
 		//t1.setSize(new Dimension(1,1));
 		//c.weightx = 0.1;
 		//b1.setOpaque(false);
 		//b1.setBorder(BorderFactory.createEmptyBorder());
 		//c.weightx = 0.1;
-		c.insets = new Insets(0,-(int)(5*scaler),0,0);
+		c.insets = new Insets(0,ScreenRes.getScaledWidth(-0.0026*scaler),0,0);
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 1;
@@ -81,14 +80,14 @@ public class FXLuma extends EffectPanel{
 
 		
 		JButton b2 = new JButton();
-		b2.setPreferredSize( new Dimension( (int)(35*scaler),(int)(35*scaler) ) );
+		b2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.018*scaler),ScreenRes.getScaledHeight(0.0324*scaler) ) );
 		//t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02), ScreenRes.getScaledHeight(0.02) ) );
 		//t1.setSize(new Dimension(1,1));
 		//c.weightx = 0.1;
 		//b1.setOpaque(false);
 		//b1.setBorder(BorderFactory.createEmptyBorder());
 		//c.weightx = 0.1;
-		c.insets = new Insets(0,(int)(30*scaler),0,0);
+		c.insets = new Insets(0,ScreenRes.getScaledWidth(0.003*scaler),0,0);
 		c.gridx = 1;
 		c.gridy = 2;
 		c.gridwidth = 1;
@@ -97,13 +96,13 @@ public class FXLuma extends EffectPanel{
 
 		
 		JButton b3 = new JButton();
-		b3.setPreferredSize( new Dimension( (int)(35*scaler),(int)(35*scaler) ) );
+		b3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.018*scaler),ScreenRes.getScaledHeight(0.0324*scaler) ) );
 		//t1.setSize(new Dimension(1,1));
 		//c.weightx = 0.1;
 		//b1.setOpaque(false);
 		//b1.setBorder(BorderFactory.createEmptyBorder());
 		//c.weightx = 0.1;
-		c.insets = new Insets(0,(int)(35*scaler),0,0);
+		c.insets = new Insets(0,ScreenRes.getScaledWidth(0.01042*scaler),0,0);
 		c.gridx = 2;
 		c.gridy = 2;
 		c.gridwidth = 1;
@@ -117,10 +116,10 @@ public class FXLuma extends EffectPanel{
 		this.add(buffer1, c);
 
 		JLabel t1 = new JLabel("0");
-		t1.setPreferredSize( new Dimension( (int)(55*scaler),(int)(15*scaler) ) );
+		t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02865*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
 		t1.setBackground(Color.WHITE);
 		t1.setOpaque(true);
-		c.insets = new Insets((int)(20*scaler),0,0,0);
+		c.insets = new Insets(ScreenRes.getScaledHeight(0.0185*scaler),0,0,0);
 		c.gridx =0;
 		c.gridy =4;
 		c.gridwidth = 1;
@@ -141,7 +140,7 @@ public class FXLuma extends EffectPanel{
 		slider2.setBackground(new Color(109, 110, 115));
 		slider2.setPaintTicks(true);
 		slider2.setPaintLabels(true);
-		c.insets = new Insets((int)(5*scaler),(int)(-60*scaler),0,0);
+		c.insets = new Insets(ScreenRes.getScaledHeight(0.0046*scaler),ScreenRes.getScaledWidth(-0.03125*scaler),0,0);
 		c.gridx =0;
 		c.gridy =6;
 		c.gridwidth = 8;
@@ -150,8 +149,8 @@ public class FXLuma extends EffectPanel{
 		JLabel t2 = new JLabel("0");
 		t2.setBackground(Color.WHITE);
 		t2.setOpaque(true);
-		t2.setPreferredSize( new Dimension( (int)(55*scaler),(int)(15*scaler) ) );
-		c.insets = new Insets((int)(10*scaler),0,0,0);
+		t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02865*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
+		c.insets = new Insets(ScreenRes.getScaledHeight(0.0093*scaler),0,0,0);
 		c.gridx =0;
 		c.gridy =7;
 		c.gridwidth = 1;
@@ -160,7 +159,7 @@ public class FXLuma extends EffectPanel{
 		JLabel l4 = new JLabel("Spacing",JLabel.CENTER);
 		l4.setForeground(Color.white);
 		l4.setFont(font2);
-		c.insets = new Insets(0,(int)(-15*scaler),0,0);
+		c.insets = new Insets(0,ScreenRes.getScaledWidth(-0.0078*scaler),0,0);
 		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
 		c.gridwidth = 1;
@@ -172,7 +171,7 @@ public class FXLuma extends EffectPanel{
 		slider3.setBackground(new Color(109, 110, 115));
 		slider3.setPaintTicks(true);
 		slider3.setPaintLabels(true);
-		c.insets = new Insets((int)(5*scaler),(int)(-60*scaler),0,0);
+		c.insets = new Insets(ScreenRes.getScaledHeight(0.0046*scaler),ScreenRes.getScaledWidth(-0.03125*scaler),0,0);
 		c.gridx =0;
 		c.gridy =9;
 		c.gridwidth = 8;

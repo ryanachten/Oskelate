@@ -19,16 +19,17 @@ public class FXFrame extends EffectPanel{
 	public FXFrame(String name) {
 		super("");
 		double scaler = 1.5;
-		this.setPreferredSize( new Dimension((int)(250*scaler),(int)(260*scaler)) );
+		this.setPreferredSize( new Dimension(ScreenRes.getScaledWidth(0.1042*scaler),ScreenRes.getScaledHeight(0.213*scaler)) );
 		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		Font font1 = new Font("Verdana", Font.BOLD, (int)(20*scaler));
-		Font font2 = new Font("Verdana", Font.BOLD, (int)(10*scaler));
+		Font font1 = new Font("Verdana", Font.BOLD, ScreenRes.getScaledHeight(0.016*scaler));
+		Font font2 = new Font("Verdana", Font.BOLD, ScreenRes.getScaledHeight(0.008*scaler));
 		
 		JLabel l1 = new JLabel(name,JLabel.CENTER);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
+		c.insets = new Insets((int)(-170*scaler),0,0,0);//28
 		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
 		c.gridwidth = 6;
@@ -39,6 +40,7 @@ public class FXFrame extends EffectPanel{
 		JLabel l2 = new JLabel("Framesync Video <-> Sound",JLabel.CENTER);
 		l2.setForeground(Color.white);
 		l2.setFont(font2);
+		c.insets = new Insets((int)(-135*scaler),0,0,0);//28
 		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
 		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
 		c.gridwidth = 6;
