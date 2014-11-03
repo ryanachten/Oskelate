@@ -382,24 +382,24 @@ public class OscUI extends JPanel {
 		skeletalPanel.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.55), ScreenRes.getScaledHeight(0.9)));//700 500
 		skeletalPanel.setBackground(OSK_PALEPINK);
 		skeletalPanel.setOpaque(true);
-		skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
+		//skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		//skeletalPanel.setLayout(new FlowLayout());
 		skeletalPanel.setBorder(emptyBorder);
 		skeletalPanel.add(makeLabel("SKELETAL RESPONSE", font22));
 
-		
-		skeletalPanel.add(new EmptyPanel("FX:LUMA",0.1,0.1, 13, 18, 0.0078, this));
-		skeletalPanel.add(new SliderPanel("FX:FRAME",0.1,0.1, 13, 18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("FX:MBLUR",0.1,0.1, 13, 18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("FX:REFRACT",0.1,0.1, 13, 18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("FX:KALEI",0.1,0.1, 13, 18, 0.0078, this));
-		
-		
+		skeletalPanel.add(new FXLuma("FX:_L_U_M_A"));
+		skeletalPanel.add(new EmptyPanel("FX:LUMA",0.2,0.2, 13, 18, 0.0078, this));
+		skeletalPanel.add(new SliderPanel("FX:FRAME",0.2,0.2, 13, 18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("FX:MBLUR",0.2,0.2, 13, 18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("FX:REFRACT",0.2,0.2, 13, 18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("FX:KALEI",0.2,0.2, 13, 18, 0.0078, this));
 		
 		
-		skeletalPanel.add(new EmptyPanel("NORMAL TX",0.1, 0.1, 13,18, 0.0078, this));//0.12 0.13
-		skeletalPanel.add(new EmptyPanel("TX:CUBISM",0.1, 0.1, 13,18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("TX:OSKWAVE",0.1, 0.1, 13,18, 0.0078, this));//0.15 0.1111
+		
+		
+		skeletalPanel.add(new EmptyPanel("NORMAL TX",0.2, 0.2, 13,18, 0.0078, this));//0.12 0.13
+		skeletalPanel.add(new EmptyPanel("TX:CUBISM",0.2, 0.2, 13,18, 0.0078, this));
+		skeletalPanel.add(new EmptyPanel("TX:OSKWAVE",0.2, 0.2, 13,18, 0.0078, this));//0.15 0.1111
 		
 		
 		/// audio
@@ -654,11 +654,7 @@ public class OscUI extends JPanel {
 		JButton videoButton = new JButton("Choose video file");
 		
 		final JButton playButton = new JButton("Play Video", loadImageAsIcon("play.png"));
-		playButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		playButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		final JButton renderButton = new JButton("Render Video", loadImageAsIcon("gear.png"));
-		renderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
-		renderButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		playButton.addActionListener(new ActionListener() {
 			boolean isPlay = true;
@@ -740,7 +736,6 @@ public class OscUI extends JPanel {
 				doSendMessage("/open", args);
 			}
 		});
-		
 		
 		videoPanel.add(videoButton);
 		
