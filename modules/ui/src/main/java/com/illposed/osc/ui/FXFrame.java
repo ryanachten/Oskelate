@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 
-public class FXMBlur extends EffectPanel{
+public class FXFrame extends EffectPanel{
 
-	public FXMBlur(String name) {
+	public FXFrame(String name) {
 		super("");
 		double scaler = 1.5;
 		this.setPreferredSize( new Dimension((int)(250*scaler),(int)(260*scaler)) );
@@ -25,23 +25,6 @@ public class FXMBlur extends EffectPanel{
 		GridBagConstraints c = new GridBagConstraints();
 		Font font1 = new Font("Verdana", Font.BOLD, (int)(20*scaler));
 		Font font2 = new Font("Verdana", Font.BOLD, (int)(10*scaler));
-		
-//		JPanel bufferLeft = new JPanel();
-//		c.weightx = 0;
-//		c.gridwidth = 1;
-//		c.gridx = 0;
-//		c.gridy = 0;
-//		bufferLeft.setOpaque(false);
-//		this.add(bufferLeft, c);
-//		
-//		JPanel bufferRight = new JPanel();
-//		c.weightx = 0;
-//		c.gridwidth = 1;
-//		c.gridx = 6;
-//		c.gridy = 0;
-//		bufferRight.setOpaque(false);
-//		this.add(bufferRight, c);
-		
 		
 		JLabel l1 = new JLabel(name,JLabel.CENTER);
 		l1.setForeground(Color.white);
@@ -53,7 +36,7 @@ public class FXMBlur extends EffectPanel{
 		c.gridy = 0;
 		this.add(l1, c);
 		
-		JLabel l2 = new JLabel("Motion Blue Magnitude",JLabel.CENTER);
+		JLabel l2 = new JLabel("Framesync Video <-> Sound",JLabel.CENTER);
 		l2.setForeground(Color.white);
 		l2.setFont(font2);
 		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
@@ -63,13 +46,23 @@ public class FXMBlur extends EffectPanel{
 		c.gridy = 1;
 		this.add(l2, c);
 		
+		JLabel l3 = new JLabel("Delay Magnitude",JLabel.CENTER);
+		l3.setForeground(Color.white);
+		l3.setFont(font2);
+		//c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
+		//c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.025),0);//28
+		c.gridwidth = 6;
+		c.gridx = 0;
+		c.gridy = 2;
+		this.add(l3, c);
+		
 		JLabel t1 = new JLabel("0");
 		t1.setPreferredSize( new Dimension( 55,15 ) );
 		t1.setBackground(Color.WHITE);
 		t1.setOpaque(true);
 		c.insets = new Insets(0,5,0,0);
 		c.gridx =0;
-		c.gridy =2;
+		c.gridy =3;
 		c.gridwidth = 1;
 		this.add(t1,c);
 		
@@ -83,8 +76,9 @@ public class FXMBlur extends EffectPanel{
 		//c.weightx = 0.1;
 		c.insets = new Insets(0,30,0,0);
 		c.gridx = 1;
-		c.gridy = 2;
-		c.gridwidth = 1;
+		c.gridy = 1;
+		c.gridwidth = 2;
+		c.gridheight = 2;
 		this.add(b1, c);
 		
 		

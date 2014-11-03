@@ -385,21 +385,15 @@ public class OscUI extends JPanel {
 		//skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		//skeletalPanel.setLayout(new FlowLayout());
 		skeletalPanel.setBorder(emptyBorder);
-		skeletalPanel.add(makeLabel("SKELETAL RESPONSE", font22));
+		//skeletalPanel.add(makeLabel("SKELETAL RESPONSE", font22));
 
 		skeletalPanel.add(new FXLuma("FX:_L_U_M_A"));
-		skeletalPanel.add(new EmptyPanel("FX:LUMA",0.2,0.2, 13, 18, 0.0078, this));
-		skeletalPanel.add(new SliderPanel("FX:FRAME",0.2,0.2, 13, 18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("FX:MBLUR",0.2,0.2, 13, 18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("FX:REFRACT",0.2,0.2, 13, 18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("FX:KALEI",0.2,0.2, 13, 18, 0.0078, this));
-		
-		
-		
-		
-		skeletalPanel.add(new EmptyPanel("NORMAL TX",0.2, 0.2, 13,18, 0.0078, this));//0.12 0.13
-		skeletalPanel.add(new EmptyPanel("TX:CUBISM",0.2, 0.2, 13,18, 0.0078, this));
-		skeletalPanel.add(new EmptyPanel("TX:OSKWAVE",0.2, 0.2, 13,18, 0.0078, this));//0.15 0.1111
+		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R"));
+		skeletalPanel.add(new FXFrame("FX:_F_R_A_M_E"));
+		skeletalPanel.add(new FXLuma("FX:_L_U_M_A"));
+		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R"));
+
+
 		
 		
 		/// audio
