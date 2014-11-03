@@ -113,6 +113,8 @@ public class OscUI extends JPanel {
 	//borders
 	public static final Border lineBorder = new LineBorder(Color.BLACK, 2);
 	public static final Border emptyBorder = new EmptyBorder(5, 5, 5, 5);
+	
+	
 
 
 	
@@ -149,6 +151,7 @@ public class OscUI extends JPanel {
 					
 					
 					System.out.println("ACCEPTED MESAGE");
+					
 					
 					List<Object> messageArgs = message.getArguments();
 					// args should have length 1 and have a float value
@@ -284,8 +287,14 @@ public class OscUI extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				oscPortOut.close();
-				oscPortIn.close();
+				try {
+					oscPortOut.close();
+					oscPortIn.close();
+				}
+				catch (Exception e1)
+				{
+					// uwot
+				}
 				
 			}
 		});

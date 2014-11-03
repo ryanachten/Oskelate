@@ -84,43 +84,51 @@ public class EmptyPanel extends EffectPanel {
 		b1.setName(name);
 		b1.setBackground(Color.RED);
 		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0030), ScreenRes.getScaledHeight(0.0139) ) );
-		b1.addActionListener(new ActionListener() {
+		b1.addActionListener(new ActionListener() 
+		{
+			
+//			"FX:LUMA",0.1,0.1, 13, 18, 0.0078, this));
+//			skelFXPanel.add(new SliderPanel("FX:FRAME",0.1,0.1, 13, 18, 0.0078, this));
+//			skelFXPanel.add(new EmptyPanel("FX:MBLUR",0.1,0.1, 13, 18, 0.0078, this));
+//			skelFXPanel.add(new EmptyPanel("FX:REFRACT",0.1,0.1, 13, 18, 0.0078, this));
+//			skelFXPanel.add(new EmptyPanel("FX:KALEI",0.1,0.1, 13, 18, 0.0078, this));
+//
+//			skeletalPanel.add(skelFXPanel);
+//			
+//			JPanel skelTXPanel = new JPanel();
+//			skelTXPanel.add(new EmptyPanel("NORMAL TX",0.12, 0.13, 18,35, 0.0130, this));
+//			skelTXPanel.add(new EmptyPanel("TX:CUBISM",0.12, 0.13, 18,35, 0.0130, this));
+//			skelTXPanel.add(new EmptyPanel("TX:OSKWAVE"
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e != null)
+				
+				JButton jButton = (JButton)e.getSource();
+				
+				
+				if (jButton != null)
 				{
-					Object obj = e.getSource();
-					if (obj instanceof JButton)
+					String name = jButton.getName();
+					System.out.println("Button clicked: "+name);
+					if (name != null && name.equals("NORMAL TX"))
 					{
-						JButton jb = (JButton)obj;
-						if (jb != null)
-						{
-							String name = jb.getName();
-							if (name != null && name.equals("NORMAL TX"))
-							{
-								if (oscUI != null)
-								{
-									args.clear();
-									args.add(new Integer(16));
-									args.add(new Integer(5));
-									oscUI.doSendMessage("/txnormal", args);									
-								}
-								else 
-									System.out.println("oscui is null");
-							}
-							else 
-								System.out.println("name is null");
-						}
-						else 
-							System.out.println("jb is null");
+						args.clear();
+						args.add(new Integer(16));
+						args.add(new Integer(5));
+						oscUI.doSendMessage("/txnormal", args);			
 					}
-					else 
-						System.out.println("obj is not JButton");
+					else if (name != null && name.equals("TX:CUBISM"))
+					{
+						args.clear();
+						args.add(new Integer(16));
+						args.add(new Integer(5));
+						oscUI.doSendMessage("/txcubism", args);			
+					}
 				}
-				else 
-					System.out.println("e is null");
+			
+			
 			}
+				
 		});
 		c.weightx = 1;
 		c.gridx = 4;
