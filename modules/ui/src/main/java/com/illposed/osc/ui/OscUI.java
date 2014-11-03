@@ -394,10 +394,10 @@ public class OscUI extends JPanel {
 		skeletalPanel.add(new FXLuma("FX:_L_U_M_A", this));
 		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R", this));
 		skeletalPanel.add(new FXFrame("FX:_F_R_A_M_E", this));
-		skeletalPanel.add(new FXRefract("FX:_R_E_F_R_A_C_T"));
-		skeletalPanel.add(new FXKalei("FX:_K_A_L_E_I"));
-		skeletalPanel.add(new TXCubism("TX:_C_U_B_I_S_M"));
-		skeletalPanel.add(new FXKalei("FX:_K_A_L_E_I"));
+		skeletalPanel.add(new FXRefract("FX:_R_E_F_R_A_C_T", this));
+		skeletalPanel.add(new FXKalei("FX:_K_A_L_E_I", this));
+		skeletalPanel.add(new TXCubism("TX:_C_U_B_I_S_M", this));
+		skeletalPanel.add(new FXOskwave("TX:_O_S_K_W_A_V_E", this));
 
 
 		

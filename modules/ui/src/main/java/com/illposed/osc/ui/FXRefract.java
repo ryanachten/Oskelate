@@ -18,7 +18,7 @@ import javax.swing.SpringLayout;
 
 public class FXRefract extends EffectPanel{
 
-	public FXRefract(String name) {
+	public FXRefract(String name, OscUI oscUI) {
 		super("");
 		double scaler = 1.5;
 		this.setPreferredSize( new Dimension(ScreenRes.getScaledWidth(0.1042*scaler),ScreenRes.getScaledHeight(0.213*scaler)) );

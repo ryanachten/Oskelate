@@ -18,7 +18,7 @@ import javax.swing.SpringLayout;
 
 public class FXKalei extends EffectPanel{
 
-	public FXKalei(String name) {
+	public FXKalei(String name, OscUI oscUI) {
 		super("");
 		double scaler = 1.5;
 		this.setPreferredSize( new Dimension(ScreenRes.getScaledWidth(0.1042*scaler),ScreenRes.getScaledHeight(0.213*scaler)) );
