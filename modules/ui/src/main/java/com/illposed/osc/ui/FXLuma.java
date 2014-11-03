@@ -46,7 +46,7 @@ public class FXLuma extends EffectPanel{
 		JLabel l1 = new JLabel(name,JLabel.CENTER);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
-		c.insets = new Insets(ScreenRes.getScaledHeight((-0.04*scaler)),0,0,0);//28   -40*scaler
+		c.insets = new Insets(ScreenRes.getScaledHeight((-0.035*scaler)),0,0,0);//28   -40*scaler
 		c.gridwidth = 6;
 		c.gridx = 0;
 		c.gridy = 0;
