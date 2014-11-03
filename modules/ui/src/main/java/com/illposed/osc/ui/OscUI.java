@@ -70,7 +70,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
+/**
+ * have added effectlisteners to components. Need to set name of buttons, and 
+ * deal with the resulting messages in pd
+ */
 
 /**
  * OscUI is a subClass of JPanel.
@@ -387,11 +390,13 @@ public class OscUI extends JPanel {
 		skeletalPanel.setBorder(new EmptyBorder(ScreenRes.getScaledHeight(0.1204),ScreenRes.getScaledWidth(0.0260),ScreenRes.getScaledHeight(0.0463),ScreenRes.getScaledWidth(0.0260)));
 		//skeletalPanel.add(makeLabel("SKELETAL RESPONSE", font22));
 
-		skeletalPanel.add(new FXLuma("FX:_L_U_M_A"));
-		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R"));
-		skeletalPanel.add(new FXFrame("FX:_F_R_A_M_E"));
+
+		skeletalPanel.add(new FXLuma("FX:_L_U_M_A", this));
+		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R", this));
+		skeletalPanel.add(new FXFrame("FX:_F_R_A_M_E", this));
 		skeletalPanel.add(new FXRefract("FX:_R_F_R_A_C_T"));
-		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R"));
+		skeletalPanel.add(new FXMBlur("FX:_M_B_L_U_R", this));
+
 
 		
 		

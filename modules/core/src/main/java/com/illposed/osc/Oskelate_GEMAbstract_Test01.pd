@@ -2,7 +2,7 @@
 #X declare -lib mrpeach;
 #X declare -lib mrpeach;
 #X obj 56 56 dumpOSC 57110;
-#N canvas 267 152 1280 752 GemWindow 0;
+#N canvas 270 380 1280 752 GemWindow 0;
 #X msg 590 83 create;
 #X msg 679 97 destroy;
 #X msg 432 335 fullscreen \$1;
@@ -134,8 +134,6 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 #X coords 0 -1 1 1 220 210 2 100 100;
 #X restore 1020 450 pd kaleie;
 #N canvas 0 22 1280 752 motionbluring 0;
-#X obj 100 100 cnv 15 220 106 empty empty FX:_M_B_L_U_R 30 28 0 18
--139264 -66577 0;
 #X obj 337 130 pix_motionblur;
 #X obj 113 165 hsl 128 15 0 0.9 0 0 empty empty empty -2 -8 0 10 -261752
 -1 -1 0 1;
@@ -145,36 +143,30 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 #X obj 253 166 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -261752 -1 -1 0 256;
 #X text 102 180 OUT;
-#X text 291 108 ->mb;
 #X obj 285 143 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 0
 0.453659;
 #X text 111 141 Motion Blur Magnitude;
 #X obj 147 44 autoscale 0 1;
 #X obj 373 57 loadbang;
 #X obj 373 33 loadbang;
-#X text 102 110 IN;
-#X obj 101 101 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
-0;
-#X obj 310 101 cnv 10 10 10 empty empty empty 5 20 0 10 -252850 -66577
-0;
 #X obj 101 195 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
 0;
-#X connect 1 0 5 0;
-#X connect 2 0 1 1;
-#X connect 3 0 1 0;
-#X connect 4 0 11 0;
-#X connect 6 0 2 0;
-#X connect 9 0 1 0;
-#X connect 11 0 6 0;
-#X connect 12 0 9 0;
-#X connect 13 0 12 0;
+#X obj 476 71 inlet;
+#X connect 0 0 4 0;
+#X connect 1 0 0 1;
+#X connect 2 0 0 0;
+#X connect 3 0 9 0;
+#X connect 5 0 1 0;
+#X connect 7 0 0 0;
+#X connect 9 0 5 0;
+#X connect 10 0 7 0;
+#X connect 11 0 10 0;
+#X connect 13 0 7 0;
 #X coords 0 -1 1 1 220 106 2 100 100;
 #X restore 276 450 pd motionbluring;
 #N canvas 0 22 1280 752 framesync 0;
 #X obj 100 100 cnv 15 220 150 empty empty FX:_F_R_A_M_E~ 30 28 0 18
 -139264 -66577 0;
-#X obj 114 203 hsl 160 20 0 50 0 0 empty empty empty -2 -8 0 10 -261752
--1 -1 0 1;
 #X obj 91 20 pix_delay;
 #X obj 285 34 autoscale 0 50;
 #X obj 106 76 inlet;
@@ -197,21 +189,20 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 0;
 #X obj 100 240 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
 0;
-#X connect 1 0 9 0;
-#X connect 2 0 5 0;
+#X obj 114 203 hsl 160 20 0 50 0 0 empty empty empty -2 -8 0 10 -261752
+-1 -1 0 1;
+#X connect 1 0 4 0;
+#X connect 2 0 18 0;
 #X connect 3 0 1 0;
-#X connect 4 0 2 0;
-#X connect 6 0 3 0;
-#X connect 9 0 2 1;
-#X connect 10 0 2 0;
-#X connect 14 0 10 0;
-#X connect 15 0 14 0;
+#X connect 5 0 2 0;
+#X connect 8 0 1 1;
+#X connect 9 0 1 0;
+#X connect 13 0 9 0;
+#X connect 14 0 13 0;
+#X connect 18 0 8 0;
 #X coords 0 -1 1 1 220 150 1 100 100;
 #X restore 530 449 pd framesync;
-#N canvas 0 22 1280 752 lumaoff 0;
-#X obj 100 100 cnv 15 220 220 empty empty FX:_L_U_M_A 45 35 0 18 -139264
--66577 0;
-#X text 101 109 IN;
+#N canvas 0 22 1280 752 lumaoff 1;
 #X obj 360 248 pix_lumaoffset;
 #X msg 474 151 smooth \$1;
 #X msg 383 156 fill \$1;
@@ -229,17 +220,15 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 -261752 -1 -1 0 256;
 #X obj 132 204 nbx 4 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
 -261752 -1 -1 0 256;
-#X obj 263 169 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 0
+#X obj 602 267 tgl 20 0 empty empty empty 17 7 0 10 -259485 -1 -1 0
 1;
-#X obj 146 170 tgl 15 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
+#X obj 750 169 tgl 15 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
 1;
-#X obj 203 170 tgl 15 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
+#X obj 845 149 tgl 15 0 empty empty empty 17 7 0 10 -204800 -1 -1 0
 1;
 #X text 193 184 Smooth;
 #X text 140 184 Fill;
 #X obj 102 77 inlet;
-#X text 196 107 mag;
-#X text 292 107 spac;
 #X text 232 206 Magnitude;
 #X text 244 263 Spacing;
 #X obj 101 325 outlet;
@@ -247,33 +236,36 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 #X text 142 150 Luma Offset Distribution;
 #X obj 511 103 loadbang;
 #X obj 511 79 loadbang;
-#X obj 100 100 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
-0;
-#X obj 202 100 cnv 10 10 10 empty empty empty 5 20 0 10 -252850 -66577
-0;
-#X obj 310 100 cnv 10 10 10 empty empty empty 5 20 0 10 -252850 -66577
-0;
 #X obj 100 310 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
 0;
-#X connect 2 0 25 0;
-#X connect 3 0 2 0;
-#X connect 4 0 2 0;
-#X connect 6 0 14 0;
-#X connect 7 0 14 0;
-#X connect 9 0 13 0;
-#X connect 10 0 13 0;
-#X connect 11 0 7 0;
-#X connect 12 0 10 0;
-#X connect 13 0 8 0;
-#X connect 13 0 2 2;
-#X connect 14 0 2 1;
-#X connect 14 0 5 0;
-#X connect 15 0 2 0;
-#X connect 16 0 4 0;
-#X connect 17 0 3 0;
-#X connect 20 0 2 0;
-#X connect 28 0 15 0;
-#X connect 29 0 28 0;
+#X obj 631 50 inlet;
+#X obj 719 65 inlet;
+#X obj 815 73 inlet;
+#X text 635 26 on/off;
+#X text 725 33 fill;
+#X text 817 36 smooth;
+#X connect 0 0 21 0;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 4 0 12 0;
+#X connect 5 0 12 0;
+#X connect 7 0 11 0;
+#X connect 8 0 11 0;
+#X connect 9 0 5 0;
+#X connect 10 0 8 0;
+#X connect 11 0 6 0;
+#X connect 11 0 0 2;
+#X connect 12 0 0 1;
+#X connect 12 0 3 0;
+#X connect 13 0 0 0;
+#X connect 14 0 2 0;
+#X connect 15 0 1 0;
+#X connect 18 0 0 0;
+#X connect 24 0 13 0;
+#X connect 25 0 24 0;
+#X connect 27 0 13 0;
+#X connect 28 0 14 0;
+#X connect 29 0 15 0;
 #X coords 0 -1 1 1 220 220 2 100 100;
 #X restore 26 450 pd lumaoff;
 #N canvas 0 22 1280 752 (subpatch) 0;
@@ -1127,19 +1119,27 @@ and off render;
 #X connect 14 0 4 0;
 #X connect 15 0 0 0;
 #X restore 479 335 pd video;
+#X obj 62 751 pix_texture;
+#X floatatom 334 638 5 0 0 0 - - -;
 #X obj 234 12 routeOSC /internal /external /rendergem /create /destroy
-/open /play /render;
+/open /play /render /fxluma /fxblur /fxframe;
 #X connect 2 0 3 0;
 #X connect 3 0 5 0;
 #X connect 4 0 2 0;
+#X connect 12 2 2 1;
+#X connect 12 3 2 2;
 #X connect 14 0 16 0;
-#X connect 16 0 20 0;
-#X connect 19 0 9 0;
-#X connect 20 0 1 0;
-#X connect 20 1 1 1;
-#X connect 20 2 1 2;
-#X connect 20 3 1 3;
-#X connect 20 4 1 4;
-#X connect 20 5 19 0;
-#X connect 20 6 19 1;
-#X connect 20 7 19 2;
+#X connect 16 0 22 0;
+#X connect 19 0 20 0;
+#X connect 20 0 9 0;
+#X connect 22 0 1 0;
+#X connect 22 1 1 1;
+#X connect 22 2 1 2;
+#X connect 22 3 1 3;
+#X connect 22 4 1 4;
+#X connect 22 5 19 0;
+#X connect 22 6 19 1;
+#X connect 22 7 19 2;
+#X connect 22 8 5 0;
+#X connect 22 9 3 0;
+#X connect 22 10 4 0;

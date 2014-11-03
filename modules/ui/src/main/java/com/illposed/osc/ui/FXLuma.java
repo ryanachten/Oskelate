@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 
 public class FXLuma extends EffectPanel{
 
-	public FXLuma(String name) {
+	public FXLuma(String name, OscUI oscUI) {
 		super("");
 		double scaler = 1.5;
 		this.setPreferredSize( new Dimension(ScreenRes.getScaledWidth(0.1042*scaler),ScreenRes.getScaledHeight(0.213*scaler)) );
@@ -64,6 +64,7 @@ public class FXLuma extends EffectPanel{
 		this.add(l2, c);
 		
 		JButton b1 = new JButton();
+		b1.setName(name);
 		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.018*scaler),ScreenRes.getScaledHeight(0.0324*scaler) ) );
 		//t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02), ScreenRes.getScaledHeight(0.02) ) );
 		//t1.setSize(new Dimension(1,1));
