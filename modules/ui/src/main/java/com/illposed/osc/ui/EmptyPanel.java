@@ -4,18 +4,22 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,12 +59,12 @@ public class EmptyPanel extends EffectPanel {
 		c.gridy = 0;
 		this.add(l1, c);
 		
-		final JButton t1 = new JButton("text", loadImageAsIcon("redBut.png"));
-		t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
-		t1.setBackground(Color.RED);
-		t1.setBorderPainted(false);
-		t1.setOpaque(true);
-		c.weightx = 0.1;
+		final JButton t1 = new JButton(loadImageAsIcon("redBut.png"));
+		//t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02), ScreenRes.getScaledHeight(0.02) ) );
+		//t1.setSize(new Dimension(1,1));
+		//c.weightx = 0.1;
+		t1.setBorder(BorderFactory.createEmptyBorder());
+		//c.weightx = 0.1;
 		c.gridx = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -75,14 +79,19 @@ public class EmptyPanel extends EffectPanel {
 					t1.setBackground(Color.RED);
 			}		
 		});
-		
-		final JButton t2 = new JButton("text", loadImageAsIcon("redBut.png"));
-		t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
-		t2.setBackground(Color.RED);
-		t2.setBorderPainted(false);
-		t2.setOpaque(true);
-		c.weightx = 0.1;
+		JPanel buf1 = new JPanel();
+		buf1.setOpaque(false);
 		c.gridx = 2;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		this.add(buf1, c);
+		
+		
+		final JButton t2 = new JButton(loadImageAsIcon("redBut.png"));
+		//t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
+		//c.weightx = 0.1;
+		t2.setBorder(BorderFactory.createEmptyBorder());
+		c.gridx = 3;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(t2, c);
@@ -97,13 +106,19 @@ public class EmptyPanel extends EffectPanel {
 			}		
 		});
 		
-		final JButton t3 = new JButton("text", loadImageAsIcon("redBut.png"));
-		t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
-		t3.setBackground(Color.RED);
-		t3.setBorderPainted(false);
-		t3.setOpaque(true);
-		c.weightx = 0.1;
-		c.gridx = 3;
+		JPanel buf2 = new JPanel();
+		buf2.setOpaque(false);
+		c.gridx = 4;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		this.add(buf2, c);
+		
+		final JButton t3 = new JButton(loadImageAsIcon("redBut.png"));
+		//t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
+		//c.weightx = 0.1;
+		//c.weightx = 0.1;
+		t3.setBorder(BorderFactory.createEmptyBorder());
+		c.gridx = 5;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(t3, c);
@@ -118,6 +133,12 @@ public class EmptyPanel extends EffectPanel {
 			}		
 		});
 		
+		JPanel buf3 = new JPanel();
+		buf3.setOpaque(false);
+		c.gridx = 6;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		this.add(buf3, c);
 		
 		JButton b1 = new JButton();
 		b1.setName(name);
@@ -206,7 +227,7 @@ public class EmptyPanel extends EffectPanel {
 				
 		});
 		c.weightx = 1;
-		c.gridx = 4;
+		c.gridx = 7;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		this.add(b1, c);
@@ -220,7 +241,7 @@ public class EmptyPanel extends EffectPanel {
 	public String getName(){
 		return this.name;
 	}
-	
+	 
 	private ImageIcon loadImageAsIcon(String path){
 		try
 		{
