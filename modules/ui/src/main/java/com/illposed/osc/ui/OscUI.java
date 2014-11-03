@@ -630,15 +630,15 @@ public class OscUI extends JPanel {
 					changeButton(renderButton,"Stop Render", "stop.png");
 					isPlay = false;
 					args.clear();
-					args.add(new Integer(0));
-					doSendMessage("/render", args);
+					args.add(new Integer(1));
+					doSendMessage("/rendergem", args);
 				}
 				else {
 					changeButton(renderButton, "Render", "play.png");
 					isPlay = false;
 					args.clear();
-					args.add(new Integer(1));
-					doSendMessage("/render", args);
+					args.add(new Integer(0));
+					doSendMessage("/rendergem", args);
 				}
 			}
 		});
