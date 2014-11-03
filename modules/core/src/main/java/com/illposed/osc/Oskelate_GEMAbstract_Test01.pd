@@ -2,7 +2,7 @@
 #X declare -lib mrpeach;
 #X declare -lib mrpeach;
 #X obj 56 56 dumpOSC 57110;
-#N canvas 270 380 1280 752 GemWindow 1;
+#N canvas 270 380 1280 752 GemWindow 0;
 #X msg 590 83 create;
 #X msg 679 97 destroy;
 #X msg 432 335 fullscreen \$1;
@@ -167,8 +167,6 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 #N canvas 0 22 1280 752 framesync 0;
 #X obj 100 100 cnv 15 220 150 empty empty FX:_F_R_A_M_E~ 30 28 0 18
 -139264 -66577 0;
-#X obj 114 203 hsl 160 20 0 50 0 0 empty empty empty -2 -8 0 10 -261752
--1 -1 0 1;
 #X obj 91 20 pix_delay;
 #X obj 285 34 autoscale 0 50;
 #X obj 106 76 inlet;
@@ -191,18 +189,20 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 0;
 #X obj 100 240 cnv 10 10 10 empty empty empty 5 20 0 10 -262144 -66577
 0;
-#X connect 1 0 9 0;
-#X connect 2 0 5 0;
+#X obj 114 203 hsl 160 20 0 50 0 0 empty empty empty -2 -8 0 10 -261752
+-1 -1 0 1;
+#X connect 1 0 4 0;
+#X connect 2 0 18 0;
 #X connect 3 0 1 0;
-#X connect 4 0 2 0;
-#X connect 6 0 3 0;
-#X connect 9 0 2 1;
-#X connect 10 0 2 0;
-#X connect 14 0 10 0;
-#X connect 15 0 14 0;
+#X connect 5 0 2 0;
+#X connect 8 0 1 1;
+#X connect 9 0 1 0;
+#X connect 13 0 9 0;
+#X connect 14 0 13 0;
+#X connect 18 0 8 0;
 #X coords 0 -1 1 1 220 150 1 100 100;
 #X restore 530 449 pd framesync;
-#N canvas 0 22 1280 752 lumaoff 0;
+#N canvas 0 22 1280 752 lumaoff 1;
 #X obj 360 248 pix_lumaoffset;
 #X msg 474 151 smooth \$1;
 #X msg 383 156 fill \$1;
@@ -1119,24 +1119,27 @@ and off render;
 #X connect 14 0 4 0;
 #X connect 15 0 0 0;
 #X restore 479 335 pd video;
-#X obj 234 12 routeOSC /internal /external /rendergem /create /destroy
-/open /play /render;
 #X obj 62 751 pix_texture;
 #X floatatom 334 638 5 0 0 0 - - -;
+#X obj 234 12 routeOSC /internal /external /rendergem /create /destroy
+/open /play /render /fxluma /fxblur /fxframe;
 #X connect 2 0 3 0;
 #X connect 3 0 5 0;
 #X connect 4 0 2 0;
 #X connect 12 2 2 1;
 #X connect 12 3 2 2;
 #X connect 14 0 16 0;
-#X connect 16 0 20 0;
-#X connect 19 0 21 0;
-#X connect 20 0 1 0;
-#X connect 20 1 1 1;
-#X connect 20 2 1 2;
-#X connect 20 3 1 3;
-#X connect 20 4 1 4;
-#X connect 20 5 19 0;
-#X connect 20 6 19 1;
-#X connect 20 7 19 2;
-#X connect 21 0 9 0;
+#X connect 16 0 22 0;
+#X connect 19 0 20 0;
+#X connect 20 0 9 0;
+#X connect 22 0 1 0;
+#X connect 22 1 1 1;
+#X connect 22 2 1 2;
+#X connect 22 3 1 3;
+#X connect 22 4 1 4;
+#X connect 22 5 19 0;
+#X connect 22 6 19 1;
+#X connect 22 7 19 2;
+#X connect 22 8 5 0;
+#X connect 22 9 3 0;
+#X connect 22 10 4 0;

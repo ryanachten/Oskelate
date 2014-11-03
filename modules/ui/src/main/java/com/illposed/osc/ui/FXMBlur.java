@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 
 public class FXMBlur extends EffectPanel{
 
-	public FXMBlur(String name) {
+	public FXMBlur(String name, OscUI oscUI) {
 		super("");
 		double scaler = 1.5;
 		this.setPreferredSize( new Dimension(ScreenRes.getScaledWidth(0.1042*scaler),ScreenRes.getScaledHeight(0.213*scaler)) );
@@ -76,6 +76,9 @@ public class FXMBlur extends EffectPanel{
 		this.add(t1,c);
 		
 		JButton b1 = new JButton();
+		b1.setName(name);
+		b1.addActionListener(new EffectListener(oscUI));
+
 		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.018*scaler),ScreenRes.getScaledHeight(0.0324*scaler) ) );
 		//t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02), ScreenRes.getScaledHeight(0.02) ) );
 		//t1.setSize(new Dimension(1,1));
