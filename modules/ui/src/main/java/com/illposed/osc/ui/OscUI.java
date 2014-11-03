@@ -654,7 +654,11 @@ public class OscUI extends JPanel {
 		JButton videoButton = new JButton("Choose video file");
 		
 		final JButton playButton = new JButton("Play Video", loadImageAsIcon("play.png"));
+		playButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		playButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		final JButton renderButton = new JButton("Render Video", loadImageAsIcon("gear.png"));
+		renderButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+		renderButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		playButton.addActionListener(new ActionListener() {
 			boolean isPlay = true;
@@ -736,6 +740,7 @@ public class OscUI extends JPanel {
 				doSendMessage("/open", args);
 			}
 		});
+		
 		
 		videoPanel.add(videoButton);
 		
