@@ -80,10 +80,12 @@ public class FXRefract extends EffectPanel{
 		
 		
 		JLabel lmin = new JLabel("min");
+		lmin.setFont(font2);
 		lmin.setForeground(Color.white);
 		lmin.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
 		lmin.setBackground(new Color(109, 110, 115));
 		lmin.setOpaque(true);
+		lmin.setFont(font2);
 		//lmin.setBounds(-200,-200,0,0);
 		
 		layout.putConstraint(SpringLayout.NORTH, lmin,
@@ -97,10 +99,12 @@ public class FXRefract extends EffectPanel{
 		this.add(lmin);
 		
 		JLabel lmax = new JLabel("max");
+		lmax.setFont(font2);
 		lmax.setForeground(Color.white);
 		lmax.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.01*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
 		lmax.setBackground(new Color(109, 110, 115));
 		lmax.setOpaque(true);
+		
 		//lmax.setBounds(-130,-200,0,0);
 		layout.putConstraint(SpringLayout.NORTH, lmax,
 				ScreenRes.getScaledHeight(0.1204),
@@ -112,6 +116,7 @@ public class FXRefract extends EffectPanel{
 		this.add(lmax);
 		
 		JLabel lmag = new JLabel("mag");
+		lmag.setFont(font2);
 		lmag.setForeground(Color.white);
 		lmag.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.02*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
 		lmag.setBackground(new Color(109, 110, 115));
@@ -203,6 +208,7 @@ public class FXRefract extends EffectPanel{
 		this.add(slider3);
 		
 		JLabel t3 = new JLabel("Refraction Magnitude");
+		t3.setFont(font2);
 		t3.setForeground(Color.white);
 		t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.06*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
 		t3.setBackground(new Color(109, 110, 115));
@@ -233,6 +239,7 @@ public class FXRefract extends EffectPanel{
 		this.add(slider4);
 		
 		JLabel t4 = new JLabel("Refraction Height");
+		t4.setFont(font2);
 		t4.setForeground(Color.white);
 		t4.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.06*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
 		t4.setBackground(new Color(109, 110, 115));
@@ -263,6 +270,7 @@ public class FXRefract extends EffectPanel{
 		this.add(slider5);
 		
 		JLabel t5 = new JLabel("Refraction Width");
+		t5.setFont(font2);
 		t5.setForeground(Color.white);
 		t5.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.06*scaler),ScreenRes.getScaledHeight(0.0139*scaler) ) );
 		t5.setBackground(new Color(109, 110, 115));
