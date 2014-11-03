@@ -384,7 +384,7 @@ public class OscUI extends JPanel {
 		skeletalPanel.setOpaque(true);
 		//skeletalPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		//skeletalPanel.setLayout(new FlowLayout());
-		skeletalPanel.setBorder(emptyBorder);
+		skeletalPanel.setBorder(new EmptyBorder(ScreenRes.getScaledHeight(0.1204),ScreenRes.getScaledWidth(0.0260),ScreenRes.getScaledHeight(0.0463),ScreenRes.getScaledWidth(0.0260)));
 		//skeletalPanel.add(makeLabel("SKELETAL RESPONSE", font22));
 
 		skeletalPanel.add(new FXLuma("FX:_L_U_M_A"));
