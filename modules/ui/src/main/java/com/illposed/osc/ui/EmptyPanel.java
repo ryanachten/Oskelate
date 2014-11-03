@@ -54,6 +54,8 @@ public class EmptyPanel extends EffectPanel {
 		final JButton t1 = new JButton();
 		t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		t1.setBackground(Color.RED);
+		t1.setBorderPainted(false);
+		t1.setOpaque(true);
 		c.weightx = 0.1;
 		c.gridx = 1;
 		c.gridy = 1;
@@ -73,6 +75,8 @@ public class EmptyPanel extends EffectPanel {
 		final JButton t2 = new JButton();
 		t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		t2.setBackground(Color.RED);
+		t2.setBorderPainted(false);
+		t2.setOpaque(true);
 		c.weightx = 0.1;
 		c.gridx = 2;
 		c.gridy = 1;
@@ -92,6 +96,8 @@ public class EmptyPanel extends EffectPanel {
 		final JButton t3 = new JButton();
 		t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		t3.setBackground(Color.RED);
+		t3.setBorderPainted(false);
+		t3.setOpaque(true);
 		c.weightx = 0.1;
 		c.gridx = 3;
 		c.gridy = 1;

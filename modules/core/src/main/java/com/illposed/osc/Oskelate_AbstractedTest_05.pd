@@ -30,16 +30,16 @@
 #X obj 131 169 bng 20 250 50 0 empty empty empty 17 7 0 10 -204800
 -1 -1;
 #X obj 164 121 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 88375 256;
+-1 -1 0 256;
 #X obj 305 120 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 360 256;
+-1 -1 0 256;
 #X obj 236 120 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
--1 -1 640 256;
+-1 -1 0 256;
 #X obj 19 188 outlet;
 #X obj 46 22 routeOSC /open /play /stop /render /norender;
 #X text 568 248 comment;
 #X text 517 110 comment;
-#X text 163 162;
+#X text 163 162 comment;
 #X connect 0 0 4 0;
 #X connect 1 0 4 0;
 #X connect 2 0 4 0;
@@ -247,11 +247,11 @@
 #X msg 474 151 smooth \$1;
 #X msg 383 156 fill \$1;
 #X obj 135 228 hsl 150 15 200 -200 0 0 empty empty empty -2 -8 0 10
--261752 -1 -1 0 1;
+-261752 -1 -1 2800 1;
 #X msg 187 203 0;
 #X obj 345 73 autoscale 200 -200;
 #X obj 135 284 hsl 150 15 200 -200 0 0 empty empty empty -2 -8 0 10
--261752 -1 -1 0 1;
+-261752 -1 -1 10100 1;
 #X msg 188 261 0;
 #X obj 345 115 autoscale 200 -200;
 #X obj 192 78 inlet;
@@ -736,10 +736,9 @@
 #X connect 38 0 37 0;
 #X coords 0 -1 1 1 250 300 1 100 100;
 #X restore 417 806 pd cubismv;
-#N canvas 0 22 1280 752 projector 0;
+#N canvas 0 22 1280 644 projector 1;
 #X obj 110 77 inlet;
 #X obj 97 220 pix_texture;
-#X obj 97 247 rectangle 16 5;
 #X obj 100 100 cnv 30 250 100 empty empty empty 30 30 0 18 -135163
 -66577 0;
 #X obj 100 100 cnv 15 250 30 empty empty TX:~PROJECT~ 50 14 0 20 -259485
@@ -747,8 +746,9 @@
 #X text 108 149 Projection with normal texture surface;
 #X obj 100 100 cnv 10 10 10 empty empty empty 5 20 0 10 -4032 -66577
 0;
+#X obj 97 247 rectangle \$1 \$2;
 #X connect 0 0 1 0;
-#X connect 1 0 2 0;
+#X connect 1 0 6 0;
 #X coords 0 -1 1 1 250 100 2 100 100;
 #X restore 37 822 pd projector;
 #N canvas 0 167 1280 752 OskelateHelp 0;
