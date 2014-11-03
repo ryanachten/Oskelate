@@ -705,7 +705,7 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 #X connect 38 0 37 0;
 #X coords 0 -1 1 1 250 300 1 100 100;
 #X restore 417 806 pd cubismv;
-#N canvas 0 22 1280 752 projector 1;
+#N canvas 0 22 1280 752 projector 0;
 #X obj 110 77 inlet;
 #X obj 97 220 pix_texture;
 #X obj 100 100 cnv 30 250 100 empty empty empty 30 30 0 18 -135163
@@ -715,7 +715,7 @@ a 2 to be packed with a screen tag you could resolve this in ONE toggle
 #X text 108 149 Projection with normal texture surface;
 #X obj 100 100 cnv 10 10 10 empty empty empty 5 20 0 10 -4032 -66577
 0;
-#X obj 90 306 rectangle \$1 \$2;
+#X obj 90 306 rectangle 16 9;
 #X connect 0 0 1 0;
 #X connect 1 0 6 0;
 #X coords 0 -1 1 1 250 100 2 100 100;
@@ -979,7 +979,7 @@ them;
 #X connect 95 0 94 1;
 #X coords 0 -1 1 1 200 220 2 100 100;
 #X restore 1034 158 pd oskel;
-#N canvas 0 76 1280 649 audio 1;
+#N canvas 0 76 1280 649 audio 0;
 #X obj 100 100 cnv 30 280 350 empty empty AUDIO 105 20 0 22 -256741
 -66577 0;
 #X obj -160 328 adc~;
@@ -1090,18 +1090,56 @@ sound;
 #X obj 229 -27 unpackOSC;
 #X text 408 -27 Pack a 0 or a 1 with the 'render' message to turn on
 and off render;
-#X obj 234 12 routeOSC /internal /external /render /create /destroy
-;
 #X obj 34 335 routeOSC /txnormal;
+#N canvas 0 22 1280 752 video 0;
+#X obj 905 91 gemhead;
+#X obj 645 228 unpack 0 0 0;
+#X msg 410 99 open \$1;
+#X obj 511 294 pix_film;
+#X msg 622 91 auto \$1;
+#X msg 609 307 0;
+#X obj 613 332 bng 20 250 50 0 empty empty empty 17 7 0 10 -204800
+-1 -1;
+#X obj 646 254 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
+-1 -1 88375 256;
+#X obj 787 253 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
+-1 -1 360 256;
+#X obj 718 253 nbx 5 18 -1e+37 1e+37 0 0 \$8 \$8 empty 20 7 0 12 -204800
+-1 -1 640 256;
+#X obj 501 351 outlet;
+#X text 684 83 Play video Send a 1 to play and a 0 to stop;
+#X text 958 80 Render video Send a 1 to play and a 0 to stop;
+#X obj 382 23 inlet;
+#X obj 623 29 inlet;
+#X obj 887 34 inlet;
+#X connect 0 0 3 0;
+#X connect 1 0 7 0;
+#X connect 1 1 9 0;
+#X connect 1 2 8 0;
+#X connect 2 0 3 0;
+#X connect 3 0 10 0;
+#X connect 3 1 1 0;
+#X connect 3 2 6 0;
+#X connect 4 0 3 0;
+#X connect 5 0 3 1;
+#X connect 6 0 5 0;
+#X connect 13 0 2 0;
+#X connect 14 0 4 0;
+#X connect 15 0 0 0;
+#X restore 479 335 pd video;
+#X obj 234 12 routeOSC /internal /external /rendergem /create /destroy
+/open /play /render;
 #X connect 2 0 3 0;
 #X connect 3 0 5 0;
 #X connect 4 0 2 0;
 #X connect 14 0 16 0;
-#X connect 16 0 18 0;
-#X connect 16 0 19 0;
-#X connect 18 0 1 0;
-#X connect 18 1 1 1;
-#X connect 18 2 1 2;
-#X connect 18 3 1 3;
-#X connect 18 4 1 4;
+#X connect 16 0 20 0;
 #X connect 19 0 9 0;
+#X connect 20 0 1 0;
+#X connect 20 1 1 1;
+#X connect 20 2 1 2;
+#X connect 20 3 1 3;
+#X connect 20 4 1 4;
+#X connect 20 5 19 0;
+#X connect 20 6 19 1;
+#X connect 20 7 19 2;
