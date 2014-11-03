@@ -384,18 +384,18 @@ public class OscUI extends JPanel {
 		
 		// FX and TX
 		JPanel skelFXPanel = new JPanel();
-		skelFXPanel.add(new EmptyPanel("FX:LUMA",0.1,0.1, 13, 18, 0.0078));
-		skelFXPanel.add(new SliderPanel("FX:FRAME",0.1,0.1, 13, 18, 0.0078));
-		skelFXPanel.add(new EmptyPanel("FX:MBLUR",0.1,0.1, 13, 18, 0.0078));
-		skelFXPanel.add(new EmptyPanel("FX:REFRACT",0.1,0.1, 13, 18, 0.0078));
-		skelFXPanel.add(new EmptyPanel("FX:KALEI",0.1,0.1, 13, 18, 0.0078));
+		skelFXPanel.add(new EmptyPanel("FX:LUMA",0.1,0.1, 13, 18, 0.0078, this));
+		skelFXPanel.add(new SliderPanel("FX:FRAME",0.1,0.1, 13, 18, 0.0078, this));
+		skelFXPanel.add(new EmptyPanel("FX:MBLUR",0.1,0.1, 13, 18, 0.0078, this));
+		skelFXPanel.add(new EmptyPanel("FX:REFRACT",0.1,0.1, 13, 18, 0.0078, this));
+		skelFXPanel.add(new EmptyPanel("FX:KALEI",0.1,0.1, 13, 18, 0.0078, this));
 
 		skeletalPanel.add(skelFXPanel);
 		
 		JPanel skelTXPanel = new JPanel();
-		skelTXPanel.add(new EmptyPanel("NORMAL TX",0.12, 0.13, 18,35, 0.0130));
-		skelTXPanel.add(new EmptyPanel("TX:CUBISM",0.12, 0.13, 18,35, 0.0130));
-		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.12, 0.13, 18,35, 0.0130));//0.15 0.1111
+		skelTXPanel.add(new EmptyPanel("NORMAL TX",0.12, 0.13, 18,35, 0.0130, this));
+		skelTXPanel.add(new EmptyPanel("TX:CUBISM",0.12, 0.13, 18,35, 0.0130, this));
+		skelTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.12, 0.13, 18,35, 0.0130, this));//0.15 0.1111
 
 		skeletalPanel.add(skelTXPanel);
 		
@@ -455,19 +455,19 @@ public class OscUI extends JPanel {
 		// FX and TX
 		JPanel auFXPanel = new JPanel();
 		auFXPanel.setBackground(OSK_PALEGREY);
-		auFXPanel.add(new EmptyPanel("FX:LUMA",0.1, 0.1, 13, 18, 0.0078));
-		auFXPanel.add(new SliderPanel("FX:FRAME",0.1, 0.1, 13, 18, 0.0078));
-		auFXPanel.add(new EmptyPanel("FX:MBLUR",0.1, 0.1, 13, 18, 0.0078));
-		auFXPanel.add(new EmptyPanel("FX:REFRACT",0.1, 0.1, 13, 18, 0.0078));
-		auFXPanel.add(new EmptyPanel("FX:KALEI",0.1, 0.1, 13, 18, 0.0078));//0.0678 0.0833
+		auFXPanel.add(new EmptyPanel("FX:LUMA",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new SliderPanel("FX:FRAME",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new EmptyPanel("FX:MBLUR",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new EmptyPanel("FX:REFRACT",0.1, 0.1, 13, 18, 0.0078, this));
+		auFXPanel.add(new EmptyPanel("FX:KALEI",0.1, 0.1, 13, 18, 0.0078, this));//0.0678 0.0833
 
 		audioPanel.add(auFXPanel);
 		
 		JPanel auTXPanel = new JPanel();
 		auTXPanel.setBackground(OSK_PALEGREY);
-		auTXPanel.add(new EmptyPanel("NORMAL TX",0.12, 0.13, 18,35, 0.0130));
-		auTXPanel.add(new EmptyPanel("TX:CUBISM",0.12, 0.13, 18,35, 0.0130));
-		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.12, 0.13, 18,35, 0.0130));
+		auTXPanel.add(new EmptyPanel("NORMAL TX",0.12, 0.13, 18,35, 0.0130, this));
+		auTXPanel.add(new EmptyPanel("TX:CUBISM",0.12, 0.13, 18,35, 0.0130, this));
+		auTXPanel.add(new EmptyPanel("TX:OSKWAVE",0.12, 0.13, 18,35, 0.0130, this));
 
 		audioPanel.add(auTXPanel);
 		
@@ -1339,7 +1339,7 @@ public class OscUI extends JPanel {
 	}
 	
 	
-	private void doSendMessage(String msg_name, List<Object> args){
+	public void doSendMessage(String msg_name, List<Object> args){
 		
 		if(null == oscPortOut){
 			showError("Please set an Address first");

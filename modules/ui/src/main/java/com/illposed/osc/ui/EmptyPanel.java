@@ -7,6 +7,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -21,8 +25,12 @@ public class EmptyPanel extends EffectPanel {
 
 	
 	
-	public EmptyPanel (String n, double w, double h, int f1, int f2, double p){
+	private String name = "";
+	private List<Object> args = new ArrayList<Object>(); 
+
+	public EmptyPanel (String n, double w, double h, int f1, int f2, double p, final OscUI oscUI){
 		super("");
+		this.name = n;
 		this.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(w), ScreenRes.getScaledHeight(h) ) );//130 90
 		//add 3 white boxes
 		this.setLayout(new GridBagLayout());
@@ -73,8 +81,47 @@ public class EmptyPanel extends EffectPanel {
 		
 		
 		JButton b1 = new JButton();
+		b1.setName(name);
 		b1.setBackground(Color.RED);
 		b1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0030), ScreenRes.getScaledHeight(0.0139) ) );
+		b1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e != null)
+				{
+					Object obj = e.getSource();
+					if (obj instanceof JButton)
+					{
+						JButton jb = (JButton)obj;
+						if (jb != null)
+						{
+							String name = jb.getName();
+							if (name != null && name.equals("NORMAL TX"))
+							{
+								if (oscUI != null)
+								{
+									args.clear();
+									args.add(new Integer(16));
+									args.add(new Integer(5));
+									oscUI.doSendMessage("/txnormal", args);									
+								}
+								else 
+									System.out.println("oscui is null");
+							}
+							else 
+								System.out.println("name is null");
+						}
+						else 
+							System.out.println("jb is null");
+					}
+					else 
+						System.out.println("obj is not JButton");
+				}
+				else 
+					System.out.println("e is null");
+			}
+		});
 		c.weightx = 1;
 		c.gridx = 4;
 		c.gridy = 1;
@@ -84,5 +131,10 @@ public class EmptyPanel extends EffectPanel {
 
 		
 		//add 1 red box
+	}
+	
+	@Override
+	public String getName(){
+		return this.name;
 	}
 }

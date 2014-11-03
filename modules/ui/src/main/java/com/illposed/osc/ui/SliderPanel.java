@@ -28,7 +28,7 @@ public class SliderPanel extends EffectPanel {
 	JSlider slider;
 	JSlider slider2;
 	JSlider slider3;
-	public SliderPanel (String n, double w, double h, int f1, int f2, double p){
+	public SliderPanel (String n, double w, double h, int f1, int f2, double p, OscUI oscUI){
 		super("");
 		this.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(w), ScreenRes.getScaledHeight(h) ) );//130 90
 		//add 3 white boxes
