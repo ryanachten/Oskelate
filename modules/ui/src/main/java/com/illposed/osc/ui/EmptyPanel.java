@@ -7,13 +7,17 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -51,7 +55,7 @@ public class EmptyPanel extends EffectPanel {
 		c.gridy = 0;
 		this.add(l1, c);
 		
-		final JButton t1 = new JButton();
+		final JButton t1 = new JButton("text", loadImageAsIcon("redBut.png"));
 		t1.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		t1.setBackground(Color.RED);
 		t1.setBorderPainted(false);
@@ -72,7 +76,7 @@ public class EmptyPanel extends EffectPanel {
 			}		
 		});
 		
-		final JButton t2 = new JButton();
+		final JButton t2 = new JButton("text", loadImageAsIcon("redBut.png"));
 		t2.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		t2.setBackground(Color.RED);
 		t2.setBorderPainted(false);
@@ -93,7 +97,7 @@ public class EmptyPanel extends EffectPanel {
 			}		
 		});
 		
-		final JButton t3 = new JButton();
+		final JButton t3 = new JButton("text", loadImageAsIcon("redBut.png"));
 		t3.setPreferredSize( new Dimension( ScreenRes.getScaledWidth(0.0156), ScreenRes.getScaledHeight(0.0185) ) );
 		t3.setBackground(Color.RED);
 		t3.setBorderPainted(false);
@@ -169,5 +173,17 @@ public class EmptyPanel extends EffectPanel {
 	@Override
 	public String getName(){
 		return this.name;
+	}
+	
+	private ImageIcon loadImageAsIcon(String path){
+		try
+		{
+		  ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		  InputStream input = getClass().getResourceAsStream(path);
+		  Image logo = ImageIO.read(input);
+		  ImageIcon i = new ImageIcon(logo);
+		  return i;
+		}
+		catch ( Exception e ) { return null; }
 	}
 }
