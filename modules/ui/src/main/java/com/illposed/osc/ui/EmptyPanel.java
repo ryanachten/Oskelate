@@ -132,13 +132,14 @@ public class EmptyPanel extends EffectPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				JButton jButton = (JButton)e.getSource();
-				
+				JButton jButton = (JButton)e.getSource();			
 				
 				if (jButton != null)
 				{
 					String name = jButton.getName();
 					System.out.println("Button clicked: "+name);
+					
+					// TEXTURES
 					if (name != null && name.equals("NORMAL TX"))
 					{
 						args.clear();
@@ -153,6 +154,51 @@ public class EmptyPanel extends EffectPanel {
 						args.add(new Integer(5));
 						oscUI.doSendMessage("/txcubism", args);			
 					}
+					else if (name != null && name.equals("TX:OSKWAVE"))
+					{
+						args.clear();
+						args.add(new Integer(16));
+						args.add(new Integer(5));
+						oscUI.doSendMessage("/txoskwave", args);
+					}
+					
+					// EFFECTS
+					else if (name != null && name.equals("FX:FRAME"))
+					{
+						args.clear();
+						args.add(new Integer(16));
+						args.add(new Integer(5));
+						oscUI.doSendMessage("/fxframe", args);
+					}
+					else if (name != null && name.equals("FX:MBLUR"))
+					{
+						args.clear();
+						args.add(new Integer(16));
+						args.add(new Integer(5));
+						oscUI.doSendMessage("/fxmblur", args);
+					}
+					else if (name != null && name.equals("FX:REFRACT"))
+					{
+						args.clear();
+						args.add(new Integer(16));
+						args.add(new Integer(5));
+						oscUI.doSendMessage("/fxrefract", args);
+					}
+					else if (name != null && name.equals("FX:KALEI"))
+					{
+						args.clear();
+						args.add(new Integer(16));
+						args.add(new Integer(5));
+						oscUI.doSendMessage("/fxkalei", args);
+					}
+					else 
+						System.out.println("Unknown button: "+name);
+					
+					
+					
+					
+					
+					
 				}
 			
 			
