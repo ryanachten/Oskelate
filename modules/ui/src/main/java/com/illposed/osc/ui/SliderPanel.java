@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,22 +38,24 @@ public class SliderPanel extends EffectPanel {
 		slider = new JSlider(JSlider.HORIZONTAL,0,50,0);
 		slider.setPaintTicks(true);
 		slider.setPaintLabels(true);
-		slider.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.00093) ));
+		slider.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.002) ));
 
 		slider2 = new JSlider(JSlider.HORIZONTAL,0,50,0);
 		slider2.setPaintTicks(true);
 		slider2.setPaintLabels(true);
-		slider2.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.00093)));
+		slider2.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.002)));
 		
 		slider3 = new JSlider(JSlider.HORIZONTAL,0,50,0);
 		slider3.setPaintTicks(true);
 		slider3.setPaintLabels(true);
-		slider3.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.00093)));
+		slider3.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0625), ScreenRes.getScaledHeight(0.002)));
+		
 		Font font1 = new Font("Verdana", Font.BOLD, f1);
 		final JLabel l1 = new JLabel(n);
 		l1.setForeground(Color.white);
 		l1.setFont(font1);
 		c.ipady = ScreenRes.getScaledHeight(p);      //make this component tall
+		c.insets = new Insets(0,0,ScreenRes.getScaledHeight(0.0099),0);//10
 		c.weightx = 0;
 		c.gridwidth = 4;
 		c.gridx = 0;
@@ -65,7 +68,7 @@ public class SliderPanel extends EffectPanel {
 		//squares.addSquare(0,20,55,8);
 		c.weightx = 1;
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 0;
 		c.gridwidth = 2;
 		this.add(squares, c);
 		
@@ -86,10 +89,10 @@ public class SliderPanel extends EffectPanel {
 			
 		JButton b1 = new JButton();
 		b1.setBackground(Color.RED);
-		b1.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.0078), ScreenRes.getScaledHeight(0.0139)));
+		b1.setPreferredSize(new Dimension(ScreenRes.getScaledWidth(0.01), ScreenRes.getScaledHeight(0.0139)));
 		c.weightx = 1;
 		c.gridx = 2;
-		c.gridy = 1;
+		c.gridy = 2;
 		c.gridwidth = 1;
 		this.add(b1, c);
 		
