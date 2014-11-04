@@ -827,7 +827,7 @@ public class OscUI extends JPanel {
 		/** make sure you only call fillLevels once both livePanel and 
 		 * average panel have been created
 		 */
-		fillLevels(5);
+		fillLevels(48);
 //		fillLevels(8);
 		levelsPanel.add(averagePanel);
 
